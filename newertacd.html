@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academics | The NICS</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'prestige-blue': '#003366',
+                        'classic-gold': '#D4AF37',
+                        'deep-emerald': '#1A3C34',
+                        'jet-black': '#000000',
+                        'off-white': '#F4F7F6',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                        serif: ['DM Serif Text', 'serif'],
+                    },
+                    fontSize: {
+                        'massive': 'clamp(6rem, 15vw, 18rem)',
+                        'giant-year': 'clamp(4rem, 10vw, 12rem)',
+                    },
+                    spacing: {
+                        '128': '32rem',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { background-color: #FFFFFF; color: #1A3C34; cursor: none; overflow-x: hidden; }
+        
+        #custom-cursor {
+            position: fixed; top: 0; left: 0; width: 20px; height: 20px;
+            border: 2px solid white; background-color: white; border-radius: 50%;
+            pointer-events: none; mix-blend-mode: difference; z-index: 9999;
+            transform: translate(-50%, -50%); transition: transform 0.1s ease;
+        }
+        
+        a:hover ~ #custom-cursor, button:hover ~ #custom-cursor, .stage-card:hover ~ #custom-cursor {
+            transform: translate(-50%, -50%) scale(2);
+            background-color: transparent;
+        }
+
+        ::selection { background: #003366; color: #D4AF37; }
+
+        .nav-link { position: relative; text-decoration: none; display: inline-block; cursor: none; }
+        .nav-link::after { content: ''; position: absolute; width: 0; height: 2px; display: block; margin-top: -2px; right: 0; background: #1A3C34; transition: width 0.3s ease; top: 50%; }
+        .nav-link:hover::after { width: 100%; left: 0; background: #D4AF37; }
+        .nav-link:hover { color: #003366; }
+
+        .ticker-border { border-top: 1px solid #000000; border-bottom: 1px solid #000000; }
+        .outline-text { -webkit-text-fill-color: transparent; -webkit-text-stroke: 1px #D4AF37; color: transparent; }
+        .blur-reveal { filter: blur(10px); opacity: 0; transform: translateY(20px); transition: all 1s ease; }
+        .blur-reveal.active { filter: blur(0); opacity: 1; transform: translateY(0); }
+
+        .dropdown-menu { display: none; position: absolute; top: 63px; left: -1rem; width: 16rem; background: white; border: 1px solid #000000; box-shadow: 4px 4px 0px 0px rgba(0,0,0,1); color: #1A3C34; z-index: 60; }
+        .group:hover .dropdown-menu { display: block; }
+        .dropdown-item { display: block; padding: 1rem 1.5rem; border-bottom: 1px solid #000000; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 0.875rem; transition: background 0s; cursor: none; }
+        .dropdown-item:last-child { border-bottom: none; }
+        .dropdown-item:hover { background-color: #003366; color: #D4AF37; }
+        
+        .stage-card:hover .stage-number { color: #D4AF37; }
+        .stage-card:hover { background-color: #1A3C34; color: white; }
+
+        .spin-slow { animation: spin 20s linear infinite; }
+        .spin-reverse-slow { animation: spinReverse 15s linear infinite; }
+        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        @keyframes spinReverse { from { transform: rotate(360deg); } to { transform: rotate(0deg); } }
+    </style>
+</head>
+<body>
+
+    <div id="custom-cursor"></div>
+
+    <nav class="fixed top-0 w-full z-50 bg-white ticker-border h-16 flex items-center justify-between px-6 cursor-none">
+        <div class="flex items-center">
+            <img src="https://placehold.co/40x40/transparent/black?text=Logo" alt="NICS Logo" class="h-8 w-auto mr-3 object-contain">
+            <div class="font-serif italic font-black text-2xl tracking-tight text-jet-black">THE NICS</div>
+        </div>
+        <ul class="hidden md:flex space-x-8 font-mono text-sm font-bold uppercase tracking-widest h-full items-center text-deep-emerald">
+            <li><a href="newert.html" class="nav-link">Home</a></li>
+            <li class="relative group h-full flex items-center cursor-pointer">
+                <span class="nav-link text-prestige-blue">About</span>
+                <div class="dropdown-menu">
+                    <a href="newertmsn.html" class="dropdown-item">Mission & Vision</a>
+                    <a href="newerthst.html" class="dropdown-item">History</a>
+                    <a href="#team" class="dropdown-item">Meet the Team</a>
+                </div>
+            </li>
+            <li><a href="newertacd.html" class="nav-link text-classic-gold border-b-2 border-classic-gold">Academics</a></li>
+            <li><a href="#" class="nav-link">Admission</a></li>
+            <li><a href="#" class="nav-link">Activities</a></li>
+        </ul>
+        <div class="md:hidden font-mono text-sm">[MENU]</div>
+    </nav>
+
+    <main class="mt-16 w-full">
+
+        <section class="relative h-[65vh] min-h-[600px] w-full flex flex-col justify-center overflow-hidden border-b border-jet-black bg-off-white">
+            
+            <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-br from-deep-emerald/90 via-prestige-blue/80 to-deep-emerald/90 mix-blend-multiply z-10"></div>
+                <div class="w-full h-full hero-bg-zoom">
+                    <img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?q=80&w=1920&auto=format&fit=crop" class="w-full h-full object-cover grayscale opacity-60" alt="Academics Background">
+                </div>
+            </div>
+
+            <div class="absolute bottom-12 right-12 z-30 opacity-80 hidden md:block">
+                <div class="relative w-32 h-32 flex items-center justify-center">
+                    <div class="absolute w-full h-full spin-slow">
+                        <svg viewBox="0 0 100 100" class="w-full h-full">
+                            <path id="circlePath2" d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" fill="transparent" />
+                            <text class="text-[11px] font-mono font-bold uppercase fill-classic-gold tracking-widest">
+                                <textPath href="#circlePath2">
+                                    • TRUTH • KNOWLEDGE • SERVICE •
+                                </textPath>
+                            </text>
+                        </svg>
+                    </div>
+                    <div class="absolute w-full h-full flex items-center justify-center">
+                         <svg viewBox="0 0 24 24" class="w-8 h-8 text-white fill-current spin-reverse-slow">
+                            <path d="M12 0L14 10L24 12L14 14L12 24L10 14L0 12L10 10L12 0Z" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="absolute inset-0 flex flex-col justify-center items-start z-30 pointer-events-none px-6 md:px-12">
+                <div class="mb-8">
+                    <h1 class="hero-line font-serif italic font-black text-5xl md:text-8xl tracking-tighter text-white uppercase leading-none opacity-0 translate-y-10 text-left">OUR</h1>
+                    <h1 class="hero-line font-playfair italic font-black text-5xl md:text-8xl tracking-tighter uppercase leading-none opacity-0 translate-y-10 mt-2 outline-text text-left">PHILOSOPHY</h1>
+                </div>
+
+                <div class="manifesto-box opacity-0 max-w-xl">
+                    <div class="p-6 border-l-4 border-classic-gold bg-deep-emerald/90 shadow-[4px_4px_0px_0px_rgba(212,175,55,1)]">
+                        <p class="font-mono text-xs md:text-sm leading-relaxed text-white">
+                            At The Nazarite International Christian School, we believe that God is the ultimate source of all truth and knowledge, and that learning is an act that honors and glorifies Him. Guided by this belief, we challenge our students by engaging them in rigorous academics through a variety of instructional approaches that support diverse learners.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <section class="w-full bg-white py-24 border-b border-jet-black px-6 md:px-12 flex flex-col items-center">
+            <div class="max-w-4xl text-center">
+                <p class="font-mono text-sm tracking-widest uppercase mb-6 text-prestige-blue">[ THE ACADEMIC SEQUENCE ]</p>
+                <h2 class="font-serif italic text-3xl md:text-5xl leading-tight text-deep-emerald mb-8">
+                    A seamless progression from foundational learning to university-ready excellence.
+                </h2>
+                <p class="font-sans text-lg leading-relaxed text-jet-black max-w-2xl mx-auto">
+                    The Nazarite International Christian School academic sequence uses diverse instructional approaches and rigorous curricula at different levels to ensure optimal learning.
+                </p>
+            </div>
+        </section>
+
+        <section class="w-full bg-off-white relative">
+            <div class="absolute left-4 md:left-1/2 top-0 bottom-0 w-px bg-classic-gold md:-translate-x-1/2 z-0"></div>
+
+            <div class="relative w-full min-h-[50vh] flex flex-col md:flex-row items-center border-b border-jet-black group stage-card transition-colors duration-500">
+                <div class="w-full md:w-1/2 p-12 flex justify-end text-right z-10">
+                    <div class="max-w-md">
+                        <span class="stage-number font-mono text-6xl font-bold text-gray-300 transition-colors duration-300">01</span>
+                        <h3 class="font-serif text-4xl mt-2 mb-4">Early Years</h3>
+                        <p class="font-mono text-xs uppercase tracking-widest mb-4 opacity-70">PRE-K • FOUNDATIONS</p>
+                        <p class="font-sans text-sm leading-relaxed">
+                            Throughout the early years (Pre-K), our emphasis is on building strong foundations. The ACE curriculum helps us accomplish this by providing structured independence, self-paced mastery, and consistent biblical integration. Biblical principles woven into daily lessons build character alongside academic skills.
+                        </p>
+                    </div>
+                </div>
+                <div class="absolute left-4 md:left-1/2 top-12 md:top-1/2 w-4 h-4 bg-deep-emerald border border-classic-gold rounded-full md:-translate-x-1/2 md:-translate-y-1/2 z-20"></div>
+                <div class="w-full md:w-1/2 p-12 z-10 hidden md:block">
+                    <div class="w-full h-64 border border-current opacity-50 bg-[url('https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center grayscale"></div>
+                </div>
+            </div>
+
+            <div class="relative w-full min-h-[50vh] flex flex-col md:flex-row-reverse items-center border-b border-jet-black group stage-card transition-colors duration-500">
+                <div class="w-full md:w-1/2 p-12 z-10">
+                    <div class="max-w-md">
+                        <span class="stage-number font-mono text-6xl font-bold text-gray-300 transition-colors duration-300">02</span>
+                        <h3 class="font-serif text-4xl mt-2 mb-4">Elementary School</h3>
+                        <p class="font-mono text-xs uppercase tracking-widest mb-4 opacity-70">GRADES 1-6 • MASTERY</p>
+                        <p class="font-sans text-sm leading-relaxed">
+                            At the elementary level (grades 1-6), our students continue with the individualized, mastery-based system of the ACE curriculum. They focus on building a strong foundation comprehension and following instructions.
+                        </p>
+                    </div>
+                </div>
+                <div class="absolute left-4 md:left-1/2 top-12 md:top-1/2 w-4 h-4 bg-deep-emerald border border-classic-gold rounded-full md:-translate-x-1/2 md:-translate-y-1/2 z-20"></div>
+                <div class="w-full md:w-1/2 p-12 z-10 hidden md:block flex justify-end">
+                     <div class="w-full h-64 border border-current opacity-50 bg-[url('https://images.unsplash.com/photo-1544952402-9039f045c473?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center grayscale"></div>
+                </div>
+            </div>
+
+            <div class="relative w-full min-h-[50vh] flex flex-col md:flex-row items-center border-b border-jet-black group stage-card transition-colors duration-500">
+                <div class="w-full md:w-1/2 p-12 flex justify-end text-right z-10">
+                    <div class="max-w-md">
+                        <span class="stage-number font-mono text-6xl font-bold text-gray-300 transition-colors duration-300">03</span>
+                        <h3 class="font-serif text-4xl mt-2 mb-4">Middle School</h3>
+                        <p class="font-mono text-xs uppercase tracking-widest mb-4 opacity-70">GRADES 7-8 • TRANSITION</p>
+                        <p class="font-sans text-sm leading-relaxed">
+                            At this critical developmental stage, our Middle schoolers (grades 7-8) are exposed to stronger, more practical Christian American curricula that emphasize application, collaboration, and deeper thinking. Students move beyond memorization to analysis, evaluation, and creative problem-solving across all subjects.
+                        </p>
+                    </div>
+                </div>
+                <div class="absolute left-4 md:left-1/2 top-12 md:top-1/2 w-4 h-4 bg-deep-emerald border border-classic-gold rounded-full md:-translate-x-1/2 md:-translate-y-1/2 z-20"></div>
+                <div class="w-full md:w-1/2 p-12 z-10 hidden md:block">
+                     <div class="w-full h-64 border border-current opacity-50 bg-[url('https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center grayscale"></div>
+                </div>
+            </div>
+
+            <div class="relative w-full min-h-[50vh] flex flex-col md:flex-row-reverse items-center border-b border-jet-black group stage-card transition-colors duration-500">
+                <div class="w-full md:w-1/2 p-12 z-10">
+                    <div class="max-w-md">
+                        <span class="stage-number font-mono text-6xl font-bold text-gray-300 transition-colors duration-300">04</span>
+                        <h3 class="font-serif text-4xl mt-2 mb-4">Junior Highschool</h3>
+                        <p class="font-mono text-xs uppercase tracking-widest mb-4 opacity-70">GRADES 9-10 • DIPLOMA TRACK</p>
+                        <p class="font-sans text-sm leading-relaxed">
+                            At the Junior highschool level (Grades 9-10), students continue with the same instructional model as Middle School, while diving into highschool level subjects and beginning the climb towards an American Highschool Diploma.
+                        </p>
+                    </div>
+                </div>
+                <div class="absolute left-4 md:left-1/2 top-12 md:top-1/2 w-4 h-4 bg-deep-emerald border border-classic-gold rounded-full md:-translate-x-1/2 md:-translate-y-1/2 z-20"></div>
+                <div class="w-full md:w-1/2 p-12 z-10 hidden md:block flex justify-end">
+                     <div class="w-full h-64 border border-current opacity-50 bg-[url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center grayscale"></div>
+                </div>
+            </div>
+
+            <div class="relative w-full min-h-[50vh] flex flex-col md:flex-row items-center border-b border-jet-black bg-jet-black text-white group stage-card transition-colors duration-500 hover:bg-deep-emerald">
+                <div class="w-full md:w-1/2 p-12 flex justify-end text-right z-10">
+                    <div class="max-w-md">
+                        <span class="stage-number font-mono text-6xl font-bold text-classic-gold transition-colors duration-300">05</span>
+                        <h3 class="font-serif text-4xl mt-2 mb-4 text-classic-gold">Senior Highschool</h3>
+                        <p class="font-mono text-xs uppercase tracking-widest mb-4 opacity-70">GRADES 11-12 • A LEVELS</p>
+                        <p class="font-sans text-sm leading-relaxed">
+                            At the Senior Highschool level (Grades 11-12) our students are prepared for university with Cambridge International A levels. A-Levels mirror university-style learning with in-depth subject mastery and independent research expectations. Finally graduating with both an American high school diploma and an A level certificate.
+                        </p>
+                    </div>
+                </div>
+                <div class="absolute left-4 md:left-1/2 top-12 md:top-1/2 w-4 h-4 bg-classic-gold border border-white rounded-full md:-translate-x-1/2 md:-translate-y-1/2 z-20"></div>
+                <div class="w-full md:w-1/2 p-12 z-10 hidden md:block">
+                     <div class="w-full h-64 border border-current opacity-50 bg-[url('https://images.unsplash.com/photo-1523580494863-6f3031224c94?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center grayscale"></div>
+                </div>
+            </div>
+
+        </section>
+
+        <footer class="w-full border-t border-jet-black bg-white text-deep-emerald">
+            <div class="grid grid-cols-1 md:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-jet-black">
+                <div class="p-6 h-full flex flex-col"><h3 class="font-mono font-bold text-xs mb-4 text-prestige-blue">SOCIAL</h3><ul class="space-y-2 font-bold uppercase text-sm"><li><a href="#" class="hover:text-classic-gold hover:underline decoration-2">Instagram</a></li><li><a href="#" class="hover:text-classic-gold hover:underline decoration-2">Facebook</a></li><li><a href="#" class="hover:text-classic-gold hover:underline decoration-2">Twitter / X</a></li></ul></div>
+                <div class="p-6 h-full flex flex-col"><h3 class="font-mono font-bold text-xs mb-4 text-prestige-blue">LOCATION</h3><p class="font-mono text-sm uppercase leading-relaxed">Naalya, Kampala<br>Uganda<br>East Africa<br><span class="text-classic-gold">Lat: 0.3644° N</span></p></div>
+                <div class="p-6 h-full flex flex-col"><h3 class="font-mono font-bold text-xs mb-4 text-prestige-blue">SITEMAP</h3><ul class="space-y-1 font-mono text-xs uppercase"><li><a href="newert.html" class="hover:text-classic-gold">[Home]</a></li><li><a href="newertacd.html" class="hover:text-classic-gold">[Academics]</a></li><li><a href="#" class="hover:text-classic-gold">[Admissions]</a></li><li><a href="#" class="hover:text-classic-gold">[Portal]</a></li></ul></div>
+                <div class="p-6 h-full flex flex-col justify-between"><div class="w-full h-12 bg-jet-black text-white flex items-center justify-center font-mono text-xs font-bold hover:bg-classic-gold hover:text-deep-emerald cursor-pointer transition-colors" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">BACK TO TOP</div><p class="font-mono text-[10px] uppercase mt-4 text-gray-400">&copy; 2025 The NICS.</p></div>
+            </div>
+        </footer>
+
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+        const cursor = document.getElementById("custom-cursor");
+        const xTo = gsap.quickSetter(cursor, "x", "px");
+        const yTo = gsap.quickSetter(cursor, "y", "px");
+        window.addEventListener("mousemove", e => { xTo(e.clientX); yTo(e.clientY); });
+        
+        document.querySelectorAll('a, button, .stage-card').forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.style.transform = 'translate(-50%, -50%) scale(1.5)');
+            el.addEventListener('mouseleave', () => cursor.style.transform = 'translate(-50%, -50%) scale(1)');
+        });
+
+        const tl = gsap.timeline();
+        tl.to(".hero-line", { y: 0, opacity: 1, duration: 1, stagger: 0.1, ease: "power3.out" })
+        .to(".manifesto-box", { opacity: 1, duration: 1, ease: "power2.out" }, "-=0.5");
+        
+        // Background Zoom Effect
+        gsap.fromTo(".hero-bg-zoom img", { scale: 1.1 }, { scale: 1, duration: 10, ease: "power1.out" });
+
+        const cards = document.querySelectorAll('.stage-card');
+        cards.forEach(card => {
+            gsap.from(card, { opacity: 0, y: 50, duration: 0.8, scrollTrigger: { trigger: card, start: "top 85%" } });
+        });
+    </script>
+</body>
+</html>

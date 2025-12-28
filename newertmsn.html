@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mission & Vision | The NICS</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'prestige-blue': '#003366',
+                        'classic-gold': '#D4AF37',
+                        'deep-emerald': '#1A3C34',
+                        'jet-black': '#000000',
+                        'off-white': '#F4F7F6',
+                        'off-grey': '#E5E5E5',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                        serif: ['DM Serif Text', 'serif'],
+                    },
+                    fontSize: {
+                        'manifesto': 'clamp(2.5rem, 6vw, 6rem)',
+                        'giant': 'clamp(6rem, 15vw, 20rem)',
+                    },
+                    spacing: {
+                        '128': '32rem',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { background-color: #FFFFFF; color: #1A3C34; cursor: none; overflow-x: hidden; }
+        
+        #custom-cursor {
+            position: fixed; top: 0; left: 0; width: 20px; height: 20px;
+            border: 2px solid white; background-color: white; border-radius: 50%;
+            pointer-events: none; mix-blend-mode: difference; z-index: 9999;
+            transform: translate(-50%, -50%); transition: transform 0.1s ease;
+        }
+        
+        a:hover ~ #custom-cursor, .value-cell:hover ~ #custom-cursor { transform: translate(-50%, -50%) scale(2); background-color: transparent; }
+
+        ::selection { background: #003366; color: #D4AF37; }
+        .nav-link { position: relative; text-decoration: none; display: inline-block; cursor: none; }
+        .nav-link::after { content: ''; position: absolute; width: 0; height: 2px; display: block; margin-top: -2px; right: 0; background: #1A3C34; transition: width 0.3s ease; top: 50%; }
+        .nav-link:hover::after { width: 100%; left: 0; background: #D4AF37; }
+        .nav-link:hover { color: #003366; }
+        .ticker-border { border-top: 1px solid #000000; border-bottom: 1px solid #000000; }
+        
+        .value-cell { border-bottom: 1px solid #000000; border-right: 1px solid #000000; cursor: none; }
+        @media (min-width: 1024px) { .value-cell:nth-child(3n) { border-right: none; } }
+        
+        .value-cell:hover { background-color: #003366; color: #FFFFFF; }
+        .value-cell:hover .grid-separator { background-color: #D4AF37; }
+        .value-cell:hover .ref-text { color: #D4AF37; } 
+        
+        .smooth-wrapper { width: 100%; }
+        .vision-word, .mission-word { transition: color 0.1s linear; }
+        
+        .reverse-italic { transform: skewX(6deg); display: inline-block; padding: 0 0.5rem; } 
+        .reverse-italic-subtle { transform: skewX(8deg); display: inline-block; } 
+
+        .dropdown-menu { display: none; position: absolute; top: 63px; left: -1rem; width: 16rem; background: white; border: 1px solid #000000; box-shadow: 4px 4px 0px 0px rgba(0,0,0,1); color: #1A3C34; z-index: 60; }
+        .group:hover .dropdown-menu { display: block; }
+        .dropdown-item { display: block; padding: 1rem 1.5rem; border-bottom: 1px solid #000000; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 0.875rem; transition: background 0s; cursor: none; }
+        .dropdown-item:last-child { border-bottom: none; }
+        .dropdown-item:hover { background-color: #003366; color: #D4AF37; }
+    </style>
+</head>
+<body>
+
+    <div id="custom-cursor"></div>
+
+    <nav class="fixed top-0 w-full z-50 bg-white ticker-border h-16 flex items-center justify-between px-6 cursor-none">
+        <div class="flex items-center">
+            <img src="https://placehold.co/40x40/transparent/black?text=Logo" alt="NICS Logo" class="h-8 w-auto mr-3 object-contain">
+            <div class="font-serif italic font-black text-2xl tracking-tight text-jet-black">THE NICS</div>
+        </div>
+        <ul class="hidden md:flex space-x-8 font-mono text-sm font-bold uppercase tracking-widest h-full items-center text-deep-emerald">
+            <li><a href="newert.html" class="nav-link">Home</a></li>
+            <li class="relative group h-full flex items-center cursor-pointer">
+                <span class="nav-link text-prestige-blue">About</span>
+                <div class="dropdown-menu">
+                    <a href="newertmsn.html" class="dropdown-item bg-prestige-blue text-classic-gold">Mission & Vision</a>
+                    <a href="newerthst.html" class="dropdown-item">History</a>
+                    <a href="#team" class="dropdown-item">Meet the Team</a>
+                </div>
+            </li>
+            <li><a href="newertacd.html" class="nav-link">Academics</a></li>
+            <li><a href="#" class="nav-link">Admission</a></li>
+            <li><a href="#" class="nav-link">Activities</a></li>
+        </ul>
+        <div class="md:hidden font-mono text-sm">[MENU]</div>
+    </nav>
+
+    <main class="mt-16 smooth-wrapper">
+
+        <section class="relative min-h-[90vh] w-full border-b border-jet-black flex items-center bg-white overflow-hidden py-24">
+            <div class="absolute top-0 left-0 w-full h-full z-0 flex flex-col justify-start pt-10 select-none pointer-events-none overflow-hidden">
+                <h1 class="vision-bg-text font-serif font-black text-giant text-deep-emerald opacity-[0.05] leading-none whitespace-nowrap ml-[-10vw] reverse-italic-subtle">OUR VISION</h1>
+            </div>
+
+            <div class="container mx-auto px-6 relative z-10">
+                <div class="max-w-5xl">
+                    <p class="font-mono text-sm mb-8 tracking-widest uppercase text-prestige-blue">[ 001 : THE VISION ]</p>
+                    <h2 id="vision-text" class="font-serif italic font-normal text-manifesto leading-[1.1] tracking-tight uppercase text-gray-300">
+                        An end-time generation, grounded in godly values, empowered by academic excellence, and committed to transforming the world for Christ.
+                    </h2>
+                </div>
+            </div>
+        </section>
+
+        <section class="relative min-h-[80vh] w-full border-b border-jet-black flex items-center bg-deep-emerald text-white overflow-hidden py-24">
+             <div class="absolute top-0 left-0 w-full h-full z-0 flex flex-col justify-start pt-10 select-none pointer-events-none overflow-hidden">
+                <h1 class="mission-bg-text font-serif italic font-black text-giant text-black opacity-[0.05] leading-none whitespace-nowrap self-end mr-[-10vw]">OUR MISSION</h1>
+            </div>
+
+             <div class="container mx-auto px-6 relative z-10 flex flex-col items-end">
+                <div class="max-w-5xl text-right">
+                    <p class="font-mono text-sm mb-8 tracking-widest uppercase text-classic-gold">[ 002 : THE MISSION ]</p>
+                    <div class="py-2 px-4 overflow-visible inline-block">
+                        <h2 id="mission-text" class="font-serif font-normal reverse-italic text-manifesto leading-[1.1] tracking-tight uppercase text-gray-600">
+                            Equipping students to honour God through a life consecrated to him and cultivating academic excellence rooted in a biblical world view.
+                        </h2>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="w-full bg-white text-deep-emerald py-4 overflow-hidden border-b border-jet-black flex items-center relative z-20">
+            <div class="marquee-content whitespace-nowrap font-mono text-xl md:text-2xl font-bold uppercase tracking-widest flex">
+                <span class="mx-8"><span class="text-classic-gold">Called and Set Apart</span> • The NICS • <span class="text-classic-gold">Called and Set Apart</span> • The NICS •</span>
+                <span class="mx-8"><span class="text-classic-gold">Called and Set Apart</span> • The NICS • <span class="text-classic-gold">Called and Set Apart</span> • The NICS •</span>
+            </div>
+        </div>
+
+        <section class="w-full bg-deep-emerald text-white border-b border-jet-black py-24 px-6 md:px-12 flex justify-center items-center">
+            <div class="max-w-6xl w-full flex flex-col md:flex-row gap-12 items-center">
+                <div class="w-full md:w-1/2 border border-classic-gold p-8 md:p-16 relative">
+                    <div class="absolute top-0 left-0 bg-classic-gold text-deep-emerald px-4 py-1 font-mono text-xs font-bold transform -translate-y-1/2 ml-8">REF: 1 PETER 2:9</div>
+                    <blockquote class="font-serif italic text-lg md:text-3xl leading-relaxed text-justify md:text-left">
+                        "But ye are a chosen generation, a royal priesthood, an holy nation, a peculiar people; that ye should shew forth the praises of Him who hath called you out of darkness into His marvellous light."
+                    </blockquote>
+                    <div class="absolute bottom-4 right-4 text-classic-gold font-mono text-xl">+</div>
+                </div>
+                <div class="w-full md:w-1/2 h-64 md:h-full relative border border-classic-gold">
+                    <img src="https://images.unsplash.com/photo-1491841550275-ad7854e35ca6?q=80&w=1000&auto=format&fit=crop" alt="Scripture Visual" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700">
+                    <div class="absolute inset-0 bg-prestige-blue mix-blend-multiply opacity-30 pointer-events-none"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="w-full bg-white relative text-deep-emerald">
+            <div class="border-b border-jet-black px-6 py-4">
+                <h3 class="font-mono text-sm tracking-widest uppercase text-prestige-blue">[ 003 : CORE VALUES ]</h3>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full">
+                
+                <div class="value-cell group relative min-h-[28rem] p-8 transition-colors duration-0">
+                    <span class="font-mono text-xs opacity-50 group-hover:opacity-100 transition-opacity absolute top-8 left-8">01</span>
+                    <div class="pt-12">
+                        <h4 class="text-4xl md:text-5xl font-serif font-normal tracking-tighter uppercase text-jet-black group-hover:text-white mb-4">Consecration</h4>
+                        <p class="font-mono text-xs font-bold mb-2 text-prestige-blue ref-text">ROMANS 12:1</p>
+                        <p class="font-sans text-sm leading-relaxed opacity-80">"I beseech you therefore, brethren, by the mercies of God, that ye present your bodies a living sacrifice, holy, acceptable unto God, which is your reasonable service."</p>
+                    </div>
+                    <div class="grid-separator w-full h-[1px] bg-jet-black origin-left transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 absolute bottom-0 left-0"></div>
+                </div>
+
+                <div class="value-cell group relative min-h-[28rem] p-8 transition-colors duration-0">
+                    <span class="font-mono text-xs opacity-50 group-hover:opacity-100 transition-opacity absolute top-8 left-8">02</span>
+                    <div class="pt-12">
+                        <h4 class="text-4xl md:text-5xl font-serif font-normal tracking-tighter uppercase text-jet-black group-hover:text-white mb-4">Obedience</h4>
+                        <p class="font-mono text-xs font-bold mb-2 text-prestige-blue ref-text">1 SAMUEL 15:22</p>
+                        <p class="font-sans text-sm leading-relaxed opacity-80">"Behold, to obey is better than sacrifice, and to heed than the fat of rams."</p>
+                    </div>
+                    <div class="grid-separator w-full h-[1px] bg-jet-black origin-left transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 absolute bottom-0 left-0"></div>
+                </div>
+
+                <div class="value-cell group relative min-h-[28rem] p-8 transition-colors duration-0">
+                    <span class="font-mono text-xs opacity-50 group-hover:opacity-100 transition-opacity absolute top-8 left-8">03</span>
+                    <div class="pt-12">
+                        <h4 class="text-4xl md:text-5xl font-serif font-normal tracking-tighter uppercase text-jet-black group-hover:text-white mb-4">Courage</h4>
+                        <p class="font-mono text-xs font-bold mb-2 text-prestige-blue ref-text">JUDGES 14:6</p>
+                        <p class="font-sans text-sm leading-relaxed opacity-80">"And the Spirit of the LORD came mightily upon him, and he tore the lion apart as one would have torn apart a young goat..."</p>
+                    </div>
+                    <div class="grid-separator w-full h-[1px] bg-jet-black origin-left transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 absolute bottom-0 left-0"></div>
+                </div>
+
+                <div class="value-cell group relative min-h-[28rem] p-8 transition-colors duration-0">
+                    <span class="font-mono text-xs opacity-50 group-hover:opacity-100 transition-opacity absolute top-8 left-8">04</span>
+                    <div class="pt-12">
+                        <h4 class="text-4xl md:text-5xl font-serif font-normal tracking-tighter uppercase text-jet-black group-hover:text-white mb-4">Meekness</h4>
+                        <p class="font-mono text-xs font-bold mb-2 text-prestige-blue ref-text">JOHN 3:30</p>
+                        <p class="font-sans text-sm leading-relaxed opacity-80">"He must increase, but I must decrease."</p>
+                    </div>
+                    <div class="grid-separator w-full h-[1px] bg-jet-black origin-left transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 absolute bottom-0 left-0"></div>
+                </div>
+
+                <div class="value-cell group relative min-h-[28rem] p-8 transition-colors duration-0">
+                    <span class="font-mono text-xs opacity-50 group-hover:opacity-100 transition-opacity absolute top-8 left-8">05</span>
+                    <div class="pt-12">
+                        <h4 class="text-4xl md:text-5xl font-serif font-normal tracking-tighter uppercase text-jet-black group-hover:text-white mb-4">Discipline</h4>
+                        <p class="font-mono text-xs font-bold mb-2 text-prestige-blue ref-text">2 TIMOTHY 2:3–5</p>
+                        <p class="font-sans text-sm leading-relaxed opacity-80">"Thou therefore endure hardness, as a good soldier of Jesus Christ. No man that warreth entangleth himself with the affairs of this life..."</p>
+                    </div>
+                    <div class="grid-separator w-full h-[1px] bg-jet-black origin-left transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 absolute bottom-0 left-0"></div>
+                </div>
+
+                <div class="value-cell group relative min-h-[28rem] p-8 transition-colors duration-0">
+                    <span class="font-mono text-xs opacity-50 group-hover:opacity-100 transition-opacity absolute top-8 left-8">06</span>
+                    <div class="pt-12">
+                        <h4 class="text-4xl md:text-5xl font-serif font-normal tracking-tighter uppercase text-jet-black group-hover:text-white mb-4">Selflessness</h4>
+                        <p class="font-mono text-xs font-bold mb-2 text-prestige-blue ref-text">JOHN 15:13</p>
+                        <p class="font-sans text-sm leading-relaxed opacity-80">"Greater love has no one than this, than to lay down one’s life for his friends."</p>
+                    </div>
+                    <div class="grid-separator w-full h-[1px] bg-jet-black origin-left transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 absolute bottom-0 left-0"></div>
+                </div>
+                
+                <div class="value-cell group relative min-h-[28rem] p-8 flex flex-col justify-center items-center text-center transition-colors duration-0 lg:col-span-1 lg:col-start-2 border-r-0 lg:border-r border-l border-jet-black">
+                    <span class="font-mono text-xs opacity-50 group-hover:opacity-100 transition-opacity absolute top-6 left-6">07</span>
+                    <div>
+                        <h4 class="text-4xl md:text-5xl font-serif font-normal tracking-tighter uppercase text-jet-black group-hover:text-white mb-4">Wisdom</h4>
+                        <p class="font-mono text-xs font-bold mb-2 text-prestige-blue ref-text">PROVERBS 1:7</p>
+                        <p class="font-sans text-sm leading-relaxed opacity-80 max-w-xs mx-auto">"The fear of the LORD is the beginning of knowledge; fools despise wisdom and instruction."</p>
+                    </div>
+                    <div class="grid-separator w-full h-[1px] bg-jet-black origin-left transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 absolute bottom-0 left-0"></div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="w-full border-t border-jet-black bg-white text-deep-emerald">
+            <div class="grid grid-cols-1 md:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-jet-black">
+                <div class="p-6 h-full flex flex-col"><h3 class="font-mono font-bold text-xs mb-4 text-prestige-blue">SOCIAL</h3><ul class="space-y-2 font-bold uppercase text-sm"><li><a href="#" class="hover:text-classic-gold hover:underline decoration-2">Instagram</a></li><li><a href="#" class="hover:text-classic-gold hover:underline decoration-2">Facebook</a></li><li><a href="#" class="hover:text-classic-gold hover:underline decoration-2">Twitter / X</a></li></ul></div>
+                <div class="p-6 h-full flex flex-col"><h3 class="font-mono font-bold text-xs mb-4 text-prestige-blue">LOCATION</h3><p class="font-mono text-sm uppercase leading-relaxed">Naalya, Kampala<br>Uganda<br>East Africa<br><span class="text-classic-gold">Lat: 0.3644° N</span></p></div>
+                <div class="p-6 h-full flex flex-col"><h3 class="font-mono font-bold text-xs mb-4 text-prestige-blue">SITEMAP</h3><ul class="space-y-1 font-mono text-xs uppercase"><li><a href="newert.html" class="hover:text-classic-gold">[Home]</a></li><li><a href="newertacd.html" class="hover:text-classic-gold">[Academics]</a></li><li><a href="#" class="hover:text-classic-gold">[Admissions]</a></li><li><a href="#" class="hover:text-classic-gold">[Portal]</a></li></ul></div>
+                <div class="p-6 h-full flex flex-col justify-between"><div class="w-full h-12 bg-jet-black text-white flex items-center justify-center font-mono text-xs font-bold hover:bg-classic-gold hover:text-deep-emerald cursor-pointer transition-colors" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">BACK TO TOP</div><p class="font-mono text-[10px] uppercase mt-4 text-gray-400">&copy; 2025 The NICS.</p></div>
+            </div>
+        </footer>
+
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+        const cursor = document.getElementById("custom-cursor");
+        const xTo = gsap.quickSetter(cursor, "x", "px");
+        const yTo = gsap.quickSetter(cursor, "y", "px");
+        window.addEventListener("mousemove", e => { xTo(e.clientX); yTo(e.clientY); });
+        
+        document.querySelectorAll('a, button, .value-cell').forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.style.transform = 'translate(-50%, -50%) scale(1.5)');
+            el.addEventListener('mouseleave', () => cursor.style.transform = 'translate(-50%, -50%) scale(1)');
+        });
+
+        const visionText = document.getElementById("vision-text");
+        const visionWords = visionText.innerText.split(" ");
+        visionText.innerHTML = "";
+        visionWords.forEach(word => { const span = document.createElement("span"); span.innerText = word + " "; span.classList.add("vision-word"); visionText.appendChild(span); });
+        gsap.fromTo(".vision-word", { color: "#D1D5DB" }, { color: "#1A3C34", stagger: 0.1, scrollTrigger: { trigger: "#vision-text", start: "top 80%", end: "bottom 50%", scrub: true } });
+
+        const missionText = document.getElementById("mission-text");
+        const missionWords = missionText.innerText.split(" ");
+        missionText.innerHTML = "";
+        missionWords.forEach(word => { const span = document.createElement("span"); span.innerText = word + " "; span.classList.add("mission-word"); missionText.appendChild(span); });
+        gsap.fromTo(".mission-word", { color: "#4B5563" }, { color: "#FFFFFF", stagger: 0.1, scrollTrigger: { trigger: "#mission-text", start: "top 80%", end: "bottom 50%", scrub: true } });
+
+        gsap.to(".vision-bg-text", { xPercent: 10, ease: "none", scrollTrigger: { trigger: ".vision-bg-text", start: "top bottom", end: "bottom top", scrub: true } });
+        gsap.to(".mission-bg-text", { xPercent: -10, ease: "none", scrollTrigger: { trigger: ".mission-bg-text", start: "top bottom", end: "bottom top", scrub: true } });
+        
+        gsap.to(".marquee-content", { xPercent: -50, repeat: -1, duration: 30, ease: "linear" });
+        
+        const values = document.querySelectorAll('.value-cell');
+        gsap.from(values, { y: 100, opacity: 0, duration: 0.8, stagger: 0.1, ease: "power4.out", scrollTrigger: { trigger: ".value-cell", start: "top 85%" } });
+    </script>
+</body>
+</html>

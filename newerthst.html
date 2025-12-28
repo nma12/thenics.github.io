@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>History & Origins | The NICS</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@900&family=DM+Serif+Text:ital@0;1&family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'prestige-blue': '#003366',
+                        'classic-gold': '#D4AF37',
+                        'deep-emerald': '#1A3C34',
+                        'jet-black': '#000000',
+                        'off-white': '#F4F7F6',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                        serif: ['DM Serif Text', 'serif'],
+                        playfair: ['Playfair Display', 'serif'],
+                    },
+                    fontSize: {
+                        'massive': 'clamp(6rem, 15vw, 20rem)',
+                        'giant-year': 'clamp(4rem, 10vw, 12rem)',
+                    },
+                    spacing: {
+                        '128': '32rem',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { background-color: #FFFFFF; color: #1A3C34; cursor: none; overflow-x: hidden; }
+        #custom-cursor {
+            position: fixed; top: 0; left: 0; width: 20px; height: 20px;
+            border: 2px solid white; background-color: white; border-radius: 50%;
+            pointer-events: none; mix-blend-mode: difference; z-index: 9999;
+            transform: translate(-50%, -50%); transition: transform 0.1s ease;
+        }
+        
+        #progress-bar { position: fixed; top: 0; left: 0; height: 4px; background: #D4AF37; width: 0%; z-index: 100; transition: width 0.1s ease-out; }
+        .nav-link { position: relative; text-decoration: none; display: inline-block; cursor: none; }
+        .nav-link::after { content: ''; position: absolute; width: 0; height: 2px; display: block; margin-top: -2px; right: 0; background: #1A3C34; transition: width 0.3s ease; top: 50%; }
+        .nav-link:hover::after { width: 100%; left: 0; background: #D4AF37; }
+        .nav-link:hover { color: #003366; }
+        .ticker-border { border-top: 1px solid #000000; border-bottom: 1px solid #000000; }
+        
+        .outline-text { -webkit-text-fill-color: transparent; -webkit-text-stroke: 1px #D4AF37; color: transparent; }
+        
+        .blur-reveal { filter: blur(10px); opacity: 0; transform: translateY(20px); transition: all 1s ease; }
+        .blur-reveal.active { filter: blur(0); opacity: 1; transform: translateY(0); }
+        .ruler-container { display: flex; width: max-content; animation: scrollRuler 30s linear infinite; }
+        @keyframes scrollRuler { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        .bounce { animation: bounce 2s infinite; }
+        @keyframes bounce { 0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 40% {transform: translateY(-10px);} 60% {transform: translateY(-5px);} }
+        .dropdown-menu { display: none; position: absolute; top: 63px; left: -1rem; width: 16rem; background: white; border: 1px solid #000000; box-shadow: 4px 4px 0px 0px rgba(0,0,0,1); color: #1A3C34; z-index: 60; }
+        .group:hover .dropdown-menu { display: block; }
+        .dropdown-item { display: block; padding: 1rem 1.5rem; border-bottom: 1px solid #000000; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 0.875rem; transition: background 0s; cursor: none; }
+        .dropdown-item:last-child { border-bottom: none; }
+        .dropdown-item:hover { background-color: #003366; color: #D4AF37; }
+    </style>
+</head>
+<body>
+
+    <div id="progress-bar"></div>
+    <div id="custom-cursor"></div>
+
+    <nav class="fixed top-0 w-full z-50 bg-white ticker-border h-16 flex items-center justify-between px-6 cursor-none">
+        <div class="flex items-center">
+            <img src="https://placehold.co/40x40/transparent/black?text=Logo" alt="NICS Logo" class="h-8 w-auto mr-3 object-contain">
+            <div class="font-serif italic font-black text-2xl tracking-tight text-jet-black">THE NICS</div>
+        </div>
+        <ul class="hidden md:flex space-x-8 font-mono text-sm font-bold uppercase tracking-widest h-full items-center text-deep-emerald">
+            <li><a href="newert.html" class="nav-link">Home</a></li>
+            <li class="relative group h-full flex items-center cursor-pointer">
+                <span class="nav-link text-prestige-blue">About</span>
+                <div class="absolute top-[63px] -left-4 w-64 bg-white border border-black hidden group-hover:block p-0 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+                    <a href="newertmsn.html" class="block px-6 py-4 border-b border-black hover:bg-electric-blue hover:text-white transition-colors duration-0 font-sans font-bold">Mission & Vision</a>
+                    <a href="newerthst.html" class="block px-6 py-4 border-b border-black bg-prestige-blue text-classic-gold font-sans font-bold">History</a>
+                    <a href="#" class="block px-6 py-4 hover:bg-electric-blue hover:text-white transition-colors duration-0 font-sans font-bold">Meet the Team</a>
+                </div>
+            </li>
+            <li><a href="newertacd.html" class="nav-link">Academics</a></li>
+            <li><a href="#" class="nav-link">Admission</a></li>
+            <li><a href="#" class="nav-link">Activities</a></li>
+        </ul>
+        <div class="md:hidden font-mono text-sm">[MENU]</div>
+    </nav>
+
+    <main class="mt-16 w-full">
+
+        <section class="relative h-screen w-full flex flex-col justify-center overflow-hidden border-b border-jet-black bg-off-white">
+            <div class="absolute inset-0 flex flex-col items-center justify-center z-30 pointer-events-none px-4 text-center">
+                <h1 class="hero-line font-serif italic font-black text-5xl md:text-8xl tracking-tighter text-deep-emerald uppercase leading-none opacity-0 translate-y-10">LET'S BEGIN</h1>
+                <h1 class="hero-line font-playfair italic font-black text-5xl md:text-8xl tracking-tighter uppercase leading-none opacity-0 translate-y-10 mt-2 outline-text">THE JOURNEY</h1>
+            </div>
+
+            <div class="absolute top-1/2 left-0 w-full transform -translate-y-1/2 z-0 opacity-15 text-deep-emerald">
+                <div class="ruler-container font-mono text-4xl font-bold whitespace-nowrap">
+                    <div class="flex items-end space-x-12 px-4">
+                        <div class="flex flex-col items-center gap-2"><div class="h-16 w-1 bg-deep-emerald"></div><span>1997</span></div><div class="h-8 w-px bg-deep-emerald"></div><div class="h-8 w-px bg-deep-emerald"></div><div class="h-8 w-px bg-deep-emerald"></div>
+                        <div class="flex flex-col items-center gap-2"><div class="h-16 w-1 bg-deep-emerald"></div><span>2005</span></div><div class="h-8 w-px bg-deep-emerald"></div><div class="h-8 w-px bg-deep-emerald"></div><div class="h-8 w-px bg-deep-emerald"></div>
+                        <div class="flex flex-col items-center gap-2"><div class="h-16 w-1 bg-deep-emerald"></div><span>2013</span></div><div class="h-8 w-px bg-deep-emerald"></div><div class="h-8 w-px bg-deep-emerald"></div><div class="h-8 w-px bg-deep-emerald"></div>
+                        <div class="flex flex-col items-center gap-2"><div class="h-16 w-1 bg-deep-emerald"></div><span>2018</span></div><div class="h-8 w-px bg-deep-emerald"></div><div class="h-8 w-px bg-deep-emerald"></div><div class="h-8 w-px bg-deep-emerald"></div>
+                        <div class="flex flex-col items-center gap-2"><div class="h-16 w-1 bg-deep-emerald"></div><span>2023</span></div><div class="h-8 w-px bg-deep-emerald"></div><div class="h-8 w-px bg-deep-emerald"></div><div class="h-8 w-px bg-deep-emerald"></div>
+                        <div class="flex flex-col items-center gap-2"><div class="h-16 w-1 bg-deep-emerald"></div><span>2025</span></div>
+                        <div class="h-8 w-px bg-deep-emerald"></div><div class="h-8 w-px bg-deep-emerald"></div><div class="h-8 w-px bg-deep-emerald"></div>
+                        
+                        <div class="flex flex-col items-center gap-2"><div class="h-16 w-1 bg-deep-emerald"></div><span>1997</span></div><div class="h-8 w-px bg-deep-emerald"></div><div class="h-8 w-px bg-deep-emerald"></div><div class="h-8 w-px bg-deep-emerald"></div>
+                        <div class="flex flex-col items-center gap-2"><div class="h-16 w-1 bg-deep-emerald"></div><span>2005</span></div><div class="h-8 w-px bg-deep-emerald"></div><div class="h-8 w-px bg-deep-emerald"></div><div class="h-8 w-px bg-deep-emerald"></div>
+                        <div class="flex flex-col items-center gap-2"><div class="h-16 w-1 bg-deep-emerald"></div><span>2013</span></div><div class="h-8 w-px bg-deep-emerald"></div><div class="h-8 w-px bg-deep-emerald"></div><div class="h-8 w-px bg-deep-emerald"></div>
+                        <div class="flex flex-col items-center gap-2"><div class="h-16 w-1 bg-deep-emerald"></div><span>2018</span></div><div class="h-8 w-px bg-deep-emerald"></div><div class="h-8 w-px bg-deep-emerald"></div><div class="h-8 w-px bg-deep-emerald"></div>
+                        <div class="flex flex-col items-center gap-2"><div class="h-16 w-1 bg-deep-emerald"></div><span>2023</span></div><div class="h-8 w-px bg-deep-emerald"></div><div class="h-8 w-px bg-deep-emerald"></div><div class="h-8 w-px bg-deep-emerald"></div>
+                        <div class="flex flex-col items-center gap-2"><div class="h-16 w-1 bg-deep-emerald"></div><span>2025</span></div>
+                        <div class="h-8 w-px bg-deep-emerald"></div><div class="h-8 w-px bg-deep-emerald"></div><div class="h-8 w-px bg-deep-emerald"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="absolute bottom-32 w-full flex flex-col items-center justify-center z-30 bounce text-classic-gold">
+                <span class="font-mono text-xs font-bold tracking-[0.2em] mb-2 bg-white px-2">SCROLL DOWN TO EXPLORE</span>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><path d="M7 13l5 5 5-5M7 6l5 5 5-5" /></svg>
+            </div>
+            
+            <div class="absolute bottom-8 left-8 border border-jet-black p-2 font-mono text-xs hidden md:block z-30 bg-white">
+                <p>TIMELINE_INIT_SEQ</p>
+                <p class="text-classic-gold">LOADING DATA... 100%</p>
+            </div>
+        </section>
+
+        <div class="w-full bg-white relative">
+            <section class="timeline-block w-full min-h-[100vh] border-b border-jet-black flex flex-col md:flex-row">
+                <div class="w-full md:w-[30%] border-b md:border-b-0 md:border-r border-jet-black relative bg-off-white">
+                    <div class="sticky top-16 h-[50vh] md:h-screen flex items-center justify-center px-4 overflow-hidden">
+                        <span class="font-serif italic font-black text-giant-year tracking-tighter leading-none text-center text-prestige-blue">2013</span>
+                    </div>
+                </div>
+                <div class="w-full md:w-[70%] p-12 md:p-24 flex items-center bg-white">
+                    <div class="max-w-3xl">
+                        <p class="font-mono text-sm tracking-widest uppercase mb-6 text-prestige-blue">[ BLOCK 001 : THE ORIGIN ]</p>
+                        <p class="narrative-text text-2xl md:text-4xl font-bold leading-tight tracking-tight text-left uppercase text-deep-emerald">
+                            Twelve years ago, in 2013, a dream that was conceived 26 years ago, <span class="text-classic-gold">'to build Him an end-time generation'</span> was birthed. The Nazirites home school, with my own children as students, was born in my living room.
+                        </p>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="timeline-block w-full min-h-[100vh] border-b border-jet-black flex flex-col md:flex-row">
+                <div class="w-full md:w-[30%] border-b md:border-b-0 md:border-r border-jet-black relative bg-off-white">
+                    <div class="sticky top-16 h-[50vh] md:h-screen flex items-center justify-center px-4 overflow-hidden">
+                        <span class="font-serif italic font-black text-giant-year tracking-tighter leading-none text-center text-prestige-blue">PREP</span>
+                    </div>
+                </div>
+                <div class="w-full md:w-[70%] p-12 md:p-24 flex items-center bg-white">
+                    <div class="max-w-3xl">
+                        <p class="font-mono text-sm tracking-widest uppercase mb-6 text-prestige-blue">[ BLOCK 002 : THE JOURNEY ]</p>
+                        <p class="narrative-text text-2xl md:text-4xl font-bold leading-tight tracking-tight text-left uppercase text-deep-emerald">
+                            As a stay-at-home mother then, with a passion to raise and nurture children in the fear and ways of the Lord, our home education journey, using the ACE Curriculum, began.
+                        </p>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="timeline-block w-full min-h-[100vh] border-b border-jet-black flex flex-col md:flex-row">
+                <div class="w-full md:w-[30%] border-b md:border-b-0 md:border-r border-jet-black relative bg-off-white">
+                    <div class="sticky top-16 h-[50vh] md:h-screen flex items-center justify-center px-4 overflow-hidden">
+                        <span class="font-serif italic font-black text-giant-year tracking-tighter leading-none text-center text-prestige-blue">EXP.</span>
+                    </div>
+                </div>
+                <div class="w-full md:w-[70%] p-12 md:p-24 flex items-center bg-white">
+                    <div class="max-w-3xl">
+                        <p class="font-mono text-sm tracking-widest uppercase mb-6 text-prestige-blue">[ BLOCK 003 : THE CALLING ]</p>
+                        <p class="narrative-text text-xl md:text-3xl font-bold leading-snug tracking-tight text-left uppercase mb-8 text-deep-emerald">
+                            The Lord opened a door for me to serve as a principal and later director and principal in two different Christian international schools. This gave me a great experience in education and leadership that I greatly needed for the calling ahead of me.
+                        </p>
+                        <p class="narrative-text text-lg md:text-xl font-medium leading-relaxed font-mono border-l-4 border-classic-gold pl-6 text-deep-emerald text-left">
+                            "My experience as a stay-at-home mother for 18 years, educating my own children from home for 10 years, and the opportunity to serve as principal in two other Christian schools for about five years prepared me for the calling to raise an end-time generation."
+                        </p>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="timeline-block w-full min-h-[100vh] border-b border-jet-black flex flex-col md:flex-row">
+                <div class="w-full md:w-[30%] border-b md:border-b-0 md:border-r border-jet-black relative bg-off-white">
+                    <div class="sticky top-16 h-[50vh] md:h-screen flex items-center justify-center px-4 overflow-hidden">
+                        <span class="font-serif italic font-black text-giant-year tracking-tighter leading-none text-center text-prestige-blue">2023</span>
+                    </div>
+                </div>
+                <div class="w-full md:w-[70%] p-12 md:p-24 flex items-center bg-white">
+                    <div class="max-w-3xl">
+                        <p class="font-mono text-sm tracking-widest uppercase mb-6 text-prestige-blue">[ BLOCK 004 : THE OPENING ]</p>
+                        <p class="narrative-text text-2xl md:text-4xl font-bold leading-tight tracking-tight text-left uppercase text-deep-emerald">
+                            This led to the opening up of <span class="text-classic-gold">The Nazarite International Christian School</span> to friends and neighbors in 2023 with the first 10 students. The school continues to grow.
+                        </p>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="timeline-block w-full min-h-[80vh] border-b border-jet-black flex flex-col md:flex-row bg-deep-emerald text-white">
+                <div class="w-full md:w-[30%] border-b md:border-b-0 md:border-r border-off-white relative bg-deep-emerald">
+                    <div class="sticky top-16 h-[50vh] md:h-screen flex items-center justify-center px-4 overflow-hidden">
+                        <span class="font-serif italic font-black text-giant-year tracking-tighter leading-none text-center text-classic-gold">NEXT</span>
+                    </div>
+                </div>
+                <div class="w-full md:w-[70%] p-12 md:p-24 flex items-center">
+                    <div class="max-w-3xl">
+                        <p class="font-mono text-sm tracking-widest uppercase mb-6 text-classic-gold">[ BLOCK 005 : THE FUTURE ]</p>
+                        <p class="narrative-text text-2xl md:text-4xl font-bold leading-tight tracking-tight text-left uppercase">
+                            As we look into the future, we remain dedicated and committed to raising children that have an undivided consecration to God and an excellent education springing from this commitment.
+                        </p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <footer class="w-full border-b border-jet-black bg-white text-deep-emerald">
+            <div class="grid grid-cols-1 md:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-jet-black">
+                <div class="p-6 h-full flex flex-col"><h3 class="font-mono font-bold text-xs mb-4 text-prestige-blue">SOCIAL</h3><ul class="space-y-2 font-bold uppercase text-sm"><li><a href="#" class="hover:text-classic-gold hover:underline decoration-2">Instagram</a></li><li><a href="#" class="hover:text-classic-gold hover:underline decoration-2">Facebook</a></li><li><a href="#" class="hover:text-classic-gold hover:underline decoration-2">Twitter / X</a></li></ul></div>
+                <div class="p-6 h-full flex flex-col"><h3 class="font-mono font-bold text-xs mb-4 text-prestige-blue">LOCATION</h3><p class="font-mono text-sm uppercase leading-relaxed">Naalya, Kampala<br>Uganda<br>East Africa<br><span class="text-classic-gold">Lat: 0.3644° N</span></p></div>
+                <div class="p-6 h-full flex flex-col"><h3 class="font-mono font-bold text-xs mb-4 text-prestige-blue">SITEMAP</h3><ul class="space-y-1 font-mono text-xs uppercase"><li><a href="newert.html" class="hover:text-classic-gold">[Home]</a></li><li><a href="newertacd.html" class="hover:text-classic-gold">[Academics]</a></li><li><a href="#" class="hover:text-classic-gold">[Admissions]</a></li><li><a href="#" class="hover:text-classic-gold">[Portal]</a></li></ul></div>
+                <div class="p-6 h-full flex flex-col justify-between"><div class="w-full h-12 bg-jet-black text-white flex items-center justify-center font-mono text-xs font-bold hover:bg-classic-gold hover:text-deep-emerald cursor-pointer transition-colors" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">BACK TO TOP</div><p class="font-mono text-[10px] uppercase mt-4 text-gray-400">&copy; 2025 The NICS.</p></div>
+            </div>
+        </footer>
+
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+        const cursor = document.getElementById("custom-cursor");
+        const xTo = gsap.quickSetter(cursor, "x", "px");
+        const yTo = gsap.quickSetter(cursor, "y", "px");
+        window.addEventListener("mousemove", e => { xTo(e.clientX); yTo(e.clientY); });
+        
+        document.querySelectorAll('a, button, .value-cell').forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.style.transform = 'translate(-50%, -50%) scale(1.5)');
+            el.addEventListener('mouseleave', () => cursor.style.transform = 'translate(-50%, -50%) scale(1)');
+        });
+
+        gsap.to("#progress-bar", { value: 100, width: "100%", ease: "none", scrollTrigger: { trigger: "body", start: "top top", end: "bottom bottom", scrub: 0 } });
+        const tl = gsap.timeline();
+        tl.to(".hero-line", { y: 0, opacity: 1, duration: 1.2, stagger: 0.15, ease: "power4.out" });
+        const texts = document.querySelectorAll(".narrative-text");
+        texts.forEach(text => { text.classList.add('blur-reveal'); ScrollTrigger.create({ trigger: text, start: "top 85%", onEnter: () => text.classList.add('active'), }); });
+        const years = document.querySelectorAll(".sticky span");
+        years.forEach(year => { gsap.fromTo(year, { scale: 0.8, opacity: 0.5 }, { scale: 1, opacity: 1, duration: 0.5, ease: "power2.out", scrollTrigger: { trigger: year.parentElement, start: "top center", toggleActions: "play reverse play reverse" } }); });
+    </script>
+</body>
+</html>
