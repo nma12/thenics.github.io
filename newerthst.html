@@ -63,8 +63,12 @@
         @keyframes scrollRuler { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
         .bounce { animation: bounce 2s infinite; }
         @keyframes bounce { 0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 40% {transform: translateY(-10px);} 60% {transform: translateY(-5px);} }
-        .dropdown-menu { display: none; position: absolute; top: 63px; left: -1rem; width: 16rem; background: white; border: 1px solid #000000; box-shadow: 4px 4px 0px 0px rgba(0,0,0,1); color: #1A3C34; z-index: 60; }
+        
+        /* DROPDOWN STYLES */
+        .dropdown-menu { display: none; position: absolute; top: 63px; width: 16rem; background: white; border: 1px solid #000000; box-shadow: 4px 4px 0px 0px rgba(0,0,0,1); color: #1A3C34; z-index: 60; }
         .group:hover .dropdown-menu { display: block; }
+        .dropdown-left { left: -1rem; }
+        .dropdown-right { right: 0; }
         .dropdown-item { display: block; padding: 1rem 1.5rem; border-bottom: 1px solid #000000; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 0.875rem; transition: background 0s; cursor: none; }
         .dropdown-item:last-child { border-bottom: none; }
         .dropdown-item:hover { background-color: #003366; color: #D4AF37; }
@@ -82,17 +86,26 @@
         </div>
         <ul class="hidden md:flex space-x-8 font-mono text-sm font-bold uppercase tracking-widest h-full items-center text-deep-emerald">
             <li><a href="newert.html" class="nav-link">Home</a></li>
+            
             <li class="relative group h-full flex items-center cursor-pointer">
-                <span class="nav-link text-prestige-blue">About</span>
-                <div class="absolute top-[63px] -left-4 w-64 bg-white border border-black hidden group-hover:block p-0 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
-                    <a href="newertmsn.html" class="block px-6 py-4 border-b border-black hover:bg-electric-blue hover:text-white transition-colors duration-0 font-sans font-bold">Mission & Vision</a>
-                    <a href="newerthst.html" class="block px-6 py-4 border-b border-black bg-prestige-blue text-classic-gold font-sans font-bold">History</a>
-                    <a href="#" class="block px-6 py-4 hover:bg-electric-blue hover:text-white transition-colors duration-0 font-sans font-bold">Meet the Team</a>
+                <span class="nav-link text-classic-gold border-b-2 border-classic-gold">About</span>
+                <div class="dropdown-menu dropdown-left">
+                    <a href="newertmsn.html" class="dropdown-item">Mission & Vision</a>
+                    <a href="newerthst.html" class="dropdown-item bg-prestige-blue text-classic-gold">History</a>
+                    <a href="#team" class="dropdown-item">Meet the Team</a>
                 </div>
             </li>
+            
             <li><a href="newertacd.html" class="nav-link">Academics</a></li>
-            <li><a href="#" class="nav-link">Admission</a></li>
-            <li><a href="#" class="nav-link">Activities</a></li>
+            <li><a href="newertadm.html" class="nav-link">Admission</a></li>
+            
+            <li class="relative group h-full flex items-center cursor-pointer">
+                <span class="nav-link text-prestige-blue">Activities</span>
+                <div class="dropdown-menu dropdown-right">
+                    <a href="newertclb.html" class="dropdown-item">Our Clubs</a>
+                    <a href="newertprt.html" class="dropdown-item">Parent Engagements</a>
+                </div>
+            </li>
         </ul>
         <div class="md:hidden font-mono text-sm">[MENU]</div>
     </nav>
@@ -115,7 +128,9 @@
                         <div class="flex flex-col items-center gap-2"><div class="h-16 w-1 bg-deep-emerald"></div><span>2023</span></div><div class="h-8 w-px bg-deep-emerald"></div><div class="h-8 w-px bg-deep-emerald"></div><div class="h-8 w-px bg-deep-emerald"></div>
                         <div class="flex flex-col items-center gap-2"><div class="h-16 w-1 bg-deep-emerald"></div><span>2025</span></div>
                         <div class="h-8 w-px bg-deep-emerald"></div><div class="h-8 w-px bg-deep-emerald"></div><div class="h-8 w-px bg-deep-emerald"></div>
-                        
+                    </div>
+                    
+                    <div class="flex items-end space-x-12 px-4">
                         <div class="flex flex-col items-center gap-2"><div class="h-16 w-1 bg-deep-emerald"></div><span>1997</span></div><div class="h-8 w-px bg-deep-emerald"></div><div class="h-8 w-px bg-deep-emerald"></div><div class="h-8 w-px bg-deep-emerald"></div>
                         <div class="flex flex-col items-center gap-2"><div class="h-16 w-1 bg-deep-emerald"></div><span>2005</span></div><div class="h-8 w-px bg-deep-emerald"></div><div class="h-8 w-px bg-deep-emerald"></div><div class="h-8 w-px bg-deep-emerald"></div>
                         <div class="flex flex-col items-center gap-2"><div class="h-16 w-1 bg-deep-emerald"></div><span>2013</span></div><div class="h-8 w-px bg-deep-emerald"></div><div class="h-8 w-px bg-deep-emerald"></div><div class="h-8 w-px bg-deep-emerald"></div>
@@ -227,7 +242,7 @@
             <div class="grid grid-cols-1 md:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-jet-black">
                 <div class="p-6 h-full flex flex-col"><h3 class="font-mono font-bold text-xs mb-4 text-prestige-blue">SOCIAL</h3><ul class="space-y-2 font-bold uppercase text-sm"><li><a href="#" class="hover:text-classic-gold hover:underline decoration-2">Instagram</a></li><li><a href="#" class="hover:text-classic-gold hover:underline decoration-2">Facebook</a></li><li><a href="#" class="hover:text-classic-gold hover:underline decoration-2">Twitter / X</a></li></ul></div>
                 <div class="p-6 h-full flex flex-col"><h3 class="font-mono font-bold text-xs mb-4 text-prestige-blue">LOCATION</h3><p class="font-mono text-sm uppercase leading-relaxed">Naalya, Kampala<br>Uganda<br>East Africa<br><span class="text-classic-gold">Lat: 0.3644° N</span></p></div>
-                <div class="p-6 h-full flex flex-col"><h3 class="font-mono font-bold text-xs mb-4 text-prestige-blue">SITEMAP</h3><ul class="space-y-1 font-mono text-xs uppercase"><li><a href="newert.html" class="hover:text-classic-gold">[Home]</a></li><li><a href="newertacd.html" class="hover:text-classic-gold">[Academics]</a></li><li><a href="#" class="hover:text-classic-gold">[Admissions]</a></li><li><a href="#" class="hover:text-classic-gold">[Portal]</a></li></ul></div>
+                <div class="p-6 h-full flex flex-col"><h3 class="font-mono font-bold text-xs mb-4 text-prestige-blue">SITEMAP</h3><ul class="space-y-1 font-mono text-xs uppercase"><li><a href="newert.html" class="hover:text-classic-gold">[Home]</a></li><li><a href="newertacd.html" class="hover:text-classic-gold">[Academics]</a></li><li><a href="newertadm.html" class="hover:text-classic-gold">[Admissions]</a></li><li><a href="#" class="hover:text-classic-gold">[Portal]</a></li></ul></div>
                 <div class="p-6 h-full flex flex-col justify-between"><div class="w-full h-12 bg-jet-black text-white flex items-center justify-center font-mono text-xs font-bold hover:bg-classic-gold hover:text-deep-emerald cursor-pointer transition-colors" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">BACK TO TOP</div><p class="font-mono text-[10px] uppercase mt-4 text-gray-400">&copy; 2025 The NICS.</p></div>
             </div>
         </footer>
