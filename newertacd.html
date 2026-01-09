@@ -20,6 +20,7 @@
                         'deep-emerald': '#1A3C34',
                         'jet-black': '#000000',
                         'off-white': '#F4F7F6',
+                        'darker-emerald': '#0D2620',
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
@@ -32,6 +33,10 @@
                     },
                     spacing: {
                         '128': '32rem',
+                    },
+                    animation: {
+                        'spin-slow': 'spin 60s linear infinite',
+                        'spin-reverse-slow': 'spinReverse 15s linear infinite',
                     }
                 }
             }
@@ -65,7 +70,6 @@
         .blur-reveal { filter: blur(10px); opacity: 0; transform: translateY(20px); transition: all 1s ease; }
         .blur-reveal.active { filter: blur(0); opacity: 1; transform: translateY(0); }
 
-        /* Updated Dropdown CSS for positioning */
         .dropdown-menu { display: none; position: absolute; top: 63px; width: 16rem; background: white; border: 1px solid #000000; box-shadow: 4px 4px 0px 0px rgba(0,0,0,1); color: #1A3C34; z-index: 60; }
         .group:hover .dropdown-menu { display: block; }
         .dropdown-left { left: -1rem; }
@@ -77,9 +81,43 @@
         
         .stage-card:hover .stage-number { color: #D4AF37; }
         .stage-card:hover { background-color: #1A3C34; color: white; }
+        
+        /* High School Section Specific Overrides (Black Theme) */
+        .stage-card.high-school-section:hover { background-color: #000000; } 
 
-        .spin-slow { animation: spin 20s linear infinite; }
-        .spin-reverse-slow { animation: spinReverse 15s linear infinite; }
+        /* Curriculum Toggle Styles */
+        #curriculum-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.8s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.5s ease;
+            opacity: 0;
+        }
+        #curriculum-details.open {
+            max-height: 3000px;
+            opacity: 1;
+        }
+        
+        .subject-column { border-right: 1px solid #2D564D; }
+        .subject-column:last-child { border-right: none; }
+        @media (max-width: 768px) { .subject-column { border-right: none; border-bottom: 1px solid #2D564D; } }
+
+        .grade-header { 
+            font-family: 'DM Serif Text', serif; 
+            color: #D4AF37; 
+            margin-bottom: 1rem; 
+            font-size: 1.5rem;
+        }
+        .subject-item {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: #F4F7F6;
+            margin-bottom: 0.5rem;
+            opacity: 0.8;
+            transition: all 0.2s ease;
+            cursor: none;
+        }
+        .subject-item:hover { opacity: 1; color: #D4AF37; transform: translateX(5px); }
+
         @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
         @keyframes spinReverse { from { transform: rotate(360deg); } to { transform: rotate(0deg); } }
     </style>
@@ -105,7 +143,6 @@
             </li>
             <li><a href="newertacd.html" class="nav-link text-classic-gold border-b-2 border-classic-gold">Academics</a></li>
             <li><a href="newertadm.html" class="nav-link">Admission</a></li>
-            
             <li class="relative group h-full flex items-center cursor-pointer">
                 <span class="nav-link text-prestige-blue">Activities</span>
                 <div class="dropdown-menu dropdown-right">
@@ -120,7 +157,6 @@
     <main class="mt-16 w-full">
 
         <section class="relative h-[55vh] min-h-[500px] w-full flex flex-col justify-center overflow-hidden border-b border-jet-black bg-off-white">
-            
             <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden">
                 <div class="absolute inset-0 bg-gradient-to-br from-deep-emerald/90 via-prestige-blue/80 to-deep-emerald/90 mix-blend-multiply z-10"></div>
                 <div class="w-full h-full hero-bg-zoom">
@@ -130,7 +166,7 @@
 
             <div class="absolute bottom-12 right-12 z-30 opacity-80 hidden md:block">
                 <div class="relative w-32 h-32 flex items-center justify-center">
-                    <div class="absolute w-full h-full spin-slow">
+                    <div class="absolute w-full h-full animate-[spin_20s_linear_infinite]">
                         <svg viewBox="0 0 100 100" class="w-full h-full">
                             <path id="circlePath2" d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" fill="transparent" />
                             <text class="text-[11px] font-mono font-bold uppercase fill-classic-gold tracking-widest">
@@ -141,7 +177,7 @@
                         </svg>
                     </div>
                     <div class="absolute w-full h-full flex items-center justify-center">
-                         <svg viewBox="0 0 24 24" class="w-8 h-8 text-white fill-current spin-reverse-slow">
+                         <svg viewBox="0 0 24 24" class="w-8 h-8 text-white fill-current animate-[spinReverse_15s_linear_infinite]">
                             <path d="M12 0L14 10L24 12L14 14L12 24L10 14L0 12L10 10L12 0Z" />
                         </svg>
                     </div>
@@ -157,12 +193,11 @@
                 <div class="manifesto-box opacity-0 max-w-xl">
                     <div class="p-6 border-l-4 border-classic-gold bg-deep-emerald/90 shadow-[4px_4px_0px_0px_rgba(212,175,55,1)]">
                         <p class="font-mono text-xs md:text-sm leading-relaxed text-white">
-                            At The Nazarite International Christian School, we believe that God is the ultimate source of all truth and knowledge, and that learning is an act that honors and glorifies Him. Guided by this belief, we challenge our students by engaging them in rigorous academics through a variety of instructional approaches that support diverse learners.
+                            At The Nazirite International Christian School, we believe that God is the ultimate source of all truth and knowledge, and that learning is an act that honors and glorifies Him. Guided by this belief, we engage students in a challenging and enriching academic program, using a variety of instructional approaches designed to cultivate academic growth.
                         </p>
                     </div>
                 </div>
             </div>
-
         </section>
 
         <section class="w-full bg-white py-24 border-b border-jet-black px-6 md:px-12 flex flex-col items-center">
@@ -172,7 +207,7 @@
                     A seamless progression from foundational learning to university-ready excellence.
                 </h2>
                 <p class="font-sans text-lg leading-relaxed text-jet-black max-w-2xl mx-auto">
-                    The Nazarite International Christian School academic sequence uses diverse instructional approaches and rigorous curricula at different levels to ensure optimal learning.
+                    The Nazarite International Christian School academic sequence uses diverse instructional approaches and rigorous curricula across grade levels to support effective and meaningful learning.
                 </p>
             </div>
         </section>
@@ -184,10 +219,10 @@
                 <div class="w-full md:w-1/2 p-12 flex justify-end text-right z-10">
                     <div class="max-w-md">
                         <span class="stage-number font-mono text-6xl font-bold text-gray-300 transition-colors duration-300">01</span>
-                        <h3 class="font-serif text-4xl mt-2 mb-4">Early Years</h3>
-                        <p class="font-mono text-xs uppercase tracking-widest mb-4 opacity-70">PRE-K • FOUNDATIONS</p>
+                        <h3 class="font-serif text-4xl mt-2 mb-4">Early Years & Elementary</h3>
+                        <p class="font-mono text-xs uppercase tracking-widest mb-4 opacity-70">PRE-K to GRADE 6 • FOUNDATIONS & MASTERY</p>
                         <p class="font-sans text-sm leading-relaxed">
-                            Throughout the early years (Pre-K), our emphasis is on building strong foundations. The ACE curriculum helps us accomplish this by providing structured independence, self-paced mastery, and consistent biblical integration. Biblical principles woven into daily lessons build character alongside academic skills.
+                            Our early years and elementary school programs focus on building strong foundational skills in comprehension and goal setting. The ACE curriculum supports this through structured independence, self-paced mastery, and intentional biblical integration.
                         </p>
                     </div>
                 </div>
@@ -201,70 +236,161 @@
                 <div class="w-full md:w-1/2 p-12 z-10">
                     <div class="max-w-md">
                         <span class="stage-number font-mono text-6xl font-bold text-gray-300 transition-colors duration-300">02</span>
-                        <h3 class="font-serif text-4xl mt-2 mb-4">Elementary School</h3>
-                        <p class="font-mono text-xs uppercase tracking-widest mb-4 opacity-70">GRADES 1-6 • MASTERY</p>
+                        <h3 class="font-serif text-4xl mt-2 mb-4">Middle School</h3>
+                        <p class="font-mono text-xs uppercase tracking-widest mb-4 opacity-70">GRADES 7-8 • APPLICATION & CRITICAL THINKING</p>
                         <p class="font-sans text-sm leading-relaxed">
-                            At the elementary level (grades 1-6), our students continue with the individualized, mastery-based system of the ACE curriculum. They focus on building a strong foundation comprehension and following instructions.
+                            At the middle school level, students engage with challenging, practical Christian American curricula that emphasizes application, collaboration, and critical thinking. They progress beyond memorization to analysis, evaluation, and creative problem-solving across all subjects.
                         </p>
                     </div>
                 </div>
                 <div class="absolute left-4 md:left-1/2 top-12 md:top-1/2 w-4 h-4 bg-deep-emerald border border-classic-gold rounded-full md:-translate-x-1/2 md:-translate-y-1/2 z-20"></div>
                 <div class="w-full md:w-1/2 p-12 z-10 hidden md:block flex justify-end">
-                     <div class="w-full h-64 border border-current opacity-50 bg-[url('https://images.unsplash.com/photo-1544952402-9039f045c473?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center grayscale"></div>
-                </div>
-            </div>
-
-            <div class="relative w-full min-h-[50vh] flex flex-col md:flex-row items-center border-b border-jet-black group stage-card transition-colors duration-500">
-                <div class="w-full md:w-1/2 p-12 flex justify-end text-right z-10">
-                    <div class="max-w-md">
-                        <span class="stage-number font-mono text-6xl font-bold text-gray-300 transition-colors duration-300">03</span>
-                        <h3 class="font-serif text-4xl mt-2 mb-4">Middle School</h3>
-                        <p class="font-mono text-xs uppercase tracking-widest mb-4 opacity-70">GRADES 7-8 • TRANSITION</p>
-                        <p class="font-sans text-sm leading-relaxed">
-                            At this critical developmental stage, our Middle schoolers (grades 7-8) are exposed to stronger, more practical Christian American curricula that emphasize application, collaboration, and deeper thinking. Students move beyond memorization to analysis, evaluation, and creative problem-solving across all subjects.
-                        </p>
-                    </div>
-                </div>
-                <div class="absolute left-4 md:left-1/2 top-12 md:top-1/2 w-4 h-4 bg-deep-emerald border border-classic-gold rounded-full md:-translate-x-1/2 md:-translate-y-1/2 z-20"></div>
-                <div class="w-full md:w-1/2 p-12 z-10 hidden md:block">
                      <div class="w-full h-64 border border-current opacity-50 bg-[url('https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center grayscale"></div>
                 </div>
             </div>
 
-            <div class="relative w-full min-h-[50vh] flex flex-col md:flex-row-reverse items-center border-b border-jet-black group stage-card transition-colors duration-500">
-                <div class="w-full md:w-1/2 p-12 z-10">
-                    <div class="max-w-md">
-                        <span class="stage-number font-mono text-6xl font-bold text-gray-300 transition-colors duration-300">04</span>
-                        <h3 class="font-serif text-4xl mt-2 mb-4">Junior Highschool</h3>
-                        <p class="font-mono text-xs uppercase tracking-widest mb-4 opacity-70">GRADES 9-10 • DIPLOMA TRACK</p>
-                        <p class="font-sans text-sm leading-relaxed">
-                            At the Junior highschool level (Grades 9-10), students continue with the same instructional model as Middle School, while diving into highschool level subjects and beginning the climb towards an American Highschool Diploma.
-                        </p>
-                    </div>
-                </div>
-                <div class="absolute left-4 md:left-1/2 top-12 md:top-1/2 w-4 h-4 bg-deep-emerald border border-classic-gold rounded-full md:-translate-x-1/2 md:-translate-y-1/2 z-20"></div>
-                <div class="w-full md:w-1/2 p-12 z-10 hidden md:block flex justify-end">
-                     <div class="w-full h-64 border border-current opacity-50 bg-[url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center grayscale"></div>
-                </div>
-            </div>
-
-            <div class="relative w-full min-h-[50vh] flex flex-col md:flex-row items-center border-b border-jet-black bg-jet-black text-white group stage-card transition-colors duration-500 hover:bg-deep-emerald">
-                <div class="w-full md:w-1/2 p-12 flex justify-end text-right z-10">
-                    <div class="max-w-md">
-                        <span class="stage-number font-mono text-6xl font-bold text-classic-gold transition-colors duration-300">05</span>
-                        <h3 class="font-serif text-4xl mt-2 mb-4 text-classic-gold">Senior Highschool</h3>
-                        <p class="font-mono text-xs uppercase tracking-widest mb-4 opacity-70">GRADES 11-12 • A LEVELS</p>
-                        <p class="font-sans text-sm leading-relaxed">
-                            At the Senior Highschool level (Grades 11-12) our students are prepared for university with Cambridge International A levels. A-Levels mirror university-style learning with in-depth subject mastery and independent research expectations. Finally graduating with both an American high school diploma and an A level certificate.
+            <div class="relative w-full min-h-[50vh] flex flex-col md:flex-row items-center border-b border-jet-black group stage-card high-school-section transition-colors duration-500 bg-jet-black text-white hover:bg-jet-black">
+                <div class="w-full md:w-1/2 p-12 flex justify-end z-10">
+                    <div class="max-w-xl text-center mx-auto md:text-right md:mx-0">
+                        <span class="stage-number font-mono text-6xl font-bold text-classic-gold transition-colors duration-300 block mb-2">03</span>
+                        <h3 class="font-serif text-4xl mt-2 mb-4 text-classic-gold">High School</h3>
+                        <p class="font-mono text-xs uppercase tracking-widest mb-4 opacity-70">GRADES 9-12 • DUAL DIPLOMA & A-LEVELS</p>
+                        
+                        <p class="font-sans text-sm leading-relaxed opacity-80 mx-auto md:ml-auto md:mr-0 max-w-lg">
+                            Our high school offers a rigorous and globally focused education, combining a broad American curriculum in Grades 9 and 10 with Cambridge A Levels in Grades 11 and 12. This dual-diploma program develops critical thinking, analytical reasoning, problem-solving skills, and effective communication skills. Graduates leave well-prepared for universities around the world, equipped with both a U.S. high school diploma and internationally recognized Cambridge qualifications.
                         </p>
                     </div>
                 </div>
                 <div class="absolute left-4 md:left-1/2 top-12 md:top-1/2 w-4 h-4 bg-classic-gold border border-white rounded-full md:-translate-x-1/2 md:-translate-y-1/2 z-20"></div>
                 <div class="w-full md:w-1/2 p-12 z-10 hidden md:block">
-                     <div class="w-full h-64 border border-current opacity-50 bg-[url('https://images.unsplash.com/photo-1523580494863-6f3031224c94?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center grayscale"></div>
+                     <div class="w-full h-64 border border-classic-gold/30 bg-[url('https://images.unsplash.com/photo-1523580494863-6f3031224c94?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center grayscale opacity-60"></div>
                 </div>
             </div>
 
+        </section>
+
+        <section class="w-full bg-deep-emerald text-white border-b border-jet-black">
+            <div class="w-full py-16 px-6 md:px-12 flex flex-col md:flex-row items-start md:items-center justify-between gap-8 cursor-pointer hover:bg-darker-emerald transition-colors" onclick="toggleCurriculum()">
+                <div class="order-2 md:order-1">
+                    <button class="inline-block px-8 py-3 border border-classic-gold text-classic-gold font-mono text-sm font-bold uppercase tracking-widest hover:bg-classic-gold hover:text-deep-emerald transition-colors duration-300 pointer-events-none">
+                        [ Read More ]
+                    </button>
+                </div>
+                <div class="order-1 md:order-2">
+                    <h3 class="font-serif text-3xl md:text-4xl leading-tight mb-2">Have a look at our subjects</h3>
+                    <p class="font-sans text-sm opacity-70">Click here to view the detailed breakdown for each grade level.</p>
+                </div>
+            </div>
+
+            <div id="curriculum-details" class="bg-darker-emerald border-t border-classic-gold/30">
+                <div class="max-w-7xl mx-auto py-16 px-6 md:px-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+                    
+                    <div class="subject-column p-4">
+                        <h4 class="grade-header">Elementary</h4>
+                        <p class="font-mono text-xs text-classic-gold mb-6 uppercase tracking-widest">Grades 1-6</p>
+                        
+                        <div class="subject-list">
+                            <p class="subject-item">[01] Math</p>
+                            <p class="subject-item">[02] English</p>
+                            <p class="subject-item">[03] Science</p>
+                            <p class="subject-item">[04] Social Studies</p>
+                            <p class="subject-item">[05] Word Building</p>
+                            <p class="subject-item">[06] Literature</p>
+                            <p class="subject-item">[07] ICDL</p>
+                        </div>
+                    </div>
+
+                    <div class="subject-column p-4">
+                        <h4 class="grade-header">Middle School</h4>
+                        <p class="font-mono text-xs text-classic-gold mb-6 uppercase tracking-widest">Grades 7-8</p>
+                        
+                        <div class="subject-list space-y-6">
+                            <div>
+                                <strong class="font-mono text-xs text-white/50 block mb-2">GRADE 7</strong>
+                                <p class="subject-item">Math: General Math</p>
+                                <p class="subject-item">Language Arts: Writing & Grammar</p>
+                                <p class="subject-item">Science: General Science</p>
+                                <p class="subject-item">History: American History/Gov</p>
+                                <p class="subject-item">Bible: Life of Christ</p>
+                                <p class="subject-item">Computer: ICDL</p>
+                                <p class="subject-item">Language: Kiswahili</p>
+                                <p class="subject-item">Sports: Swimming, Football, Basketball</p>
+                            </div>
+                            <div>
+                                <strong class="font-mono text-xs text-white/50 block mb-2">GRADE 8</strong>
+                                <p class="subject-item">Math: Pre-Algebra</p>
+                                <p class="subject-item">Language Arts: Writing & Grammar II</p>
+                                <p class="subject-item">Science: Physical Science</p>
+                                <p class="subject-item">History: World History</p>
+                                <p class="subject-item">Bible: Life of Christ</p>
+                            </div>
+                            <div>
+                                <strong class="font-mono text-xs text-white/50 block mb-2">ELECTIVES (7 & 8)</strong>
+                                <p class="subject-item opacity-60">Art & Design, Music, AI, Spanish, French, Astronomy, Food & Nutrition, African Perspective</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="subject-column p-4">
+                        <h4 class="grade-header">Junior High</h4>
+                        <p class="font-mono text-xs text-classic-gold mb-6 uppercase tracking-widest">Grades 9-10</p>
+                        
+                        <div class="subject-list space-y-6">
+                            <div>
+                                <strong class="font-mono text-xs text-white/50 block mb-2">GRADE 9</strong>
+                                <p class="subject-item">Math: Algebra 1 / Geometry</p>
+                                <p class="subject-item">Lang Arts: Writing & Grammar I</p>
+                                <p class="subject-item">Science: Biology</p>
+                                <p class="subject-item">History: American History</p>
+                                <p class="subject-item">Bible: Old Testament Survey</p>
+                            </div>
+                            <div>
+                                <strong class="font-mono text-xs text-white/50 block mb-2">GRADE 10</strong>
+                                <p class="subject-item">Math: Algebra 2</p>
+                                <p class="subject-item">Lang Arts: Writing & Grammar II</p>
+                                <p class="subject-item">Science: Chemistry or Physics</p>
+                                <p class="subject-item">History: World History</p>
+                            </div>
+                            <div>
+                                <strong class="font-mono text-xs text-white/50 block mb-2">ELECTIVES</strong>
+                                <p class="subject-item opacity-60">Personal Finance, Art, Music, AI, Spanish/French (2yrs), Astronomy, Health, Oral Comm, African Perspective</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="subject-column p-4">
+                        <h4 class="grade-header">Senior High</h4>
+                        <p class="font-mono text-xs text-classic-gold mb-6 uppercase tracking-widest">Grades 11-12 (A-Levels)</p>
+                        
+                        <div class="subject-list space-y-6">
+                            <div>
+                                <strong class="font-mono text-xs text-white/50 block mb-2">GRADE 11 (AS LEVEL)</strong>
+                                <p class="subject-item">Math: AS Level</p>
+                                <p class="subject-item">Lang Arts: AS English Lang</p>
+                                <p class="subject-item">Science: AS (Bio/Chem/Phys)</p>
+                                <p class="subject-item">History: Gov (0.5 Cr) & AS (Econ/Hist/Geo)</p>
+                                <p class="subject-item">Bible: New Testament Survey</p>
+                            </div>
+                            <div>
+                                <strong class="font-mono text-xs text-white/50 block mb-2">GRADE 12 (A2 LEVEL)</strong>
+                                <p class="subject-item">Math: A2 Level</p>
+                                <p class="subject-item">English: A2 English Lang</p>
+                                <p class="subject-item">Science: A2 (Bio/Chem/Phys)</p>
+                                <p class="subject-item">Social Studies: A2 (Econ or Hist)</p>
+                            </div>
+                            <div>
+                                <strong class="font-mono text-xs text-white/50 block mb-2">ELECTIVES</strong>
+                                <p class="subject-item opacity-60">Personal Finance, Art, Music, AI, Languages, Astronomy, Food & Nutrition, ICDL Advanced</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                
+                <div class="w-full text-center pb-8">
+                    <button onclick="toggleCurriculum()" class="font-mono text-xs text-classic-gold uppercase tracking-widest hover:text-white transition-colors">[ Close Details ]</button>
+                </div>
+            </div>
         </section>
 
         <footer class="w-full border-t border-jet-black bg-white text-deep-emerald">
@@ -303,6 +429,16 @@
         cards.forEach(card => {
             gsap.from(card, { opacity: 0, y: 50, duration: 0.8, scrollTrigger: { trigger: card, start: "top 85%" } });
         });
+
+        function toggleCurriculum() {
+            const details = document.getElementById('curriculum-details');
+            details.classList.toggle('open');
+            if(details.classList.contains('open')) {
+                setTimeout(() => {
+                    details.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 100);
+            }
+        }
     </script>
 </body>
 </html>
