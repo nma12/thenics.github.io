@@ -53,9 +53,8 @@
             transform: translate(-50%, -50%); transition: transform 0.1s ease;
         }
         
-        a:hover ~ #custom-cursor, button:hover ~ #custom-cursor, .stage-card:hover ~ #custom-cursor {
-            transform: translate(-50%, -50%) scale(2);
-            background-color: transparent;
+        a:hover ~ #custom-cursor, button:hover ~ #custom-cursor, .stage-card:hover ~ #custom-cursor, .accordion-btn:hover ~ #custom-cursor {
+            transform: translate(-50%, -50%) scale(2); background-color: transparent;
         }
 
         ::selection { background: #003366; color: #D4AF37; }
@@ -87,14 +86,12 @@
 
         /* Curriculum Toggle Styles */
         #curriculum-details {
-            max-height: 0;
-            overflow: hidden;
+            max-height: 0; overflow: hidden;
             transition: max-height 0.8s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.5s ease;
             opacity: 0;
         }
         #curriculum-details.open {
-            max-height: 3000px;
-            opacity: 1;
+            max-height: 3000px; opacity: 1;
         }
         
         .subject-column { border-right: 1px solid #2D564D; }
@@ -102,14 +99,12 @@
         @media (max-width: 768px) { .subject-column { border-right: none; border-bottom: 1px solid #2D564D; } }
 
         .grade-header { 
-            font-family: 'DM Serif Text', serif; 
-            color: #D4AF37; 
+            font-family: 'DM Serif Text', serif; color: #D4AF37; 
             margin-bottom: 1rem; 
             font-size: 1.5rem;
         }
         .subject-item {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.75rem;
+            font-family: 'JetBrains Mono', monospace; font-size: 0.75rem;
             color: #F4F7F6;
             margin-bottom: 0.5rem;
             opacity: 0.8;
@@ -120,39 +115,115 @@
 
         @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
         @keyframes spinReverse { from { transform: rotate(360deg); } to { transform: rotate(0deg); } }
+
+        /* Mobile Menu Transitions */
+        #mobile-menu-overlay {
+            clip-path: circle(0% at 100% 0); transition: clip-path 0.6s cubic-bezier(0.85, 0, 0.15, 1);
+        }
+        #mobile-menu-overlay.open {
+            clip-path: circle(150% at 100% 0);
+        }
+
+        /* Accordion Transitions */
+        .accordion-content {
+            max-height: 0; overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
     </style>
 </head>
 <body>
 
     <div id="custom-cursor"></div>
 
-    <nav class="fixed top-0 w-full z-50 bg-white ticker-border h-16 flex items-center justify-between px-6 cursor-none">
-        <div class="flex items-center">
-            <img src="https://placehold.co/40x40/transparent/black?text=Logo" alt="NICS Logo" class="h-8 w-auto mr-3 object-contain">
-            <div class="font-serif italic font-black text-2xl tracking-tight text-jet-black">THE NICS</div>
+    <nav class="fixed top-0 left-0 w-full h-16 bg-white ticker-border flex items-center justify-between px-6 z-50 cursor-none transition-colors duration-300" id="main-nav">
+        <div class="flex items-center relative z-50">
+            <img src="https://placehold.co/40x40/transparent/black?text=Logo" alt="NICS Logo" class="h-8 w-auto mr-3 object-contain transition-all duration-300" id="nav-logo">
+            <div class="font-serif italic font-black text-2xl tracking-tight text-jet-black transition-colors duration-300" id="nav-text">THE NICS</div>
         </div>
+        
         <ul class="hidden md:flex space-x-8 font-mono text-sm font-bold uppercase tracking-widest h-full items-center text-deep-emerald">
             <li><a href="newert.html" class="nav-link">Home</a></li>
             <li class="relative group h-full flex items-center cursor-pointer">
-                <span class="nav-link text-prestige-blue">About</span>
+                <span class="nav-link">About</span>
                 <div class="dropdown-menu dropdown-left">
                     <a href="newertmsn.html" class="dropdown-item">Mission & Vision</a>
                     <a href="newerthst.html" class="dropdown-item">History</a>
-                    <a href="#team" class="dropdown-item">Meet the Team</a>
+                    <a href="newertmtm.html" class="dropdown-item">Meet the Team</a>
                 </div>
             </li>
             <li><a href="newertacd.html" class="nav-link text-classic-gold border-b-2 border-classic-gold">Academics</a></li>
             <li><a href="newertadm.html" class="nav-link">Admission</a></li>
             <li class="relative group h-full flex items-center cursor-pointer">
-                <span class="nav-link text-prestige-blue">Activities</span>
+                <span class="nav-link">Activities</span>
                 <div class="dropdown-menu dropdown-right">
-                    <a href="newertclb.html" class="dropdown-item">Our Clubs</a>
+                    <a href="newertclb.html" class="dropdown-item">After-school Clubs</a>
                     <a href="newertprt.html" class="dropdown-item">Parent Engagements</a>
                 </div>
             </li>
+            <li><a href="newertstr.html" class="nav-link">TNICS Store</a></li>
         </ul>
-        <div class="md:hidden font-mono text-sm">[MENU]</div>
+
+        <button id="mobile-menu-btn" class="md:hidden font-mono text-xs font-bold text-deep-emerald uppercase tracking-widest z-50 relative px-4 py-2 border border-deep-emerald hover:bg-deep-emerald hover:text-white transition-colors duration-300">
+            MENU
+        </button>
     </nav>
+
+    <div id="mobile-menu-overlay" class="fixed inset-0 bg-deep-emerald z-40 flex flex-col justify-start items-start px-8 md:hidden overflow-y-auto pt-32 pb-12">
+        
+        <div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: radial-gradient(#D4AF37 1px, transparent 1px); background-size: 30px 30px;"></div>
+
+        <ul class="flex flex-col space-y-6 w-full text-left relative z-50">
+            
+            <li class="mobile-group opacity-0 translate-y-4">
+                <a href="newert.html" class="font-mono text-xl font-bold uppercase tracking-widest text-white hover:text-classic-gold transition-colors">Home</a>
+            </li>
+            
+            <li class="mobile-group opacity-0 translate-y-4 w-full">
+                <button class="accordion-btn w-full flex items-center justify-between font-mono text-xl font-bold uppercase tracking-widest text-white hover:text-classic-gold transition-colors text-left group">
+                    <span>About</span>
+                    <span class="accordion-icon text-sm text-classic-gold group-hover:text-white">[ + ]</span>
+                </button>
+                <div class="accordion-content">
+                    <ul class="pl-4 pt-4 border-l border-white/20 space-y-3 mt-2">
+                        <li><a href="newertmsn.html" class="block font-mono text-sm font-bold text-white/70 hover:text-white hover:pl-2 transition-all">Mission & Vision</a></li>
+                        <li><a href="newerthst.html" class="block font-mono text-sm font-bold text-white/70 hover:text-white hover:pl-2 transition-all">History</a></li>
+                        <li><a href="newertmtm.html" class="block font-mono text-sm font-bold text-white/70 hover:text-white hover:pl-2 transition-all">Meet the Team</a></li>
+                    </ul>
+                </div>
+            </li>
+
+            <li class="mobile-group opacity-0 translate-y-4">
+                <a href="newertacd.html" class="font-mono text-xl font-bold uppercase tracking-widest text-classic-gold hover:text-white transition-colors">Academics</a>
+            </li>
+
+            <li class="mobile-group opacity-0 translate-y-4">
+                <a href="newertadm.html" class="font-mono text-xl font-bold uppercase tracking-widest text-white hover:text-classic-gold transition-colors">Admission</a>
+            </li>
+            
+            <li class="mobile-group opacity-0 translate-y-4 w-full">
+                <button class="accordion-btn w-full flex items-center justify-between font-mono text-xl font-bold uppercase tracking-widest text-white hover:text-classic-gold transition-colors text-left group">
+                    <span>Activities</span>
+                    <span class="accordion-icon text-sm text-classic-gold group-hover:text-white">[ + ]</span>
+                </button>
+                <div class="accordion-content">
+                    <ul class="pl-4 pt-4 border-l border-white/20 space-y-3 mt-2">
+                        <li><a href="newertclb.html" class="block font-mono text-sm font-bold text-white/70 hover:text-white hover:pl-2 transition-all">After-school Clubs</a></li>
+                        <li><a href="newertprt.html" class="block font-mono text-sm font-bold text-white/70 hover:text-white hover:pl-2 transition-all">Parent Engagements</a></li>
+                    </ul>
+                </div>
+            </li>
+
+            <li class="mobile-group opacity-0 translate-y-4">
+                <a href="newertstr.html" class="font-mono text-xl font-bold uppercase tracking-widest text-white hover:text-classic-gold transition-colors">
+                    TNICS Store
+                </a>
+            </li>
+        </ul>
+
+        <div class="mt-auto pt-10 text-left mobile-footer opacity-0 relative z-50">
+            <p class="font-mono text-[10px] text-white/40 uppercase tracking-widest">Est. 2023 • Kampala</p>
+        </div>
+    </div>
 
     <main class="mt-16 w-full">
 
@@ -207,7 +278,7 @@
                     A seamless progression from foundational learning to university-ready excellence.
                 </h2>
                 <p class="font-sans text-lg leading-relaxed text-jet-black max-w-2xl mx-auto">
-                    The Nazarite International Christian School academic sequence uses diverse instructional approaches and rigorous curricula across grade levels to support effective and meaningful learning.
+                    The Nazirite International Christian School academic sequence uses diverse instructional approaches and rigorous curricula across grade levels to support effective and meaningful learning.
                 </p>
             </div>
         </section>
@@ -226,7 +297,7 @@
                         </p>
                     </div>
                 </div>
-                <div class="absolute left-4 md:left-1/2 top-12 md:top-1/2 w-4 h-4 bg-deep-emerald border border-classic-gold rounded-full md:-translate-x-1/2 md:-translate-y-1/2 z-20"></div>
+                <div class="absolute left-4 md:left-1/2 top-12 md:top-1/2 w-4 h-4 bg-deep-emerald border border-classic-gold rounded-full -translate-x-1/2 md:-translate-x-1/2 md:-translate-y-1/2 z-20"></div>
                 <div class="w-full md:w-1/2 p-12 z-10 hidden md:block">
                     <div class="w-full h-64 border border-current opacity-50 bg-[url('https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center grayscale"></div>
                 </div>
@@ -239,13 +310,13 @@
                         <h3 class="font-serif text-4xl mt-2 mb-4">Middle School</h3>
                         <p class="font-mono text-xs uppercase tracking-widest mb-4 opacity-70">GRADES 7-8 • APPLICATION & CRITICAL THINKING</p>
                         <p class="font-sans text-sm leading-relaxed">
-                            At the middle school level, students engage with challenging, practical Christian American curricula that emphasizes application, collaboration, and critical thinking. They progress beyond memorization to analysis, evaluation, and creative problem-solving across all subjects.
+                            At the middle school level, students engage with challenging, practical Christian American curricula that emphasize application, collaboration, and critical thinking. They progress beyond memorization to analysis, evaluation, and creative problem-solving across all subjects.
                         </p>
                     </div>
                 </div>
-                <div class="absolute left-4 md:left-1/2 top-12 md:top-1/2 w-4 h-4 bg-deep-emerald border border-classic-gold rounded-full md:-translate-x-1/2 md:-translate-y-1/2 z-20"></div>
+                <div class="absolute left-4 md:left-1/2 top-12 md:top-1/2 w-4 h-4 bg-deep-emerald border border-classic-gold rounded-full -translate-x-1/2 md:-translate-x-1/2 md:-translate-y-1/2 z-20"></div>
                 <div class="w-full md:w-1/2 p-12 z-10 hidden md:block flex justify-end">
-                     <div class="w-full h-64 border border-current opacity-50 bg-[url('https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center grayscale"></div>
+                    <div class="w-full h-64 border border-current opacity-50 bg-[url('https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center grayscale"></div>
                 </div>
             </div>
 
@@ -257,13 +328,13 @@
                         <p class="font-mono text-xs uppercase tracking-widest mb-4 opacity-70">GRADES 9-12 • DUAL DIPLOMA & A-LEVELS</p>
                         
                         <p class="font-sans text-sm leading-relaxed opacity-80 mx-auto md:ml-auto md:mr-0 max-w-lg">
-                            Our high school offers a rigorous and globally focused education, combining a broad American curriculum in Grades 9 and 10 with Cambridge A Levels in Grades 11 and 12. This dual-diploma program develops critical thinking, analytical reasoning, problem-solving skills, and effective communication skills. Graduates leave well-prepared for universities around the world, equipped with both a U.S. high school diploma and internationally recognized Cambridge qualifications.
+                            Our high school offers a rigorous and globally focused education, combining a broad American curriculum in Grades 9 and 10 with Cambridge A Levels in Grades 11 and 12. This high school diploma program develops critical thinking, analytical reasoning, problem-solving skills, and effective communication skills. Graduates leave well-prepared for universities around the world, equipped with both a U.S. high school diploma and internationally recognized Cambridge qualifications.
                         </p>
                     </div>
                 </div>
-                <div class="absolute left-4 md:left-1/2 top-12 md:top-1/2 w-4 h-4 bg-classic-gold border border-white rounded-full md:-translate-x-1/2 md:-translate-y-1/2 z-20"></div>
+                <div class="absolute left-4 md:left-1/2 top-12 md:top-1/2 w-4 h-4 bg-classic-gold border border-white rounded-full -translate-x-1/2 md:-translate-x-1/2 md:-translate-y-1/2 z-20"></div>
                 <div class="w-full md:w-1/2 p-12 z-10 hidden md:block">
-                     <div class="w-full h-64 border border-classic-gold/30 bg-[url('https://images.unsplash.com/photo-1523580494863-6f3031224c94?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center grayscale opacity-60"></div>
+                    <div class="w-full h-64 border border-classic-gold/30 bg-[url('https://images.unsplash.com/photo-1523580494863-6f3031224c94?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center grayscale opacity-60"></div>
                 </div>
             </div>
 
@@ -277,7 +348,7 @@
                     </button>
                 </div>
                 <div class="order-1 md:order-2">
-                    <h3 class="font-serif text-3xl md:text-4xl leading-tight mb-2">Have a look at our subjects</h3>
+                    <h3 class="font-serif text-3xl md:text-4xl leading-tight mb-2">Have a look at our courses</h3>
                     <p class="font-sans text-sm opacity-70">Click here to view the detailed breakdown for each grade level.</p>
                 </div>
             </div>
@@ -290,13 +361,13 @@
                         <p class="font-mono text-xs text-classic-gold mb-6 uppercase tracking-widest">Grades 1-6</p>
                         
                         <div class="subject-list">
-                            <p class="subject-item">[01] Math</p>
-                            <p class="subject-item">[02] English</p>
-                            <p class="subject-item">[03] Science</p>
-                            <p class="subject-item">[04] Social Studies</p>
-                            <p class="subject-item">[05] Word Building</p>
-                            <p class="subject-item">[06] Literature</p>
-                            <p class="subject-item">[07] ICDL</p>
+                            <p class="subject-item">Mathematics</p>
+                            <p class="subject-item">English</p>
+                            <p class="subject-item">Science</p>
+                            <p class="subject-item">Social Studies</p>
+                            <p class="subject-item">Word Building</p>
+                            <p class="subject-item">Literature</p>
+                            <p class="subject-item">ICDL</p>
                         </div>
                     </div>
 
@@ -306,26 +377,18 @@
                         
                         <div class="subject-list space-y-6">
                             <div>
-                                <strong class="font-mono text-xs text-white/50 block mb-2">GRADE 7</strong>
-                                <p class="subject-item">Math: General Math</p>
-                                <p class="subject-item">Language Arts: Writing & Grammar</p>
-                                <p class="subject-item">Science: General Science</p>
-                                <p class="subject-item">History: American History/Gov</p>
-                                <p class="subject-item">Bible: Life of Christ</p>
-                                <p class="subject-item">Computer: ICDL</p>
-                                <p class="subject-item">Language: Kiswahili</p>
-                                <p class="subject-item">Sports: Swimming, Football, Basketball</p>
+                                <strong class="font-mono text-xs text-white/50 block mb-2">COURSES</strong>
+                                <p class="subject-item">Mathematics (General / Pre-Algebra)</p>
+                                <p class="subject-item">Language Arts (Writing & Grammar I/II)</p>
+                                <p class="subject-item">Science (General / Physical)</p>
+                                <p class="subject-item">History (American / World)</p>
+                                <p class="subject-item">Bible (Life of Christ)</p>
+                                <p class="subject-item">Computer (ICDL)</p>
+                                <p class="subject-item">Language (Kiswahili)</p>
+                                <p class="subject-item">Sports (Swimming, Football, Basketball)</p>
                             </div>
                             <div>
-                                <strong class="font-mono text-xs text-white/50 block mb-2">GRADE 8</strong>
-                                <p class="subject-item">Math: Pre-Algebra</p>
-                                <p class="subject-item">Language Arts: Writing & Grammar II</p>
-                                <p class="subject-item">Science: Physical Science</p>
-                                <p class="subject-item">History: World History</p>
-                                <p class="subject-item">Bible: Life of Christ</p>
-                            </div>
-                            <div>
-                                <strong class="font-mono text-xs text-white/50 block mb-2">ELECTIVES (7 & 8)</strong>
+                                <strong class="font-mono text-xs text-white/50 block mb-2">ELECTIVES</strong>
                                 <p class="subject-item opacity-60">Art & Design, Music, AI, Spanish, French, Astronomy, Food & Nutrition, African Perspective</p>
                             </div>
                         </div>
@@ -337,19 +400,12 @@
                         
                         <div class="subject-list space-y-6">
                             <div>
-                                <strong class="font-mono text-xs text-white/50 block mb-2">GRADE 9</strong>
-                                <p class="subject-item">Math: Algebra 1 / Geometry</p>
-                                <p class="subject-item">Lang Arts: Writing & Grammar I</p>
-                                <p class="subject-item">Science: Biology</p>
-                                <p class="subject-item">History: American History</p>
-                                <p class="subject-item">Bible: Old Testament Survey</p>
-                            </div>
-                            <div>
-                                <strong class="font-mono text-xs text-white/50 block mb-2">GRADE 10</strong>
-                                <p class="subject-item">Math: Algebra 2</p>
-                                <p class="subject-item">Lang Arts: Writing & Grammar II</p>
-                                <p class="subject-item">Science: Chemistry or Physics</p>
-                                <p class="subject-item">History: World History</p>
+                                <strong class="font-mono text-xs text-white/50 block mb-2">COURSES</strong>
+                                <p class="subject-item">Math (Algebra 1/2, Geometry)</p>
+                                <p class="subject-item">Lang Arts (Writing & Grammar)</p>
+                                <p class="subject-item">Science (Biology, Chemistry, Physics)</p>
+                                <p class="subject-item">History (American, World)</p>
+                                <p class="subject-item">Bible (Old Testament Survey)</p>
                             </div>
                             <div>
                                 <strong class="font-mono text-xs text-white/50 block mb-2">ELECTIVES</strong>
@@ -364,19 +420,13 @@
                         
                         <div class="subject-list space-y-6">
                             <div>
-                                <strong class="font-mono text-xs text-white/50 block mb-2">GRADE 11 (AS LEVEL)</strong>
-                                <p class="subject-item">Math: AS Level</p>
-                                <p class="subject-item">Lang Arts: AS English Lang</p>
-                                <p class="subject-item">Science: AS (Bio/Chem/Phys)</p>
-                                <p class="subject-item">History: Gov (0.5 Cr) & AS (Econ/Hist/Geo)</p>
-                                <p class="subject-item">Bible: New Testament Survey</p>
-                            </div>
-                            <div>
-                                <strong class="font-mono text-xs text-white/50 block mb-2">GRADE 12 (A2 LEVEL)</strong>
-                                <p class="subject-item">Math: A2 Level</p>
-                                <p class="subject-item">English: A2 English Lang</p>
-                                <p class="subject-item">Science: A2 (Bio/Chem/Phys)</p>
-                                <p class="subject-item">Social Studies: A2 (Econ or Hist)</p>
+                                <strong class="font-mono text-xs text-white/50 block mb-2">COURSES (AS/A2)</strong>
+                                <p class="subject-item">Mathematics</p>
+                                <p class="subject-item">English Language</p>
+                                <p class="subject-item">Sciences (Biology, Chemistry, Physics)</p>
+                                <p class="subject-item">History & Economics</p>
+                                <p class="subject-item">Geography & Government</p>
+                                <p class="subject-item">Bible (New Testament Survey)</p>
                             </div>
                             <div>
                                 <strong class="font-mono text-xs text-white/50 block mb-2">ELECTIVES</strong>
@@ -395,9 +445,9 @@
 
         <footer class="w-full border-t border-jet-black bg-white text-deep-emerald">
             <div class="grid grid-cols-1 md:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-jet-black">
-                <div class="p-6 h-full flex flex-col"><h3 class="font-mono font-bold text-xs mb-4 text-prestige-blue">SOCIAL</h3><ul class="space-y-2 font-bold uppercase text-sm"><li><a href="#" class="hover:text-classic-gold hover:underline decoration-2">Instagram</a></li><li><a href="#" class="hover:text-classic-gold hover:underline decoration-2">Facebook</a></li><li><a href="#" class="hover:text-classic-gold hover:underline decoration-2">Twitter / X</a></li></ul></div>
-                <div class="p-6 h-full flex flex-col"><h3 class="font-mono font-bold text-xs mb-4 text-prestige-blue">LOCATION</h3><p class="font-mono text-sm uppercase leading-relaxed">Naalya, Kampala<br>Uganda<br>East Africa<br><span class="text-classic-gold">Lat: 0.3644° N</span></p></div>
-                <div class="p-6 h-full flex flex-col"><h3 class="font-mono font-bold text-xs mb-4 text-prestige-blue">SITEMAP</h3><ul class="space-y-1 font-mono text-xs uppercase"><li><a href="newert.html" class="hover:text-classic-gold">[Home]</a></li><li><a href="newertacd.html" class="hover:text-classic-gold">[Academics]</a></li><li><a href="newertadm.html" class="hover:text-classic-gold">[Admissions]</a></li><li><a href="#" class="hover:text-classic-gold">[Portal]</a></li></ul></div>
+                <div class="p-6 h-full flex flex-col"><h3 class="font-mono font-bold text-xs mb-4 text-prestige-blue">SOCIAL</h3><ul class="space-y-2 font-bold uppercase text-sm"><li><a href="https://www.instagram.com/thenicsug/" class="hover:text-classic-gold hover:underline decoration-2">Instagram</a></li></ul></div>
+                <div class="p-6 h-full flex flex-col"><h3 class="font-mono font-bold text-xs mb-4 text-prestige-blue">LOCATION</h3><p class="font-mono text-sm uppercase leading-relaxed">Naguru, Kampala<br>Uganda<br>East Africa<br><span class="text-classic-gold">Lat: 0.3644° N</span></p></div>
+                <div class="p-6 h-full flex flex-col"><h3 class="font-mono font-bold text-xs mb-4 text-prestige-blue">SITEMAP</h3><ul class="space-y-1 font-mono text-xs uppercase"><li><a href="newert.html" class="hover:text-classic-gold">[Home]</a></li><li><a href="newertacd.html" class="hover:text-classic-gold">[Academics]</a></li><li><a href="newertadm.html" class="hover:text-classic-gold">[Admissions]</a></li></ul></div>
                 <div class="p-6 h-full flex flex-col justify-between"><div class="w-full h-12 bg-jet-black text-white flex items-center justify-center font-mono text-xs font-bold hover:bg-classic-gold hover:text-deep-emerald cursor-pointer transition-colors" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">BACK TO TOP</div><p class="font-mono text-[10px] uppercase mt-4 text-gray-400">&copy; 2025 The NICS.</p></div>
             </div>
         </footer>
@@ -418,13 +468,90 @@
             el.addEventListener('mouseleave', () => cursor.style.transform = 'translate(-50%, -50%) scale(1)');
         });
 
+        // --- MODERN MOBILE MENU LOGIC ---
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu-overlay');
+        const navLogo = document.getElementById('nav-logo');
+        const navText = document.getElementById('nav-text');
+        const mainNav = document.getElementById('main-nav');
+        
+        let isMenuOpen = false;
+        menuBtn.addEventListener('click', () => {
+            isMenuOpen = !isMenuOpen;
+            if(isMenuOpen) {
+                mobileMenu.classList.add('open');
+                menuBtn.textContent = "CLOSE";
+                menuBtn.classList.replace('text-deep-emerald', 'text-white');
+                menuBtn.classList.replace('border-deep-emerald', 'border-white');
+                
+                // IMPORTANT: Change nav background to green so white close button is visible
+                mainNav.classList.remove('bg-white', 'ticker-border');
+                mainNav.classList.add('bg-deep-emerald');
+
+                // Change header elements to white
+                navLogo.style.filter = "invert(1)";
+                navText.style.color = "white";
+                
+                // Animate Group Links Stagger
+                gsap.to(".mobile-group", {
+                    y: 0,
+                    opacity: 1,
+                    duration: 0.5,
+                    stagger: 0.05,
+                    delay: 0.2,
+                    ease: "power2.out"
+                });
+                gsap.to(".mobile-footer", { opacity: 1, delay: 0.8 });
+
+            } else {
+                mobileMenu.classList.remove('open');
+                menuBtn.textContent = "MENU";
+                menuBtn.classList.replace('text-white', 'text-deep-emerald');
+                menuBtn.classList.replace('border-white', 'border-deep-emerald');
+                
+                // Revert nav background
+                mainNav.classList.add('bg-white', 'ticker-border');
+                mainNav.classList.remove('bg-deep-emerald');
+
+                // Revert header elements
+                navLogo.style.filter = "invert(0)";
+                navText.style.color = "#000000";
+
+                // Reset Links
+                gsap.to(".mobile-group", { y: 10, opacity: 0, duration: 0.2 });
+                gsap.to(".mobile-footer", { opacity: 0 });
+                
+                // Close all accordions
+                document.querySelectorAll('.accordion-content').forEach(el => el.style.maxHeight = null);
+                document.querySelectorAll('.accordion-icon').forEach(el => el.textContent = "[ + ]");
+            }
+        });
+
+        // Accordion Logic
+        document.querySelectorAll('.accordion-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const content = this.nextElementSibling;
+                const icon = this.querySelector('.accordion-icon');
+                
+                if (content.style.maxHeight) {
+                    content.style.maxHeight = null;
+                    icon.textContent = "[ + ]";
+                } else {
+                    document.querySelectorAll('.accordion-content').forEach(el => el.style.maxHeight = null);
+                    document.querySelectorAll('.accordion-icon').forEach(el => el.textContent = "[ + ]");
+                    content.style.maxHeight = content.scrollHeight + "px";
+                    icon.textContent = "[ - ]";
+                }
+            });
+        });
+
         const tl = gsap.timeline();
         tl.to(".hero-line", { y: 0, opacity: 1, duration: 1, stagger: 0.1, ease: "power3.out" })
         .to(".manifesto-box", { opacity: 1, duration: 1, ease: "power2.out" }, "-=0.5");
         
         // Background Zoom Effect
         gsap.fromTo(".hero-bg-zoom img", { scale: 1.1 }, { scale: 1, duration: 10, ease: "power1.out" });
-
+        
         const cards = document.querySelectorAll('.stage-card');
         cards.forEach(card => {
             gsap.from(card, { opacity: 0, y: 50, duration: 0.8, scrollTrigger: { trigger: card, start: "top 85%" } });

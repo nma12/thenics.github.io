@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The NICS | Prestige Brutalism</title>
+    <title>Store | The NICS</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -20,6 +20,7 @@
                         'deep-emerald': '#1A3C34',
                         'jet-black': '#000000',
                         'off-white': '#F4F7F6',
+                        'darker-emerald': '#0D2620',
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
@@ -27,7 +28,10 @@
                         serif: ['DM Serif Text', 'serif'],
                     },
                     fontSize: {
-                        'massive': 'clamp(4rem, 15vw, 18rem)',
+                        'massive': 'clamp(2.5rem, 7vw, 6rem)',
+                    },
+                    animation: {
+                        'spin-slow': 'spin 20s linear infinite',
                     }
                 }
             }
@@ -35,7 +39,7 @@
     </script>
 
     <style>
-        body { background-color: #FFFFFF; color: #1A3C34; cursor: none; overflow-x: hidden; height: 100vh; }
+        body { background-color: #1A3C34; color: #FFFFFF; cursor: none; overflow-x: hidden; font-family: 'Inter', sans-serif; }
         
         #custom-cursor {
             position: fixed; top: 0; left: 0; width: 20px; height: 20px;
@@ -45,36 +49,40 @@
         }
         
         a:hover ~ #custom-cursor, button:hover ~ #custom-cursor, .accordion-btn:hover ~ #custom-cursor {
-            transform: translate(-50%, -50%) scale(2); background-color: transparent;
+            transform: translate(-50%, -50%) scale(2);
+            background-color: transparent;
         }
 
         ::selection { background: #003366; color: #D4AF37; }
 
         .nav-link { position: relative; text-decoration: none; display: inline-block; cursor: none; }
-        .nav-link::after { content: ''; position: absolute; width: 0; height: 2px; display: block; margin-top: -2px; right: 0; background: #1A3C34; transition: width 0.3s ease; top: 50%; }
+        .nav-link::after { content: ''; position: absolute; width: 0; height: 2px; display: block; margin-top: -2px; right: 0; background: #D4AF37; transition: width 0.3s ease; top: 50%; }
         .nav-link:hover::after { width: 100%; left: 0; background: #D4AF37; }
-        .nav-link:hover { color: #003366; }
+        .nav-link:hover { color: #D4AF37; }
 
-        .ticker-border { border-top: 1px solid #000000; border-bottom: 1px solid #000000; }
+        .ticker-border { border-top: 1px solid #D4AF37; border-bottom: 1px solid #D4AF37; }
 
-        /* Desktop Dropdown */
-        .dropdown-menu { display: none; position: absolute; top: 63px; width: 16rem; background: white; border: 1px solid #000000; box-shadow: 4px 4px 0px 0px rgba(0,0,0,1); color: #1A3C34; z-index: 60; cursor: none;}
+        /* Dropdown Styling */
+        .dropdown-menu { display: none; position: absolute; top: 63px; width: 16rem; background: white; border: 1px solid #000000; box-shadow: 4px 4px 0px 0px rgba(0,0,0,1); color: #1A3C34; z-index: 60; }
         .group:hover .dropdown-menu { display: block; }
         .dropdown-left { left: -1rem; }
         .dropdown-right { right: 0; }
-
-        .dropdown-item { display: block; padding: 1rem 1.5rem; border-bottom: 1px solid #000000; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 0.875rem; transition: background 0s; cursor: none;}
+        .dropdown-item { display: block; padding: 1rem 1.5rem; border-bottom: 1px solid #000000; font-family: 'Inter', sans-serif; font-weight: 500; font-size: 0.875rem; transition: background 0s; cursor: none; }
         .dropdown-item:last-child { border-bottom: none; }
         .dropdown-item:hover { background-color: #003366; color: #D4AF37; }
 
-        .spin-slow { animation: spin 20s linear infinite; }
-        .spin-reverse-slow { animation: spinReverse 15s linear infinite; }
-        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-        @keyframes spinReverse { from { transform: rotate(360deg); } to { transform: rotate(0deg); } }
+        /* Noisy Grunge Texture */
+        .bg-pattern {
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.3'/%3E%3C/svg%3E");
+            background-size: 150px 150px;
+            opacity: 0.5;
+            mix-blend-mode: soft-light;
+        }
 
         /* Mobile Menu Transitions */
         #mobile-menu-overlay {
-            clip-path: circle(0% at 100% 0); transition: clip-path 0.6s cubic-bezier(0.85, 0, 0.15, 1);
+            clip-path: circle(0% at 100% 0);
+            transition: clip-path 0.6s cubic-bezier(0.85, 0, 0.15, 1);
         }
         #mobile-menu-overlay.open {
             clip-path: circle(150% at 100% 0);
@@ -82,7 +90,8 @@
 
         /* Accordion Transitions */
         .accordion-content {
-            max-height: 0; overflow: hidden;
+            max-height: 0;
+            overflow: hidden;
             transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
     </style>
@@ -91,14 +100,14 @@
 
     <div id="custom-cursor"></div>
 
-    <nav class="fixed top-0 left-0 w-full h-16 bg-white ticker-border flex items-center justify-between px-6 z-50 cursor-none transition-colors duration-300" id="main-nav">
+    <nav class="fixed top-0 left-0 w-full h-16 bg-deep-emerald ticker-border flex items-center justify-between px-6 z-50 cursor-none text-white border-b border-classic-gold/30 transition-colors duration-300" id="main-nav">
         <div class="flex items-center relative z-50">
-            <img src="https://placehold.co/40x40/transparent/black?text=Logo" alt="NICS Logo" class="h-8 w-auto mr-3 object-contain transition-all duration-300" id="nav-logo">
-            <div class="font-serif italic font-black text-2xl tracking-tight text-jet-black transition-colors duration-300" id="nav-text">THE NICS</div>
+            <img src="https://placehold.co/40x40/transparent/white?text=Logo" alt="NICS Logo" class="h-8 w-auto mr-3 object-contain invert transition-all duration-300" id="nav-logo">
+            <div class="font-serif italic font-black text-2xl tracking-tight text-white transition-colors duration-300" id="nav-text">THE NICS</div>
         </div>
         
-        <ul class="hidden md:flex space-x-8 font-mono text-sm font-bold uppercase tracking-widest h-full items-center text-deep-emerald">
-            <li><a href="newert.html" class="nav-link text-classic-gold border-b-2 border-classic-gold">Home</a></li>
+        <ul class="hidden md:flex space-x-8 font-mono text-sm font-medium uppercase tracking-widest h-full items-center text-white/80">
+            <li><a href="newert.html" class="nav-link">Home</a></li>
             <li class="relative group h-full flex items-center cursor-pointer">
                 <span class="nav-link">About</span>
                 <div class="dropdown-menu dropdown-left">
@@ -116,22 +125,22 @@
                     <a href="newertprt.html" class="dropdown-item">Parent Engagements</a>
                 </div>
             </li>
-            <li><a href="newertstr.html" class="nav-link">TNICS Store</a></li>
+            <li><a href="newertstr.html" class="nav-link text-classic-gold border-b-2 border-classic-gold">TNICS Store</a></li>
         </ul>
 
-        <button id="mobile-menu-btn" class="md:hidden font-mono text-xs font-bold text-deep-emerald uppercase tracking-widest z-50 relative px-4 py-2 border border-deep-emerald hover:bg-deep-emerald hover:text-white transition-colors duration-300">
+        <button id="mobile-menu-btn" class="md:hidden font-mono text-xs font-bold text-white uppercase tracking-widest z-50 relative px-4 py-2 border border-white hover:bg-white hover:text-deep-emerald transition-colors duration-300">
             MENU
         </button>
     </nav>
 
-    <div id="mobile-menu-overlay" class="fixed inset-0 bg-deep-emerald z-40 flex flex-col justify-center items-start px-8 md:hidden">
+    <div id="mobile-menu-overlay" class="fixed inset-0 bg-deep-emerald z-40 flex flex-col justify-start items-start px-8 md:hidden overflow-y-auto pt-32 pb-12">
         
         <div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: radial-gradient(#D4AF37 1px, transparent 1px); background-size: 30px 30px;"></div>
 
-        <ul class="flex flex-col space-y-6 w-full text-left">
+        <ul class="flex flex-col space-y-6 w-full text-left relative z-50">
             
             <li class="mobile-group opacity-0 translate-y-4">
-                <a href="newert.html" class="font-mono text-xl font-bold uppercase tracking-widest text-classic-gold hover:text-white transition-colors">Home</a>
+                <a href="newert.html" class="font-mono text-xl font-bold uppercase tracking-widest text-white hover:text-classic-gold transition-colors">Home</a>
             </li>
             
             <li class="mobile-group opacity-0 translate-y-4 w-full">
@@ -141,9 +150,9 @@
                 </button>
                 <div class="accordion-content">
                     <ul class="pl-4 pt-4 border-l border-white/20 space-y-3 mt-2">
-                        <li><a href="newertmsn.html" class="block font-mono text-sm font-bold text-white/70 hover:text-white hover:pl-2 transition-all">Mission & Vision</a></li>
-                        <li><a href="newerthst.html" class="block font-mono text-sm font-bold text-white/70 hover:text-white hover:pl-2 transition-all">History</a></li>
-                        <li><a href="newertmtm.html" class="block font-mono text-sm font-bold text-white/70 hover:text-white hover:pl-2 transition-all">Meet the Team</a></li>
+                        <li><a href="newertmsn.html" class="block font-mono text-sm font-medium text-white/70 hover:text-white hover:pl-2 transition-all">Mission & Vision</a></li>
+                        <li><a href="newerthst.html" class="block font-mono text-sm font-medium text-white/70 hover:text-white hover:pl-2 transition-all">History</a></li>
+                        <li><a href="newertmtm.html" class="block font-mono text-sm font-medium text-white/70 hover:text-white hover:pl-2 transition-all">Meet the Team</a></li>
                     </ul>
                 </div>
             </li>
@@ -163,82 +172,58 @@
                 </button>
                 <div class="accordion-content">
                     <ul class="pl-4 pt-4 border-l border-white/20 space-y-3 mt-2">
-                        <li><a href="newertclb.html" class="block font-mono text-sm font-bold text-white/70 hover:text-white hover:pl-2 transition-all">After-school Clubs</a></li>
-                        <li><a href="newertprt.html" class="block font-mono text-sm font-bold text-white/70 hover:text-white hover:pl-2 transition-all">Parent Engagements</a></li>
+                        <li><a href="newertclb.html" class="block font-mono text-sm font-medium text-white/70 hover:text-white hover:pl-2 transition-all">After-school Clubs</a></li>
+                        <li><a href="newertprt.html" class="block font-mono text-sm font-medium text-white/70 hover:text-white hover:pl-2 transition-all">Parent Engagements</a></li>
                     </ul>
                 </div>
             </li>
 
-            <li class="mobile-group opacity-0 translate-y-4 pt-4">
-                <a href="newertstr.html" class="font-mono text-xl font-bold uppercase tracking-widest text-white hover:text-classic-gold transition-colors">
+            <li class="mobile-group opacity-0 translate-y-4">
+                <a href="newertstr.html" class="font-mono text-xl font-bold uppercase tracking-widest text-classic-gold hover:text-white transition-colors">
                     TNICS Store
                 </a>
             </li>
         </ul>
 
-        <div class="absolute bottom-8 left-8 text-left mobile-footer opacity-0">
+        <div class="mt-auto pt-10 text-left mobile-footer opacity-0 relative z-50">
             <p class="font-mono text-[10px] text-white/40 uppercase tracking-widest">Est. 2023 • Kampala</p>
         </div>
     </div>
 
-    <main class="h-auto w-full flex flex-col pt-16">
+    <div class="flex flex-col min-h-screen pt-16">
 
-        <section class="relative h-screen flex-grow w-full flex flex-col justify-center overflow-hidden border-b border-jet-black bg-white">
-            <div class="hero-bg-container absolute inset-0 w-full h-[120%] -top-[10%] z-0 pointer-events-none">
-                 <div class="absolute inset-0 bg-gradient-to-tr from-deep-emerald via-[#002b1f] to-prestige-blue mix-blend-multiply opacity-70 z-10"></div>
-                 <div class="hero-bg-image absolute inset-0 bg-[url('https://images.unsplash.com/photo-1562774053-701939374585?q=80&w=1920&auto=format&fit=crop')] bg-cover bg-center z-0 grayscale"></div>
-            </div>
+        <main class="flex-grow flex flex-col items-center justify-center relative overflow-hidden bg-deep-emerald px-6 py-12">
+            
+            <div class="absolute inset-0 bg-pattern z-0 pointer-events-none"></div>
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vw] bg-classic-gold/5 rounded-full blur-3xl z-0 pointer-events-none"></div>
 
-            <div class="absolute top-8 left-6 md:top-12 md:left-12 z-30 max-w-4xl">
-                <div class="overflow-hidden">
-                    <h2 class="hero-header translate-y-full opacity-0 font-serif text-white text-4xl md:text-6xl font-normal uppercase leading-none tracking-tight border-l-8 border-classic-gold pl-6">
-                         The Nazirite<br><em class="font-serif">International</em><br>Christian School
-                    </h2>
+            <div class="relative z-10 text-center max-w-5xl">
+                
+                <div class="mb-6 flex justify-center">
+                    <div class="w-16 h-16 border border-classic-gold flex items-center justify-center rounded-full animate-spin-slow">
+                        <span class="font-serif text-2xl text-classic-gold">×</span>
+                    </div>
                 </div>
-                <div class="overflow-hidden mt-4 pl-6">
-                    <p class="hero-motto translate-y-full opacity-0 font-mono text-classic-gold text-lg md:text-xl font-bold tracking-widest uppercase">
-                        "Called and Set Apart"
+
+                <h1 class="font-serif text-massive leading-none text-white reveal-text">
+                    COMING<br>
+                    <span class="text-transparent" style="-webkit-text-stroke: 1px #D4AF37;">SOON</span>
+                </h1>
+
+                <div class="mt-8 max-w-xl mx-auto reveal-text">
+                    <p class="font-mono text-xs md:text-sm text-classic-gold font-bold uppercase tracking-widest mb-3">
+                        /// GETTING THINGS READY \\\
+                    </p>
+                    <p class="font-sans text-base md:text-lg leading-relaxed text-white/80">
+                        The TNICS Store is currently not open.
                     </p>
                 </div>
+
             </div>
 
-            <div class="absolute bottom-24 left-6 md:bottom-8 md:left-12 z-30 tech-badge opacity-0 hidden md:flex items-center justify-center select-none scale-75 origin-bottom-left md:scale-100">
-                <div class="relative w-40 h-40 bg-white rounded-full border border-jet-black flex items-center justify-center shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
-                    <div class="absolute w-full h-full spin-slow">
-                        <svg viewBox="0 0 100 100" class="w-full h-full">
-                            <path id="circlePath" d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" fill="transparent" />
-                            <text class="text-[10px] font-mono font-bold uppercase fill-deep-emerald tracking-widest">
-                                <textPath href="#circlePath">
-                                    • THE NICS • SINCE 2023 • THE NICS • SINCE 2023 •
-                                </textPath>
-                            </text>
-                        </svg>
-                    </div>
-                    <div class="w-20 h-20 rounded-full border border-jet-black flex items-center justify-center relative bg-white z-10">
-                        <svg viewBox="0 0 24 24" class="w-12 h-12 text-classic-gold fill-current spin-reverse-slow">
-                            <path d="M12 0L14 10L24 12L14 14L12 24L10 14L0 12L10 10L12 0Z" />
-                        </svg>
-                    </div>
-                </div>
-            </div>
+        </main>
 
-            <div class="absolute bottom-8 right-8 max-w-[80%] md:max-w-xl p-6 border border-jet-black bg-white z-30 manifesto-box opacity-0 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
-                <p class="font-mono text-sm md:text-lg leading-relaxed uppercase text-deep-emerald font-bold">
-                    Welcome to The Nazirite International Christian School. We are an International Christian School using a variety of American Christian curricula from Early Years to Junior High School and International A Levels for Senior High School.
-                </p>
-            </div>
-        </section>
-
-        <div class="w-full bg-deep-emerald text-classic-gold py-3 overflow-hidden border-t border-jet-black flex items-center flex-none">
-            <div class="marquee-content whitespace-nowrap font-mono text-lg font-bold uppercase tracking-widest flex">
-                <span class="mx-4">Excellence • Faith • Integrity • Innovation • Discipleship •</span>
-                <span class="mx-4">Excellence • Faith • Integrity • Innovation • Discipleship •</span>
-                <span class="mx-4">Excellence • Faith • Integrity • Innovation • Discipleship •</span>
-                <span class="mx-4">Excellence • Faith • Integrity • Innovation • Discipleship •</span>
-            </div>
-        </div>
-
-        <footer class="w-full border-t border-jet-black bg-white text-deep-emerald">
+        <footer class="w-full border-t border-jet-black bg-white text-deep-emerald relative z-30">
             <div class="grid grid-cols-1 md:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-jet-black">
                 <div class="p-6 h-full flex flex-col"><h3 class="font-mono font-bold text-xs mb-4 text-prestige-blue">SOCIAL</h3><ul class="space-y-2 font-bold uppercase text-sm"><li><a href="https://www.instagram.com/thenicsug/" class="hover:text-classic-gold hover:underline decoration-2">Instagram</a></li></ul></div>
                 <div class="p-6 h-full flex flex-col"><h3 class="font-mono font-bold text-xs mb-4 text-prestige-blue">LOCATION</h3><p class="font-mono text-sm uppercase leading-relaxed">Naguru, Kampala<br>Uganda<br>East Africa<br><span class="text-classic-gold">Lat: 0.3644° N</span></p></div>
@@ -247,17 +232,15 @@
             </div>
         </footer>
 
-    </main>
+    </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    
     <script>
-        gsap.registerPlugin(ScrollTrigger);
         const cursor = document.getElementById("custom-cursor");
         const xTo = gsap.quickSetter(cursor, "x", "px");
         const yTo = gsap.quickSetter(cursor, "y", "px");
         window.addEventListener("mousemove", e => { xTo(e.clientX); yTo(e.clientY); });
+        
         document.querySelectorAll('a, button').forEach(el => {
             el.addEventListener('mouseenter', () => cursor.style.transform = 'translate(-50%, -50%) scale(1.5)');
             el.addEventListener('mouseleave', () => cursor.style.transform = 'translate(-50%, -50%) scale(1)');
@@ -270,18 +253,13 @@
         const navText = document.getElementById('nav-text');
         
         let isMenuOpen = false;
-        // Toggle Overlay
+
         menuBtn.addEventListener('click', () => {
             isMenuOpen = !isMenuOpen;
             if(isMenuOpen) {
                 mobileMenu.classList.add('open');
                 menuBtn.textContent = "CLOSE";
-                menuBtn.classList.replace('text-deep-emerald', 'text-white');
-                menuBtn.classList.replace('border-deep-emerald', 'border-white');
-                
-                // Change header elements to white
-                navLogo.style.filter = "invert(1)";
-                navText.style.color = "white";
+                // Header is already green/white, no class swap needed
                 
                 // Animate Group Links Stagger
                 gsap.to(".mobile-group", {
@@ -297,13 +275,7 @@
             } else {
                 mobileMenu.classList.remove('open');
                 menuBtn.textContent = "MENU";
-                menuBtn.classList.replace('text-white', 'text-deep-emerald');
-                menuBtn.classList.replace('border-white', 'border-deep-emerald');
                 
-                // Revert header elements
-                navLogo.style.filter = "invert(0)";
-                navText.style.color = "#000000";
-
                 // Reset Links
                 gsap.to(".mobile-group", { y: 10, opacity: 0, duration: 0.2 });
                 gsap.to(".mobile-footer", { opacity: 0 });
@@ -324,23 +296,19 @@
                     content.style.maxHeight = null;
                     icon.textContent = "[ + ]";
                 } else {
-                    // Close others (optional, keeps it cleaner)
                     document.querySelectorAll('.accordion-content').forEach(el => el.style.maxHeight = null);
                     document.querySelectorAll('.accordion-icon').forEach(el => el.textContent = "[ + ]");
-                    
                     content.style.maxHeight = content.scrollHeight + "px";
                     icon.textContent = "[ - ]";
                 }
             });
         });
 
-        const tl = gsap.timeline();
-        tl.to(".hero-header", { y: 0, opacity: 1, duration: 1, ease: "power3.out" })
-        .to(".hero-motto", { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" }, "-=0.7")
-        .to(".manifesto-box", { opacity: 1, duration: 1, ease: "power2.out" }, "-=0.5")
-        .to(".tech-badge", { opacity: 1, duration: 1, ease: "power2.out" }, "-=0.8");
-        gsap.to(".hero-bg-container", { yPercent: 5, ease: "none", scrollTrigger: { trigger: ".hero-bg-container", start: "top top", end: "bottom top", scrub: true } });
-        gsap.to(".marquee-content", { xPercent: -50, repeat: -1, duration: 40, ease: "linear" });
+        // Intro Animation - Explicitly animating from hidden state
+        gsap.fromTo(".reveal-text", 
+            { y: 30, opacity: 0 },
+            { y: 0, opacity: 1, duration: 1.2, stagger: 0.2, ease: "power3.out" }
+        );
     </script>
 </body>
 </html>

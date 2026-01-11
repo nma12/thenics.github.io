@@ -7,7 +7,7 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Inter:wght@300;400;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -48,9 +48,8 @@
             transform: translate(-50%, -50%); transition: transform 0.1s ease;
         }
         
-        a:hover ~ #custom-cursor, button:hover ~ #custom-cursor, .step-item:hover ~ #custom-cursor, .criteria-row:hover ~ #custom-cursor {
-            transform: translate(-50%, -50%) scale(2);
-            background-color: transparent;
+        a:hover ~ #custom-cursor, button:hover ~ #custom-cursor, .step-item:hover ~ #custom-cursor, .criteria-row:hover ~ #custom-cursor, .accordion-btn:hover ~ #custom-cursor {
+            transform: translate(-50%, -50%) scale(2); background-color: transparent;
         }
 
         ::selection { background: #003366; color: #D4AF37; }
@@ -84,25 +83,40 @@
         .tracker-dot { transition: all 0.3s ease; }
         .tracker-label { transition: all 0.3s ease; opacity: 0.3; }
         .tracker-label.active { opacity: 1; color: #D4AF37; font-weight: bold; transform: translateX(10px); }
+
+        /* Mobile Menu Transitions */
+        #mobile-menu-overlay {
+            clip-path: circle(0% at 100% 0); transition: clip-path 0.6s cubic-bezier(0.85, 0, 0.15, 1);
+        }
+        #mobile-menu-overlay.open {
+            clip-path: circle(150% at 100% 0);
+        }
+
+        /* Accordion Transitions */
+        .accordion-content {
+            max-height: 0; overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
     </style>
 </head>
 <body>
 
     <div id="custom-cursor"></div>
 
-    <nav class="fixed top-0 w-full z-50 bg-white ticker-border h-16 flex items-center justify-between px-6 cursor-none">
-        <div class="flex items-center">
-            <img src="https://placehold.co/40x40/transparent/black?text=Logo" alt="NICS Logo" class="h-8 w-auto mr-3 object-contain">
-            <div class="font-serif italic font-black text-2xl tracking-tight text-jet-black">THE NICS</div>
+    <nav class="fixed top-0 left-0 w-full h-16 bg-white ticker-border flex items-center justify-between px-6 z-50 cursor-none transition-colors duration-300" id="main-nav">
+        <div class="flex items-center relative z-50">
+            <img src="https://placehold.co/40x40/transparent/black?text=Logo" alt="NICS Logo" class="h-8 w-auto mr-3 object-contain transition-all duration-300" id="nav-logo">
+            <div class="font-serif italic font-black text-2xl tracking-tight text-jet-black transition-colors duration-300" id="nav-text">THE NICS</div>
         </div>
+        
         <ul class="hidden md:flex space-x-8 font-mono text-sm font-bold uppercase tracking-widest h-full items-center text-deep-emerald">
             <li><a href="newert.html" class="nav-link">Home</a></li>
             <li class="relative group h-full flex items-center cursor-pointer">
-                <span class="nav-link text-prestige-blue">About</span>
+                <span class="nav-link">About</span>
                 <div class="dropdown-menu dropdown-left">
                     <a href="newertmsn.html" class="dropdown-item">Mission & Vision</a>
                     <a href="newerthst.html" class="dropdown-item">History</a>
-                    <a href="#team" class="dropdown-item">Meet the Team</a>
+                    <a href="newertmtm.html" class="dropdown-item">Meet the Team</a>
                 </div>
             </li>
             <li><a href="newertacd.html" class="nav-link">Academics</a></li>
@@ -110,13 +124,74 @@
             <li class="relative group h-full flex items-center cursor-pointer">
                 <span class="nav-link">Activities</span>
                 <div class="dropdown-menu dropdown-right">
-                    <a href="newertclb.html" class="dropdown-item">Our Clubs</a>
+                    <a href="newertclb.html" class="dropdown-item">After-school Clubs</a>
                     <a href="newertprt.html" class="dropdown-item">Parent Engagements</a>
                 </div>
             </li>
+            <li><a href="newertstr.html" class="nav-link">TNICS Store</a></li>
         </ul>
-        <div class="md:hidden font-mono text-sm">[MENU]</div>
+
+        <button id="mobile-menu-btn" class="md:hidden font-mono text-xs font-bold text-deep-emerald uppercase tracking-widest z-50 relative px-4 py-2 border border-deep-emerald hover:bg-deep-emerald hover:text-white transition-colors duration-300">
+            MENU
+        </button>
     </nav>
+
+    <div id="mobile-menu-overlay" class="fixed inset-0 bg-deep-emerald z-40 flex flex-col justify-start items-start px-8 md:hidden overflow-y-auto pt-32 pb-12">
+        
+        <div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: radial-gradient(#D4AF37 1px, transparent 1px); background-size: 30px 30px;"></div>
+
+        <ul class="flex flex-col space-y-6 w-full text-left relative z-50">
+            
+            <li class="mobile-group opacity-0 translate-y-4">
+                <a href="newert.html" class="font-mono text-xl font-bold uppercase tracking-widest text-white hover:text-classic-gold transition-colors">Home</a>
+            </li>
+            
+            <li class="mobile-group opacity-0 translate-y-4 w-full">
+                <button class="accordion-btn w-full flex items-center justify-between font-mono text-xl font-bold uppercase tracking-widest text-white hover:text-classic-gold transition-colors text-left group">
+                    <span>About</span>
+                    <span class="accordion-icon text-sm text-classic-gold group-hover:text-white">[ + ]</span>
+                </button>
+                <div class="accordion-content">
+                    <ul class="pl-4 pt-4 border-l border-white/20 space-y-3 mt-2">
+                        <li><a href="newertmsn.html" class="block font-mono text-sm font-bold text-white/70 hover:text-white hover:pl-2 transition-all">Mission & Vision</a></li>
+                        <li><a href="newerthst.html" class="block font-mono text-sm font-bold text-white/70 hover:text-white hover:pl-2 transition-all">History</a></li>
+                        <li><a href="newertmtm.html" class="block font-mono text-sm font-bold text-white/70 hover:text-white hover:pl-2 transition-all">Meet the Team</a></li>
+                    </ul>
+                </div>
+            </li>
+
+            <li class="mobile-group opacity-0 translate-y-4">
+                <a href="newertacd.html" class="font-mono text-xl font-bold uppercase tracking-widest text-white hover:text-classic-gold transition-colors">Academics</a>
+            </li>
+
+            <li class="mobile-group opacity-0 translate-y-4">
+                <a href="newertadm.html" class="font-mono text-xl font-bold uppercase tracking-widest text-classic-gold hover:text-white transition-colors">Admission</a>
+            </li>
+            
+            <li class="mobile-group opacity-0 translate-y-4 w-full">
+                <button class="accordion-btn w-full flex items-center justify-between font-mono text-xl font-bold uppercase tracking-widest text-white hover:text-classic-gold transition-colors text-left group">
+                    <span>Activities</span>
+                    <span class="accordion-icon text-sm text-classic-gold group-hover:text-white">[ + ]</span>
+                </button>
+                <div class="accordion-content">
+                    <ul class="pl-4 pt-4 border-l border-white/20 space-y-3 mt-2">
+                        <li><a href="newertclb.html" class="block font-mono text-sm font-bold text-white/70 hover:text-white hover:pl-2 transition-all">After-school Clubs</a></li>
+                        <li><a href="newertprt.html" class="block font-mono text-sm font-bold text-white/70 hover:text-white hover:pl-2 transition-all">Parent Engagements</a></li>
+                    </ul>
+                </div>
+            </li>
+
+            <li class="mobile-group opacity-0 translate-y-4 pt-4">
+                <a href="newertstr.html" class="font-mono text-xl font-bold uppercase tracking-widest text-white hover:text-classic-gold transition-colors">
+                    TNICS Store
+                </a>
+            </li>
+        </ul>
+
+        <div class="mt-auto pt-10 text-left mobile-footer opacity-0 relative z-50">
+            <p class="font-mono text-[10px] text-white/40 uppercase tracking-widest">Est. 2023 • Kampala</p>
+        </div>
+    </div>
 
     <main class="mt-16 w-full flex flex-col md:flex-row relative">
 
@@ -138,42 +213,21 @@
                     <div class="criteria-row group">
                         <span class="font-mono text-xs font-bold text-classic-gold mb-2 block opacity-50 group-hover:opacity-100">01</span>
                         <p class="font-sans text-sm leading-relaxed opacity-80 group-hover:opacity-100">
-                            We consider students whose academic goals align with the school expectation of great intellectual prowess.
+                            We consider students whose academic and co-curricular goals would benefit with the schools offerings.
                         </p>
                     </div>
                     
                     <div class="criteria-row group">
                         <span class="font-mono text-xs font-bold text-classic-gold mb-2 block opacity-50 group-hover:opacity-100">02</span>
                         <p class="font-sans text-sm leading-relaxed opacity-80 group-hover:opacity-100">
-                            We consider students whose academic and co-curricular goals would benefit with the schools offerings.
+                            We believe in parental partnership. Therefore, at least one parent should provide a clear testimony of faith and agree to partner with the school in the child's spiritual and academic growth.
                         </p>
                     </div>
 
                     <div class="criteria-row group">
                         <span class="font-mono text-xs font-bold text-classic-gold mb-2 block opacity-50 group-hover:opacity-100">03</span>
                         <p class="font-sans text-sm leading-relaxed opacity-80 group-hover:opacity-100">
-                            We consider students who show evidence of academic potential and excellence able to handle our rigorous curriculum and critical thinking.
-                        </p>
-                    </div>
-
-                    <div class="criteria-row group">
-                        <span class="font-mono text-xs font-bold text-classic-gold mb-2 block opacity-50 group-hover:opacity-100">04</span>
-                        <p class="font-sans text-sm leading-relaxed opacity-80 group-hover:opacity-100">
-                            We believe in parental partnership. At least one parent should typically provide a clear testimony of faith and agree to partner with the school in the child's spiritual and academic growth.
-                        </p>
-                    </div>
-
-                    <div class="criteria-row group">
-                        <span class="font-mono text-xs font-bold text-classic-gold mb-2 block opacity-50 group-hover:opacity-100">05</span>
-                        <p class="font-sans text-sm leading-relaxed opacity-80 group-hover:opacity-100">
                             We consider the space available in the grade being applied for.
-                        </p>
-                    </div>
-
-                    <div class="criteria-row group">
-                        <span class="font-mono text-xs font-bold text-classic-gold mb-2 block opacity-50 group-hover:opacity-100">06</span>
-                        <p class="font-sans text-sm leading-relaxed opacity-80 group-hover:opacity-100">
-                            We believe in parental partnership. Therefore, at least one parent should provide a clear testimony of faith and agree to partner with the school in the child's spiritual and academic growth.
                         </p>
                     </div>
                 </div>
@@ -190,9 +244,12 @@
                     <span class="step-num font-mono text-4xl font-bold text-gray-300 transition-colors">01</span>
                     <div>
                         <h3 class="font-serif text-2xl mb-2">Application Form</h3>
-                        <p class="font-sans text-sm leading-relaxed opacity-80 max-w-xl">
+                        <p class="font-sans text-sm leading-relaxed opacity-80 max-w-xl mb-4">
                             Parents are required to complete and submit the school application form. All applications are carefully reviewed and assessed by the admissions team.
                         </p>
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSe4zJbaxi9u4mjet2wtqLCyE8AmzLd8d4jpq9Um8n_ie_u49g/viewform?usp=dialog" target="_blank" class="inline-block px-6 py-2 border border-deep-emerald text-deep-emerald font-mono text-xs font-bold uppercase tracking-widest hover:bg-deep-emerald hover:text-white transition-colors">
+                            [ Apply Now ]
+                        </a>
                     </div>
                 </div>
 
@@ -227,11 +284,28 @@
                 </div>
             </div>
 
+            <div class="p-12 bg-deep-emerald text-white md:hidden border-b border-jet-black">
+                <p class="font-mono text-xs text-classic-gold tracking-widest mb-6">[ POST-INTERVIEW ]</p>
+                <h3 class="font-serif italic text-2xl mb-6">Assessment</h3>
+                <p class="font-sans text-sm leading-relaxed opacity-80 mb-8">
+                    After completing the specified steps, shortlisted students will sit for assessments in Mathematics, English, and Comprehension.
+                </p>
+                <div class="bg-white/5 border border-classic-gold p-4 mb-2">
+                    <p class="font-mono text-xs uppercase opacity-60 mb-1">Assessment Fee</p>
+                    <p class="font-mono text-2xl font-bold text-classic-gold">UGX 200,000</p>
+                </div>
+                <p class="font-mono text-[10px] opacity-60">* Payable prior to the assessment.</p>
+            </div>
+
             <div id="section-terms" class="p-12 md:p-16 bg-off-white border-b border-jet-black">
-                <div class="grid grid-cols-1 md:grid-cols-1 gap-12">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
                     <div>
                         <h4 class="font-mono text-xs font-bold text-prestige-blue mb-2 uppercase tracking-widest">[ Confirmation ]</h4>
-                        <p class="font-serif text-xl leading-snug">Admission will be confirmed upon completion of the assessments and payment of the admission fee.</p>
+                        <p class="font-serif text-xl leading-snug font-bold">Admission will be confirmed upon completion of the assessments and payment of the admission fee.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-mono text-xs font-bold text-prestige-blue mb-2 uppercase tracking-widest">[ Policy ]</h4>
+                        <p class="font-sans text-sm leading-relaxed text-gray-600 italic">"We do not discriminate based on national or ethnic origin, gender, age, race, color, or disability."</p>
                     </div>
                 </div>
             </div>
@@ -240,7 +314,7 @@
 
         <div class="w-full md:w-1/3 bg-deep-emerald text-white flex flex-col relative border-b border-jet-black md:border-b-0">
             
-            <div class="p-12 md:p-16 bg-deep-emerald z-20 shrink-0 relative">
+            <div class="hidden md:block p-12 md:p-16 bg-deep-emerald z-20 shrink-0 relative">
                 <p class="font-mono text-xs text-classic-gold tracking-widest mb-6">[ POST-INTERVIEW ]</p>
                 <h3 class="font-serif italic text-2xl mb-6">Assessment</h3>
                 <p class="font-sans text-sm leading-relaxed opacity-80 mb-8">
@@ -253,7 +327,7 @@
                 <p class="font-mono text-[10px] opacity-60">* Payable prior to the assessment.</p>
             </div>
             
-            <div class="sticky top-16 relative overflow-hidden flex flex-col justify-center px-10 min-h-screen">
+            <div class="sticky top-16 relative overflow-hidden hidden md:flex flex-col justify-center px-10 min-h-screen">
                 
                 <div class="absolute inset-0 bg-darker-emerald z-0"></div>
                 <div class="absolute inset-0 z-0 bg-[radial-gradient(#D4AF37_1px,transparent_1px)] [background-size:20px_20px] opacity-20"></div>
@@ -279,9 +353,9 @@
 
     <footer class="w-full border-t border-jet-black bg-white text-deep-emerald relative z-30">
         <div class="grid grid-cols-1 md:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-jet-black">
-            <div class="p-6 h-full flex flex-col"><h3 class="font-mono font-bold text-xs mb-4 text-prestige-blue">SOCIAL</h3><ul class="space-y-2 font-bold uppercase text-sm"><li><a href="#" class="hover:text-classic-gold hover:underline decoration-2">Instagram</a></li><li><a href="#" class="hover:text-classic-gold hover:underline decoration-2">Facebook</a></li><li><a href="#" class="hover:text-classic-gold hover:underline decoration-2">Twitter / X</a></li></ul></div>
-            <div class="p-6 h-full flex flex-col"><h3 class="font-mono font-bold text-xs mb-4 text-prestige-blue">LOCATION</h3><p class="font-mono text-sm uppercase leading-relaxed">Naalya, Kampala<br>Uganda<br>East Africa<br><span class="text-classic-gold">Lat: 0.3644° N</span></p></div>
-            <div class="p-6 h-full flex flex-col"><h3 class="font-mono font-bold text-xs mb-4 text-prestige-blue">SITEMAP</h3><ul class="space-y-1 font-mono text-xs uppercase"><li><a href="newert.html" class="hover:text-classic-gold">[Home]</a></li><li><a href="newertacd.html" class="hover:text-classic-gold">[Academics]</a></li><li><a href="newertadm.html" class="hover:text-classic-gold">[Admissions]</a></li><li><a href="#" class="hover:text-classic-gold">[Portal]</a></li></ul></div>
+            <div class="p-6 h-full flex flex-col"><h3 class="font-mono font-bold text-xs mb-4 text-prestige-blue">SOCIAL</h3><ul class="space-y-2 font-bold uppercase text-sm"><li><a href="https://www.instagram.com/thenicsug/" class="hover:text-classic-gold hover:underline decoration-2">Instagram</a></li></ul></div>
+            <div class="p-6 h-full flex flex-col"><h3 class="font-mono font-bold text-xs mb-4 text-prestige-blue">LOCATION</h3><p class="font-mono text-sm uppercase leading-relaxed">Naguru, Kampala<br>Uganda<br>East Africa<br><span class="text-classic-gold">Lat: 0.3644° N</span></p></div>
+            <div class="p-6 h-full flex flex-col"><h3 class="font-mono font-bold text-xs mb-4 text-prestige-blue">SITEMAP</h3><ul class="space-y-1 font-mono text-xs uppercase"><li><a href="newert.html" class="hover:text-classic-gold">[Home]</a></li><li><a href="newertacd.html" class="hover:text-classic-gold">[Academics]</a></li><li><a href="newertadm.html" class="hover:text-classic-gold">[Admissions]</a></li></ul></div>
             <div class="p-6 h-full flex flex-col justify-between"><div class="w-full h-12 bg-jet-black text-white flex items-center justify-center font-mono text-xs font-bold hover:bg-classic-gold hover:text-deep-emerald cursor-pointer transition-colors" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">BACK TO TOP</div><p class="font-mono text-[10px] uppercase mt-4 text-gray-400">&copy; 2025 The NICS.</p></div>
         </div>
     </footer>
@@ -300,13 +374,90 @@
             el.addEventListener('mouseleave', () => cursor.style.transform = 'translate(-50%, -50%) scale(1)');
         });
 
+        // --- MODERN MOBILE MENU LOGIC ---
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu-overlay');
+        const navLogo = document.getElementById('nav-logo');
+        const navText = document.getElementById('nav-text');
+        const mainNav = document.getElementById('main-nav');
+        
+        let isMenuOpen = false;
+        menuBtn.addEventListener('click', () => {
+            isMenuOpen = !isMenuOpen;
+            if(isMenuOpen) {
+                mobileMenu.classList.add('open');
+                menuBtn.textContent = "CLOSE";
+                menuBtn.classList.replace('text-deep-emerald', 'text-white');
+                menuBtn.classList.replace('border-deep-emerald', 'border-white');
+                
+                // IMPORTANT: Change nav background to green so white close button is visible
+                mainNav.classList.remove('bg-white', 'ticker-border');
+                mainNav.classList.add('bg-deep-emerald');
+
+                // Change header elements to white
+                navLogo.style.filter = "invert(1)";
+                navText.style.color = "white";
+                
+                // Animate Group Links Stagger
+                gsap.to(".mobile-group", {
+                    y: 0,
+                    opacity: 1,
+                    duration: 0.5,
+                    stagger: 0.05,
+                    delay: 0.2,
+                    ease: "power2.out"
+                });
+                gsap.to(".mobile-footer", { opacity: 1, delay: 0.8 });
+
+            } else {
+                mobileMenu.classList.remove('open');
+                menuBtn.textContent = "MENU";
+                menuBtn.classList.replace('text-white', 'text-deep-emerald');
+                menuBtn.classList.replace('border-white', 'border-deep-emerald');
+                
+                // Revert nav background
+                mainNav.classList.add('bg-white', 'ticker-border');
+                mainNav.classList.remove('bg-deep-emerald');
+
+                // Revert header elements
+                navLogo.style.filter = "invert(0)";
+                navText.style.color = "#000000";
+
+                // Reset Links
+                gsap.to(".mobile-group", { y: 10, opacity: 0, duration: 0.2 });
+                gsap.to(".mobile-footer", { opacity: 0 });
+                
+                // Close all accordions
+                document.querySelectorAll('.accordion-content').forEach(el => el.style.maxHeight = null);
+                document.querySelectorAll('.accordion-icon').forEach(el => el.textContent = "[ + ]");
+            }
+        });
+
+        // Accordion Logic
+        document.querySelectorAll('.accordion-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const content = this.nextElementSibling;
+                const icon = this.querySelector('.accordion-icon');
+                
+                if (content.style.maxHeight) {
+                    content.style.maxHeight = null;
+                    icon.textContent = "[ + ]";
+                } else {
+                    document.querySelectorAll('.accordion-content').forEach(el => el.style.maxHeight = null);
+                    document.querySelectorAll('.accordion-icon').forEach(el => el.textContent = "[ + ]");
+                    content.style.maxHeight = content.scrollHeight + "px";
+                    icon.textContent = "[ - ]";
+                }
+            });
+        });
+
         // Animations
         const tl = gsap.timeline();
         tl.from("h1", { y: 50, opacity: 0, duration: 1, ease: "power3.out" })
           .from(".criteria-row", { opacity: 0, x: -20, duration: 0.8, stagger: 0.1, ease: "power2.out" })
           .from(".step-item", { x: -20, opacity: 0, duration: 0.8, stagger: 0.1, ease: "power2.out" }, "-=0.5");
 
-        // Tracker Logic
+        // Tracker Logic (Runs on desktop)
         ScrollTrigger.create({
             trigger: "#section-criteria",
             endTrigger: "#section-terms",
@@ -314,8 +465,12 @@
             end: "bottom center",
             onUpdate: (self) => {
                 const progress = self.progress * 100;
-                document.getElementById('tracker-fill').style.height = `${progress}%`;
-                document.getElementById('tracker-dot').style.top = `${progress}%`;
+                const fill = document.getElementById('tracker-fill');
+                const dot = document.getElementById('tracker-dot');
+                if(fill && dot) {
+                    fill.style.height = `${progress}%`;
+                    dot.style.top = `${progress}%`;
+                }
             }
         });
 
@@ -326,7 +481,7 @@
                 start: "top 60%",
                 end: "bottom 60%",
                 onToggle: (self) => {
-                    if (self.isActive) {
+                    if (self.isActive && labels.length > 0) {
                         labels.forEach(l => l.classList.remove('active'));
                         labels[index].classList.add('active');
                     }

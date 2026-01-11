@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Clubs | The NICS</title>
+    <title>After-school Clubs | The NICS</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Inter:wght@300;400;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -42,7 +42,7 @@
     </script>
 
     <style>
-        body { background-color: #FFFFFF; color: #1A3C34; cursor: none; overflow-x: hidden; }
+        body { background-color: #FFFFFF; color: #1A3C34; cursor: none; overflow-x: hidden; font-family: 'Inter', sans-serif; }
         
         #custom-cursor {
             position: fixed; top: 0; left: 0; width: 20px; height: 20px;
@@ -51,9 +51,8 @@
             transform: translate(-50%, -50%); transition: transform 0.1s ease;
         }
         
-        a:hover ~ #custom-cursor, button:hover ~ #custom-cursor, .club-card:hover ~ #custom-cursor {
-            transform: translate(-50%, -50%) scale(2);
-            background-color: transparent;
+        a:hover ~ #custom-cursor, button:hover ~ #custom-cursor, .club-card:hover ~ #custom-cursor, .accordion-btn:hover ~ #custom-cursor {
+            transform: translate(-50%, -50%) scale(2); background-color: transparent;
         }
 
         ::selection { background: #003366; color: #D4AF37; }
@@ -70,26 +69,29 @@
         .group:hover .dropdown-menu { display: block; }
         .dropdown-left { left: -1rem; }
         .dropdown-right { right: 0; }
-        .dropdown-item { display: block; padding: 1rem 1.5rem; border-bottom: 1px solid #000000; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 0.875rem; transition: background 0s; cursor: none; }
+        /* FIXED: Changed font-weight from 700 to 500 to match desktop menu fix */
+        .dropdown-item { display: block; padding: 1rem 1.5rem; border-bottom: 1px solid #000000; font-family: 'Inter', sans-serif; font-weight: 500; font-size: 0.875rem; transition: background 0s; cursor: none; }
         .dropdown-item:last-child { border-bottom: none; }
         .dropdown-item:hover { background-color: #003366; color: #D4AF37; }
         
         /* --- CARD STYLING & ANIMATION --- */
         .club-card { 
             display: flex; flex-direction: column; height: 100%; 
-            border-right: 1px solid #e5e7eb; border-bottom: 1px solid #e5e7eb; 
+            border-right: 1px solid #e5e7eb; border-bottom: 1px solid #e5e7eb;
             transition: background-color 0.5s cubic-bezier(0.25, 1, 0.5, 1), transform 0.5s ease;
             background-color: white;
         }
         
-        /* Hover State: Prestige Color Animation */
         .club-card:hover { 
-            background-color: #1A3C34; /* Deep Emerald */
-            z-index: 10;
+            background-color: #1A3C34; z-index: 10;
         }
 
         /* Image Handling */
-        .club-card-image { overflow: hidden; height: 260px; border-bottom: 1px solid #e5e7eb; position: relative; }
+        .club-card-image { 
+            overflow: hidden; 
+            height: 16rem; 
+            border-bottom: 1px solid #e5e7eb; position: relative; 
+        }
         .club-card-image img { transition: transform 0.8s ease, filter 0.5s ease; width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); }
         .club-card:hover .club-card-image img { transform: scale(1.05); filter: grayscale(0%); }
 
@@ -106,14 +108,23 @@
         .card-desc { color: #1A3C34; opacity: 0.8; transition: color 0.4s ease; }
         .club-card:hover .card-desc { color: #F4F7F6; opacity: 0.9; }
 
-        /* Separator Line Animation */
         .card-line { width: 0; height: 1px; background-color: #D4AF37; transition: width 0.6s ease; margin-bottom: 1rem; }
         .club-card:hover .card-line { width: 100%; }
 
-        /* Texture */
-        .bg-dots {
-            background-image: radial-gradient(#D4AF37 1.5px, transparent 1.5px);
-            background-size: 30px 30px;
+        .bg-dots { background-image: radial-gradient(#D4AF37 1.5px, transparent 1.5px); background-size: 30px 30px; }
+
+        /* Mobile Menu Transitions */
+        #mobile-menu-overlay {
+            clip-path: circle(0% at 100% 0); transition: clip-path 0.6s cubic-bezier(0.85, 0, 0.15, 1);
+        }
+        #mobile-menu-overlay.open {
+            clip-path: circle(150% at 100% 0);
+        }
+
+        /* Accordion Transitions */
+        .accordion-content {
+            max-height: 0; overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
     </style>
 </head>
@@ -121,45 +132,106 @@
 
     <div id="custom-cursor"></div>
 
-    <nav class="fixed top-0 w-full z-50 bg-white ticker-border h-16 flex items-center justify-between px-6 cursor-none">
-        <div class="flex items-center">
-            <img src="https://placehold.co/40x40/transparent/black?text=Logo" alt="NICS Logo" class="h-8 w-auto mr-3 object-contain">
-            <div class="font-serif italic font-black text-2xl tracking-tight text-jet-black">THE NICS</div>
+    <nav class="fixed top-0 left-0 w-full h-16 bg-white ticker-border flex items-center justify-between px-6 z-50 cursor-none transition-colors duration-300" id="main-nav">
+        <div class="flex items-center relative z-50">
+            <img src="https://placehold.co/40x40/transparent/black?text=Logo" alt="NICS Logo" class="h-8 w-auto mr-3 object-contain transition-all duration-300" id="nav-logo">
+            <div class="font-serif italic font-black text-2xl tracking-tight text-jet-black transition-colors duration-300" id="nav-text">THE NICS</div>
         </div>
-        <ul class="hidden md:flex space-x-8 font-mono text-sm font-bold uppercase tracking-widest h-full items-center text-deep-emerald">
+        
+        <ul class="hidden md:flex space-x-8 font-mono text-sm font-medium uppercase tracking-widest h-full items-center text-deep-emerald">
             <li><a href="newert.html" class="nav-link">Home</a></li>
             <li class="relative group h-full flex items-center cursor-pointer">
-                <span class="nav-link text-prestige-blue">About</span>
+                <span class="nav-link">About</span>
                 <div class="dropdown-menu dropdown-left">
                     <a href="newertmsn.html" class="dropdown-item">Mission & Vision</a>
                     <a href="newerthst.html" class="dropdown-item">History</a>
-                    <a href="#team" class="dropdown-item">Meet the Team</a>
+                    <a href="newertmtm.html" class="dropdown-item">Meet the Team</a>
                 </div>
             </li>
             <li><a href="newertacd.html" class="nav-link">Academics</a></li>
             <li><a href="newertadm.html" class="nav-link">Admission</a></li>
-            
             <li class="relative group h-full flex items-center cursor-pointer">
                 <span class="nav-link text-classic-gold border-b-2 border-classic-gold">Activities</span>
                 <div class="dropdown-menu dropdown-right">
-                    <a href="newertclb.html" class="dropdown-item bg-prestige-blue text-classic-gold">Our Clubs</a>
+                    <a href="newertclb.html" class="dropdown-item bg-prestige-blue text-classic-gold">After-school Clubs</a>
                     <a href="newertprt.html" class="dropdown-item">Parent Engagements</a>
                 </div>
             </li>
+            <li><a href="newertstr.html" class="nav-link">TNICS Store</a></li>
         </ul>
-        <div class="md:hidden font-mono text-sm">[MENU]</div>
+
+        <button id="mobile-menu-btn" class="md:hidden font-mono text-xs font-bold text-deep-emerald uppercase tracking-widest z-50 relative px-4 py-2 border border-deep-emerald hover:bg-deep-emerald hover:text-white transition-colors duration-300">
+            MENU
+        </button>
     </nav>
+
+    <div id="mobile-menu-overlay" class="fixed inset-0 bg-deep-emerald z-40 flex flex-col justify-start items-start px-8 md:hidden overflow-y-auto pt-32 pb-12">
+        
+        <div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: radial-gradient(#D4AF37 1px, transparent 1px); background-size: 30px 30px;"></div>
+
+        <ul class="flex flex-col space-y-6 w-full text-left relative z-50">
+            
+            <li class="mobile-group opacity-0 translate-y-4">
+                <a href="newert.html" class="font-mono text-xl font-bold uppercase tracking-widest text-white hover:text-classic-gold transition-colors">Home</a>
+            </li>
+            
+            <li class="mobile-group opacity-0 translate-y-4 w-full">
+                <button class="accordion-btn w-full flex items-center justify-between font-mono text-xl font-bold uppercase tracking-widest text-white hover:text-classic-gold transition-colors text-left group">
+                    <span>About</span>
+                    <span class="accordion-icon text-sm text-classic-gold group-hover:text-white">[ + ]</span>
+                </button>
+                <div class="accordion-content">
+                    <ul class="pl-4 pt-4 border-l border-white/20 space-y-3 mt-2">
+                        <li><a href="newertmsn.html" class="block font-mono text-sm font-medium text-white/70 hover:text-white hover:pl-2 transition-all">Mission & Vision</a></li>
+                        <li><a href="newerthst.html" class="block font-mono text-sm font-medium text-white/70 hover:text-white hover:pl-2 transition-all">History</a></li>
+                        <li><a href="newertmtm.html" class="block font-mono text-sm font-medium text-white/70 hover:text-white hover:pl-2 transition-all">Meet the Team</a></li>
+                    </ul>
+                </div>
+            </li>
+
+            <li class="mobile-group opacity-0 translate-y-4">
+                <a href="newertacd.html" class="font-mono text-xl font-bold uppercase tracking-widest text-white hover:text-classic-gold transition-colors">Academics</a>
+            </li>
+
+            <li class="mobile-group opacity-0 translate-y-4">
+                <a href="newertadm.html" class="font-mono text-xl font-bold uppercase tracking-widest text-white hover:text-classic-gold transition-colors">Admission</a>
+            </li>
+            
+            <li class="mobile-group opacity-0 translate-y-4 w-full">
+                <button class="accordion-btn w-full flex items-center justify-between font-mono text-xl font-bold uppercase tracking-widest text-white hover:text-classic-gold transition-colors text-left group">
+                    <span>Activities</span>
+                    <span class="accordion-icon text-sm text-classic-gold group-hover:text-white">[ + ]</span>
+                </button>
+                <div class="accordion-content">
+                    <ul class="pl-4 pt-4 border-l border-white/20 space-y-3 mt-2">
+                        <li><a href="newertclb.html" class="block font-mono text-sm font-medium text-classic-gold hover:text-white hover:pl-2 transition-all">After-school Clubs</a></li>
+                        <li><a href="newertprt.html" class="block font-mono text-sm font-medium text-white/70 hover:text-white hover:pl-2 transition-all">Parent Engagements</a></li>
+                    </ul>
+                </div>
+            </li>
+
+            <li class="mobile-group opacity-0 translate-y-4">
+                <a href="newertstr.html" class="font-mono text-xl font-bold uppercase tracking-widest text-white hover:text-classic-gold transition-colors">
+                    TNICS Store
+                </a>
+            </li>
+        </ul>
+
+        <div class="mt-auto pt-10 text-left mobile-footer opacity-0 relative z-50">
+            <p class="font-mono text-[10px] text-white/40 uppercase tracking-widest">Est. 2023 • Kampala</p>
+        </div>
+    </div>
 
     <main class="mt-16 w-full">
 
-        <section class="w-full border-b border-jet-black flex flex-col md:flex-row h-[50vh] min-h-[400px]">
+        <section class="w-full border-b border-jet-black flex flex-col md:flex-row min-h-[50vh]">
             
-            <div class="w-full md:w-1/2 bg-off-white p-12 flex flex-col justify-center text-deep-emerald border-r border-jet-black relative overflow-hidden">
+            <div class="w-full md:w-1/2 bg-off-white p-12 pt-24 md:pt-12 flex flex-col justify-center text-deep-emerald border-r border-jet-black relative overflow-hidden">
                 <div class="absolute -inset-[50%] bg-dots opacity-30 animate-spin-slow pointer-events-none"></div>
                 
                 <div class="relative z-10">
                     <h1 class="font-serif text-5xl md:text-7xl leading-none mb-6">
-                        AFTER SCHOOL<br>
+                        AFTER-SCHOOL<br>
                         <span class="text-transparent" style="-webkit-text-stroke: 1px #1A3C34;">CLUBS</span>
                     </h1>
                     <div class="flex items-center gap-4">
@@ -172,7 +244,7 @@
             <div class="w-full md:w-1/2 bg-deep-emerald p-12 flex items-center relative">
                 <p class="font-sans text-sm md:text-base leading-relaxed text-white/90 font-light relative z-10">
                     <strong class="font-mono text-xs block mb-4 text-classic-gold tracking-widest">[ OVERVIEW ]</strong>
-                    The Nazirite International Christian School After-School Clubs offer students a vibrant space to explore their interests, develop new skills, and build confidence beyond the classroom. Our diverse range of clubs ensures that every student can find something they are passionate about while learning the value of teamwork, creativity, and commitment.
+                    The Nazirite International Christian School After-school Clubs offer students a vibrant space to explore their interests, develop new skills, and build confidence beyond the classroom. Our diverse range of clubs ensures that every student can find something they are passionate about while learning the value of teamwork, creativity, and commitment.
                 </p>
             </div>
         </section>
@@ -185,7 +257,7 @@
                         <img src="https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?q=80&w=1000&auto=format&fit=crop" alt="Performing Arts">
                         <div class="absolute top-4 right-4 bg-white/90 px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-wider text-deep-emerald">01</div>
                     </div>
-                    <div class="p-8 flex flex-col justify-between h-full">
+                    <div class="p-6 md:p-8 flex flex-col justify-between h-full">
                         <div>
                             <div class="flex items-baseline justify-between mb-4">
                                 <h3 class="card-title text-2xl font-serif">Performing Arts</h3>
@@ -202,7 +274,7 @@
                         <img src="https://images.unsplash.com/photo-1457369804613-52c61a468e7d?q=80&w=1000&auto=format&fit=crop" alt="Creative Writing">
                         <div class="absolute top-4 right-4 bg-white/90 px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-wider text-deep-emerald">02</div>
                     </div>
-                    <div class="p-8 flex flex-col justify-between h-full">
+                    <div class="p-6 md:p-8 flex flex-col justify-between h-full">
                         <div>
                             <div class="flex items-baseline justify-between mb-4">
                                 <h3 class="card-title text-2xl font-serif">Creative Writing</h3>
@@ -219,7 +291,7 @@
                         <img src="https://images.unsplash.com/photo-1556910103-1c02745a30bf?q=80&w=1000&auto=format&fit=crop" alt="Cookery">
                         <div class="absolute top-4 right-4 bg-white/90 px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-wider text-deep-emerald">03</div>
                     </div>
-                    <div class="p-8 flex flex-col justify-between h-full">
+                    <div class="p-6 md:p-8 flex flex-col justify-between h-full">
                         <div>
                             <div class="flex items-baseline justify-between mb-4">
                                 <h3 class="card-title text-2xl font-serif">Cookery</h3>
@@ -236,7 +308,7 @@
                         <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=1000&auto=format&fit=crop" alt="Robotics">
                         <div class="absolute top-4 right-4 bg-white/90 px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-wider text-deep-emerald">04</div>
                     </div>
-                    <div class="p-8 flex flex-col justify-between h-full">
+                    <div class="p-6 md:p-8 flex flex-col justify-between h-full">
                         <div>
                             <div class="flex items-baseline justify-between mb-4">
                                 <h3 class="card-title text-2xl font-serif">Robotics</h3>
@@ -248,12 +320,12 @@
                     </div>
                 </div>
 
-                 <div class="club-card group">
+                <div class="club-card group">
                     <div class="club-card-image">
                         <img src="https://images.unsplash.com/photo-1542435503-956c469947f6?q=80&w=1000&auto=format&fit=crop" alt="Journalism">
                         <div class="absolute top-4 right-4 bg-white/90 px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-wider text-deep-emerald">05</div>
                     </div>
-                    <div class="p-8 flex flex-col justify-between h-full">
+                    <div class="p-6 md:p-8 flex flex-col justify-between h-full">
                         <div>
                             <div class="flex items-baseline justify-between mb-4">
                                 <h3 class="card-title text-2xl font-serif">Yearbook/Journalism</h3>
@@ -265,12 +337,12 @@
                     </div>
                 </div>
 
-                 <div class="club-card group">
+                <div class="club-card group">
                     <div class="club-card-image">
                         <img src="https://images.unsplash.com/photo-1559067515-bf7d799b6d4d?q=80&w=1000&auto=format&fit=crop" alt="Aviation">
                         <div class="absolute top-4 right-4 bg-white/90 px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-wider text-deep-emerald">06</div>
                     </div>
-                    <div class="p-8 flex flex-col justify-between h-full">
+                    <div class="p-6 md:p-8 flex flex-col justify-between h-full">
                         <div>
                             <div class="flex items-baseline justify-between mb-4">
                                 <h3 class="card-title text-2xl font-serif">Aviation Club</h3>
@@ -287,7 +359,7 @@
                         <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1000&auto=format&fit=crop" alt="Gaming">
                         <div class="absolute top-4 right-4 bg-white/90 px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-wider text-deep-emerald">07</div>
                     </div>
-                    <div class="p-8 flex flex-col justify-between h-full">
+                    <div class="p-6 md:p-8 flex flex-col justify-between h-full">
                         <div>
                             <div class="flex items-baseline justify-between mb-4">
                                 <h3 class="card-title text-2xl font-serif">Gaming Club</h3>
@@ -304,7 +376,7 @@
                         <img src="https://images.unsplash.com/photo-1523726491678-bf852e717f63?q=80&w=1000&auto=format&fit=crop" alt="Africa">
                         <div class="absolute top-4 right-4 bg-white/90 px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-wider text-deep-emerald">08</div>
                     </div>
-                    <div class="p-8 flex flex-col justify-between h-full">
+                    <div class="p-6 md:p-8 flex flex-col justify-between h-full">
                         <div>
                             <div class="flex items-baseline justify-between mb-4">
                                 <h3 class="card-title text-2xl font-serif">African Perspectives</h3>
@@ -322,7 +394,7 @@
         <section class="w-full bg-classic-gold text-deep-emerald py-16 px-6 md:px-12 relative overflow-hidden">
             <div class="max-w-4xl mx-auto text-center relative z-10 mb-10">
                 <p class="font-serif italic text-2xl md:text-4xl leading-tight mb-6">
-                    "Each year, TNICS After-School Clubs proudly host a variety of events that showcase students’ talents and hard work. These include performances, exhibitions, competitions, showcases, and themed activity days."
+                    "Each year, TNICS After-school Clubs proudly host a variety of events that showcase students’ talents and hard work. These include performances, exhibitions, competitions, showcases, and themed activity days."
                 </p>
                 <p class="font-mono text-xs uppercase tracking-widest opacity-80 mt-8">
                     Essential & Memorable Part of Life at TNICS
@@ -332,9 +404,9 @@
 
         <footer class="w-full border-t border-jet-black bg-white text-deep-emerald">
             <div class="grid grid-cols-1 md:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-jet-black">
-                <div class="p-6 h-full flex flex-col"><h3 class="font-mono font-bold text-xs mb-4 text-prestige-blue">SOCIAL</h3><ul class="space-y-2 font-bold uppercase text-sm"><li><a href="#" class="hover:text-classic-gold hover:underline decoration-2">Instagram</a></li><li><a href="#" class="hover:text-classic-gold hover:underline decoration-2">Facebook</a></li><li><a href="#" class="hover:text-classic-gold hover:underline decoration-2">Twitter / X</a></li></ul></div>
-                <div class="p-6 h-full flex flex-col"><h3 class="font-mono font-bold text-xs mb-4 text-prestige-blue">LOCATION</h3><p class="font-mono text-sm uppercase leading-relaxed">Naalya, Kampala<br>Uganda<br>East Africa<br><span class="text-classic-gold">Lat: 0.3644° N</span></p></div>
-                <div class="p-6 h-full flex flex-col"><h3 class="font-mono font-bold text-xs mb-4 text-prestige-blue">SITEMAP</h3><ul class="space-y-1 font-mono text-xs uppercase"><li><a href="newert.html" class="hover:text-classic-gold">[Home]</a></li><li><a href="newertacd.html" class="hover:text-classic-gold">[Academics]</a></li><li><a href="newertadm.html" class="hover:text-classic-gold">[Admissions]</a></li><li><a href="#" class="hover:text-classic-gold">[Portal]</a></li></ul></div>
+                <div class="p-6 h-full flex flex-col"><h3 class="font-mono font-bold text-xs mb-4 text-prestige-blue">SOCIAL</h3><ul class="space-y-2 font-bold uppercase text-sm"><li><a href="https://www.instagram.com/thenicsug/" class="hover:text-classic-gold hover:underline decoration-2">Instagram</a></li></ul></div>
+                <div class="p-6 h-full flex flex-col"><h3 class="font-mono font-bold text-xs mb-4 text-prestige-blue">LOCATION</h3><p class="font-mono text-sm uppercase leading-relaxed">Naguru, Kampala<br>Uganda<br>East Africa<br><span class="text-classic-gold">Lat: 0.3644° N</span></p></div>
+                <div class="p-6 h-full flex flex-col"><h3 class="font-mono font-bold text-xs mb-4 text-prestige-blue">SITEMAP</h3><ul class="space-y-1 font-mono text-xs uppercase"><li><a href="newert.html" class="hover:text-classic-gold">[Home]</a></li><li><a href="newertacd.html" class="hover:text-classic-gold">[Academics]</a></li><li><a href="newertadm.html" class="hover:text-classic-gold">[Admissions]</a></li></ul></div>
                 <div class="p-6 h-full flex flex-col justify-between"><div class="w-full h-12 bg-jet-black text-white flex items-center justify-center font-mono text-xs font-bold hover:bg-classic-gold hover:text-deep-emerald cursor-pointer transition-colors" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">BACK TO TOP</div><p class="font-mono text-[10px] uppercase mt-4 text-gray-400">&copy; 2025 The NICS.</p></div>
             </div>
         </footer>
@@ -355,9 +427,94 @@
             el.addEventListener('mouseleave', () => cursor.style.transform = 'translate(-50%, -50%) scale(1)');
         });
 
+        // --- MODERN MOBILE MENU LOGIC ---
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu-overlay');
+        const navLogo = document.getElementById('nav-logo');
+        const navText = document.getElementById('nav-text');
+        const mainNav = document.getElementById('main-nav');
+        
+        let isMenuOpen = false;
+        menuBtn.addEventListener('click', () => {
+            isMenuOpen = !isMenuOpen;
+            if(isMenuOpen) {
+                mobileMenu.classList.add('open');
+                menuBtn.textContent = "CLOSE";
+                menuBtn.classList.replace('text-deep-emerald', 'text-white');
+                menuBtn.classList.replace('border-deep-emerald', 'border-white');
+                
+                // IMPORTANT: Change nav background to green so white close button is visible
+                mainNav.classList.remove('bg-white', 'ticker-border');
+                mainNav.classList.add('bg-deep-emerald');
+
+                // Change header elements to white
+                navLogo.style.filter = "invert(1)";
+                navText.style.color = "white";
+                
+                // Re-open Active Accordion (Activities is active)
+                const activeLink = document.querySelector('.mobile-group .accordion-content .text-classic-gold');
+                if(activeLink) {
+                    const parentContent = activeLink.closest('.accordion-content');
+                    const parentBtn = parentContent.previousElementSibling;
+                    parentContent.style.maxHeight = parentContent.scrollHeight + "px";
+                    parentBtn.querySelector('.accordion-icon').textContent = "[ - ]";
+                }
+
+                // Animate Group Links Stagger
+                gsap.to(".mobile-group", {
+                    y: 0,
+                    opacity: 1,
+                    duration: 0.5,
+                    stagger: 0.05,
+                    delay: 0.2,
+                    ease: "power2.out"
+                });
+                gsap.to(".mobile-footer", { opacity: 1, delay: 0.8 });
+
+            } else {
+                mobileMenu.classList.remove('open');
+                menuBtn.textContent = "MENU";
+                menuBtn.classList.replace('text-white', 'text-deep-emerald');
+                menuBtn.classList.replace('border-white', 'border-deep-emerald');
+                
+                // Revert nav background
+                mainNav.classList.add('bg-white', 'ticker-border');
+                mainNav.classList.remove('bg-deep-emerald');
+
+                // Revert header elements
+                navLogo.style.filter = "invert(0)";
+                navText.style.color = "#000000";
+
+                // Reset Links
+                gsap.to(".mobile-group", { y: 10, opacity: 0, duration: 0.2 });
+                gsap.to(".mobile-footer", { opacity: 0 });
+                
+                // Close all accordions
+                document.querySelectorAll('.accordion-content').forEach(el => el.style.maxHeight = null);
+                document.querySelectorAll('.accordion-icon').forEach(el => el.textContent = "[ + ]");
+            }
+        });
+
+        // Accordion Logic
+        document.querySelectorAll('.accordion-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const content = this.nextElementSibling;
+                const icon = this.querySelector('.accordion-icon');
+                
+                if (content.style.maxHeight) {
+                    content.style.maxHeight = null;
+                    icon.textContent = "[ + ]";
+                } else {
+                    document.querySelectorAll('.accordion-content').forEach(el => el.style.maxHeight = null);
+                    document.querySelectorAll('.accordion-icon').forEach(el => el.textContent = "[ + ]");
+                    content.style.maxHeight = content.scrollHeight + "px";
+                    icon.textContent = "[ - ]";
+                }
+            });
+        });
+
         // Intro Animations
         gsap.from("h1", { opacity: 0, y: 30, duration: 1, ease: "power3.out" });
-
         const cards = document.querySelectorAll('.club-card');
         cards.forEach(card => {
             gsap.from(card, { opacity: 0, y: 30, duration: 0.6, scrollTrigger: { trigger: card, start: "top 90%" } });
