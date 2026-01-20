@@ -7,7 +7,7 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Inter:wght@300;400;500;600;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -44,7 +44,7 @@
     </script>
 
     <style>
-        body { background-color: #FFFFFF; color: #1A3C34; cursor: none; overflow-x: hidden; }
+        body { background-color: #FFFFFF; color: #1A3C34; cursor: none; overflow-x: hidden; font-family: 'Inter', sans-serif; }
         
         #custom-cursor {
             position: fixed; top: 0; left: 0; width: 20px; height: 20px;
@@ -65,7 +65,14 @@
         .nav-link:hover { color: #003366; }
 
         .ticker-border { border-top: 1px solid #000000; border-bottom: 1px solid #000000; }
-        .outline-text { -webkit-text-fill-color: transparent; -webkit-text-stroke: 1px #D4AF37; color: transparent; }
+        
+        /* Outline Text Style */
+        .outline-text { 
+            -webkit-text-fill-color: transparent; 
+            -webkit-text-stroke: 1px #D4AF37; 
+            color: transparent; 
+        }
+        
         .blur-reveal { filter: blur(10px); opacity: 0; transform: translateY(20px); transition: all 1s ease; }
         .blur-reveal.active { filter: blur(0); opacity: 1; transform: translateY(0); }
 
@@ -74,29 +81,27 @@
         .dropdown-left { left: -1rem; }
         .dropdown-right { right: 0; }
         
-        .dropdown-item { display: block; padding: 1rem 1.5rem; border-bottom: 1px solid #000000; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 0.875rem; transition: background 0s; cursor: none; }
+        .dropdown-item { display: block; padding: 1rem 1.5rem; border-bottom: 1px solid #000000; font-family: 'Inter', sans-serif; font-weight: 500; font-size: 0.875rem; transition: background 0s; cursor: none; }
         .dropdown-item:last-child { border-bottom: none; }
         .dropdown-item:hover { background-color: #003366; color: #D4AF37; }
         
         .stage-card:hover .stage-number { color: #D4AF37; }
         .stage-card:hover { background-color: #1A3C34; color: white; }
         
-        /* High School Section Specific Overrides (Black Theme) */
         .stage-card.high-school-section:hover { background-color: #000000; } 
 
-        /* Curriculum Toggle Styles */
         #curriculum-details {
             max-height: 0; overflow: hidden;
             transition: max-height 0.8s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.5s ease;
             opacity: 0;
         }
         #curriculum-details.open {
-            max-height: 3000px; opacity: 1;
+            max-height: 4000px; opacity: 1;
         }
         
         .subject-column { border-right: 1px solid #2D564D; }
         .subject-column:last-child { border-right: none; }
-        @media (max-width: 768px) { .subject-column { border-right: none; border-bottom: 1px solid #2D564D; } }
+        @media (max-width: 1024px) { .subject-column { border-right: none; border-bottom: 1px solid #2D564D; } }
 
         .grade-header { 
             font-family: 'DM Serif Text', serif; color: #D4AF37; 
@@ -116,7 +121,6 @@
         @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
         @keyframes spinReverse { from { transform: rotate(360deg); } to { transform: rotate(0deg); } }
 
-        /* Mobile Menu Transitions */
         #mobile-menu-overlay {
             clip-path: circle(0% at 100% 0); transition: clip-path 0.6s cubic-bezier(0.85, 0, 0.15, 1);
         }
@@ -124,7 +128,6 @@
             clip-path: circle(150% at 100% 0);
         }
 
-        /* Accordion Transitions */
         .accordion-content {
             max-height: 0; overflow: hidden;
             transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -141,7 +144,7 @@
             <div class="font-serif italic font-black text-2xl tracking-tight text-jet-black transition-colors duration-300" id="nav-text">THE NICS</div>
         </div>
         
-        <ul class="hidden md:flex space-x-8 font-mono text-sm font-bold uppercase tracking-widest h-full items-center text-deep-emerald">
+        <ul class="hidden md:flex space-x-8 font-mono text-sm font-medium uppercase tracking-widest h-full items-center text-deep-emerald">
             <li><a href="newert.html" class="nav-link">Home</a></li>
             <li class="relative group h-full flex items-center cursor-pointer">
                 <span class="nav-link">About</span>
@@ -185,9 +188,9 @@
                 </button>
                 <div class="accordion-content">
                     <ul class="pl-4 pt-4 border-l border-white/20 space-y-3 mt-2">
-                        <li><a href="newertmsn.html" class="block font-mono text-sm font-bold text-white/70 hover:text-white hover:pl-2 transition-all">Mission & Vision</a></li>
-                        <li><a href="newerthst.html" class="block font-mono text-sm font-bold text-white/70 hover:text-white hover:pl-2 transition-all">History</a></li>
-                        <li><a href="newertmtm.html" class="block font-mono text-sm font-bold text-white/70 hover:text-white hover:pl-2 transition-all">Meet the Team</a></li>
+                        <li><a href="newertmsn.html" class="block font-mono text-sm font-medium text-white/70 hover:text-white hover:pl-2 transition-all">Mission & Vision</a></li>
+                        <li><a href="newerthst.html" class="block font-mono text-sm font-medium text-white/70 hover:text-white hover:pl-2 transition-all">History</a></li>
+                        <li><a href="newertmtm.html" class="block font-mono text-sm font-medium text-white/70 hover:text-white hover:pl-2 transition-all">Meet the Team</a></li>
                     </ul>
                 </div>
             </li>
@@ -207,8 +210,8 @@
                 </button>
                 <div class="accordion-content">
                     <ul class="pl-4 pt-4 border-l border-white/20 space-y-3 mt-2">
-                        <li><a href="newertclb.html" class="block font-mono text-sm font-bold text-white/70 hover:text-white hover:pl-2 transition-all">After-school Clubs</a></li>
-                        <li><a href="newertprt.html" class="block font-mono text-sm font-bold text-white/70 hover:text-white hover:pl-2 transition-all">Parent Engagements</a></li>
+                        <li><a href="newertclb.html" class="block font-mono text-sm font-medium text-white/70 hover:text-white hover:pl-2 transition-all">After-school Clubs</a></li>
+                        <li><a href="newertprt.html" class="block font-mono text-sm font-medium text-white/70 hover:text-white hover:pl-2 transition-all">Parent Engagements</a></li>
                     </ul>
                 </div>
             </li>
@@ -258,7 +261,7 @@
             <div class="absolute inset-0 flex flex-col justify-center items-start z-30 pointer-events-none px-6 md:px-12">
                 <div class="mb-8">
                     <h1 class="hero-line font-serif italic font-black text-5xl md:text-8xl tracking-tighter text-white uppercase leading-none opacity-0 translate-y-10 text-left">OUR</h1>
-                    <h1 class="hero-line font-playfair italic font-black text-5xl md:text-8xl tracking-tighter uppercase leading-none opacity-0 translate-y-10 mt-2 outline-text text-left">PHILOSOPHY</h1>
+                    <h1 class="hero-line font-sans italic font-black text-5xl md:text-8xl tracking-tighter uppercase leading-none opacity-0 translate-y-10 mt-2 outline-text text-left">PHILOSOPHY</h1>
                 </div>
 
                 <div class="manifesto-box opacity-0 max-w-xl">
@@ -325,10 +328,10 @@
                     <div class="max-w-xl text-center mx-auto md:text-right md:mx-0">
                         <span class="stage-number font-mono text-6xl font-bold text-classic-gold transition-colors duration-300 block mb-2">03</span>
                         <h3 class="font-serif text-4xl mt-2 mb-4 text-classic-gold">High School</h3>
-                        <p class="font-mono text-xs uppercase tracking-widest mb-4 opacity-70">GRADES 9-12 • DUAL DIPLOMA & A-LEVELS</p>
+                        <p class="font-mono text-xs uppercase tracking-widest mb-4 opacity-70">GRADES 9-12 • HIGH SCHOOL DIPLOMA & A-LEVELS</p>
                         
                         <p class="font-sans text-sm leading-relaxed opacity-80 mx-auto md:ml-auto md:mr-0 max-w-lg">
-                            Our high school offers a rigorous and globally focused education, combining a broad American curriculum in Grades 9 and 10 with Cambridge A Levels in Grades 11 and 12. This high school diploma program develops critical thinking, analytical reasoning, problem-solving skills, and effective communication skills. Graduates leave well-prepared for universities around the world, equipped with both a U.S. high school diploma and internationally recognized Cambridge qualifications.
+                            Our high school offers a rigorous and globally focused education, combining a broad American curriculum in Grades 9 and 10 with International A Levels in Grades 11 and 12. This high school diploma program develops critical thinking, analytical reasoning, problem-solving skills, and effective communication skills. Graduates leave well-prepared for universities around the world, equipped with both a U.S. high school diploma and internationally recognized International qualifications.
                         </p>
                     </div>
                 </div>
@@ -354,7 +357,7 @@
             </div>
 
             <div id="curriculum-details" class="bg-darker-emerald border-t border-classic-gold/30">
-                <div class="max-w-7xl mx-auto py-16 px-6 md:px-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+                <div class="max-w-7xl mx-auto py-16 px-6 md:px-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
                     
                     <div class="subject-column p-4">
                         <h4 class="grade-header">Elementary</h4>
@@ -378,59 +381,40 @@
                         <div class="subject-list space-y-6">
                             <div>
                                 <strong class="font-mono text-xs text-white/50 block mb-2">COURSES</strong>
-                                <p class="subject-item">Mathematics (General / Pre-Algebra)</p>
-                                <p class="subject-item">Language Arts (Writing & Grammar I/II)</p>
-                                <p class="subject-item">Science (General / Physical)</p>
-                                <p class="subject-item">History (American / World)</p>
+                                <p class="subject-item">Mathematics (General, Pre-Algebra)</p>
+                                <p class="subject-item">Language Arts (Writing & Grammar I, II)</p>
+                                <p class="subject-item">Science (General, Physical)</p>
+                                <p class="subject-item">History (American, Ancient)</p>
                                 <p class="subject-item">Bible (Life of Christ)</p>
                                 <p class="subject-item">Computer (ICDL)</p>
                                 <p class="subject-item">Language (Kiswahili)</p>
-                                <p class="subject-item">Sports (Swimming, Football, Basketball)</p>
                             </div>
                             <div>
                                 <strong class="font-mono text-xs text-white/50 block mb-2">ELECTIVES</strong>
-                                <p class="subject-item opacity-60">Art & Design, Music, AI, Spanish, French, Astronomy, Food & Nutrition, African Perspective</p>
+                                <p class="subject-item opacity-60">Art & Design, Music, AI, Spanish, French, Astronomy, Food & Nutrition</p>
                             </div>
                         </div>
                     </div>
 
                     <div class="subject-column p-4">
-                        <h4 class="grade-header">Junior High</h4>
-                        <p class="font-mono text-xs text-classic-gold mb-6 uppercase tracking-widest">Grades 9-10</p>
+                        <h4 class="grade-header">High School</h4>
+                        <p class="font-mono text-xs text-classic-gold mb-6 uppercase tracking-widest">Grades 9-12</p>
                         
                         <div class="subject-list space-y-6">
                             <div>
-                                <strong class="font-mono text-xs text-white/50 block mb-2">COURSES</strong>
-                                <p class="subject-item">Math (Algebra 1/2, Geometry)</p>
-                                <p class="subject-item">Lang Arts (Writing & Grammar)</p>
-                                <p class="subject-item">Science (Biology, Chemistry, Physics)</p>
-                                <p class="subject-item">History (American, World)</p>
-                                <p class="subject-item">Bible (Old Testament Survey)</p>
+                                <strong class="font-mono text-xs text-white/50 block mb-2">COURSE OFFERINGS</strong>
+                                <p class="subject-item">Mathematics (Algebra 1, Geometry, Algebra 2, A-level Math)</p>
+                                <p class="subject-item">Language Arts (English 1, English 2, A-level English Language & Literature)</p>
+                                <p class="subject-item">Science (Biology, Chemistry, Physics, Anatomy & Physiology, Marine Biology, A-level Bio/Chem/Phys)</p>
+                                <p class="subject-item">History (American History, World History, Government, A-level Economics & History)</p>
+                                <p class="subject-item">Computer (ICDL)</p>
+                                <p class="subject-item">Physical Education</p>
+                                <p class="subject-item">Languages (Spanish, French, Latin)</p>
+                                <p class="subject-item">Bible (Old Testament Survey, New Testament Survey, Church History)</p>
                             </div>
                             <div>
                                 <strong class="font-mono text-xs text-white/50 block mb-2">ELECTIVES</strong>
-                                <p class="subject-item opacity-60">Personal Finance, Art, Music, AI, Spanish/French (2yrs), Astronomy, Health, Oral Comm, African Perspective</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="subject-column p-4">
-                        <h4 class="grade-header">Senior High</h4>
-                        <p class="font-mono text-xs text-classic-gold mb-6 uppercase tracking-widest">Grades 11-12 (A-Levels)</p>
-                        
-                        <div class="subject-list space-y-6">
-                            <div>
-                                <strong class="font-mono text-xs text-white/50 block mb-2">COURSES (AS/A2)</strong>
-                                <p class="subject-item">Mathematics</p>
-                                <p class="subject-item">English Language</p>
-                                <p class="subject-item">Sciences (Biology, Chemistry, Physics)</p>
-                                <p class="subject-item">History & Economics</p>
-                                <p class="subject-item">Geography & Government</p>
-                                <p class="subject-item">Bible (New Testament Survey)</p>
-                            </div>
-                            <div>
-                                <strong class="font-mono text-xs text-white/50 block mb-2">ELECTIVES</strong>
-                                <p class="subject-item opacity-60">Personal Finance, Art, Music, AI, Languages, Astronomy, Food & Nutrition, ICDL Advanced</p>
+                                <p class="subject-item opacity-60">Personal Finance, Art & Design, Music, AI, Astronomy, Nutrition, Health, Communication, Psychology, College Success Strategies, ICDL Advanced</p>
                             </div>
                         </div>
                     </div>

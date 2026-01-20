@@ -7,7 +7,7 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Inter:wght@300;400;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
     
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -68,7 +68,8 @@
         .group:hover .dropdown-menu { display: block; }
         .dropdown-left { left: -1rem; }
         .dropdown-right { right: 0; }
-        .dropdown-item { display: block; padding: 1rem 1.5rem; border-bottom: 1px solid #000000; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 0.875rem; transition: background 0s; cursor: none; }
+        /* FIXED: font-medium */
+        .dropdown-item { display: block; padding: 1rem 1.5rem; border-bottom: 1px solid #000000; font-family: 'Inter', sans-serif; font-weight: 500; font-size: 0.875rem; transition: background 0s; cursor: none; }
         .dropdown-item:last-child { border-bottom: none; }
         .dropdown-item:hover { background-color: #003366; color: #D4AF37; }
 
@@ -108,11 +109,11 @@
             transform: scale(1);
         }
 
-        /* EDITS: Mobile Image Fix - Shorter on mobile (3/2), taller on desktop (4/5) */
+        /* EDITS: Image Wrapper Aspect Ratio & Position */
         .img-wrapper {
             position: relative;
             width: 100%;
-            aspect-ratio: 3/2; /* Mobile default */
+            aspect-ratio: 1/1; /* Mobile: Square to prevent clipping but keep height managed */
             overflow: hidden;
             background-color: #F3F4F6;
             display: flex;
@@ -122,7 +123,7 @@
         
         @media (min-width: 768px) {
             .img-wrapper {
-                aspect-ratio: 4/5; /* Desktop restore */
+                aspect-ratio: 4/5; /* Desktop: Standard Portrait */
             }
         }
 
@@ -130,6 +131,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            object-position: top center; /* FIXED: Prevents head/top clipping */
             opacity: 0.8; 
             transition: all 0.6s ease;
         }
@@ -191,7 +193,7 @@
             <div class="font-serif italic font-black text-2xl tracking-tight text-jet-black transition-colors duration-300" id="nav-text">THE NICS</div>
         </div>
         
-        <ul class="hidden md:flex space-x-8 font-mono text-sm font-bold uppercase tracking-widest h-full items-center text-deep-emerald">
+        <ul class="hidden md:flex space-x-8 font-mono text-sm font-medium uppercase tracking-widest h-full items-center text-deep-emerald">
             <li><a href="newert.html" class="nav-link">Home</a></li>
             <li class="relative group h-full flex items-center cursor-pointer">
                 <span class="nav-link text-classic-gold border-b-2 border-classic-gold">About</span>
@@ -235,9 +237,9 @@
                 </button>
                 <div class="accordion-content">
                     <ul class="pl-4 pt-4 border-l border-white/20 space-y-3 mt-2">
-                        <li><a href="newertmsn.html" class="block font-mono text-sm font-bold text-white/70 hover:text-white hover:pl-2 transition-all">Mission & Vision</a></li>
-                        <li><a href="newerthst.html" class="block font-mono text-sm font-bold text-white/70 hover:text-white hover:pl-2 transition-all">History</a></li>
-                        <li><a href="newertmtm.html" class="block font-mono text-sm font-bold text-classic-gold hover:text-white hover:pl-2 transition-all">Meet the Team</a></li>
+                        <li><a href="newertmsn.html" class="block font-mono text-sm font-medium text-white/70 hover:text-white hover:pl-2 transition-all">Mission & Vision</a></li>
+                        <li><a href="newerthst.html" class="block font-mono text-sm font-medium text-white/70 hover:text-white hover:pl-2 transition-all">History</a></li>
+                        <li><a href="newertmtm.html" class="block font-mono text-sm font-medium text-classic-gold hover:text-white hover:pl-2 transition-all">Meet the Team</a></li>
                     </ul>
                 </div>
             </li>
@@ -257,8 +259,8 @@
                 </button>
                 <div class="accordion-content">
                     <ul class="pl-4 pt-4 border-l border-white/20 space-y-3 mt-2">
-                        <li><a href="newertclb.html" class="block font-mono text-sm font-bold text-white/70 hover:text-white hover:pl-2 transition-all">After-school Clubs</a></li>
-                        <li><a href="newertprt.html" class="block font-mono text-sm font-bold text-white/70 hover:text-white hover:pl-2 transition-all">Parent Engagements</a></li>
+                        <li><a href="newertclb.html" class="block font-mono text-sm font-medium text-white/70 hover:text-white hover:pl-2 transition-all">After-school Clubs</a></li>
+                        <li><a href="newertprt.html" class="block font-mono text-sm font-medium text-white/70 hover:text-white hover:pl-2 transition-all">Parent Engagements</a></li>
                     </ul>
                 </div>
             </li>

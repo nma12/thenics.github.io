@@ -7,7 +7,7 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Inter:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
     
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -71,15 +71,23 @@
         .smooth-wrapper { width: 100%; }
         .vision-word, .mission-word { transition: color 0.1s linear; }
         
-        .reverse-italic { transform: skewX(6deg); display: inline-block; padding: 0 0.5rem; } 
-        .reverse-italic-subtle { transform: skewX(8deg); display: inline-block; } 
+        /* EDITED: Transforms only apply on Desktop (min-width: 768px) */
+        .reverse-italic { display: inline-block; padding: 0 0.5rem; transform: none; } 
+        @media (min-width: 768px) {
+            .reverse-italic { transform: skewX(6deg); }
+        }
+
+        .reverse-italic-subtle { display: inline-block; transform: none; } 
+        @media (min-width: 768px) {
+            .reverse-italic-subtle { transform: skewX(8deg); }
+        }
 
         /* Dropdown Styling */
         .dropdown-menu { display: none; position: absolute; top: 63px; width: 16rem; background: white; border: 1px solid #000000; box-shadow: 4px 4px 0px 0px rgba(0,0,0,1); color: #1A3C34; z-index: 60; }
         .group:hover .dropdown-menu { display: block; }
         .dropdown-left { left: -1rem; }
         .dropdown-right { right: 0; }
-        .dropdown-item { display: block; padding: 1rem 1.5rem; border-bottom: 1px solid #000000; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 0.875rem; transition: background 0s; cursor: none; }
+        .dropdown-item { display: block; padding: 1rem 1.5rem; border-bottom: 1px solid #000000; font-family: 'Inter', sans-serif; font-weight: 500; font-size: 0.875rem; transition: background 0s; cursor: none; }
         .dropdown-item:last-child { border-bottom: none; }
         .dropdown-item:hover { background-color: #003366; color: #D4AF37; }
 
@@ -108,7 +116,7 @@
             <div class="font-serif italic font-black text-2xl tracking-tight text-jet-black transition-colors duration-300" id="nav-text">THE NICS</div>
         </div>
         
-        <ul class="hidden md:flex space-x-8 font-mono text-sm font-bold uppercase tracking-widest h-full items-center text-deep-emerald">
+        <ul class="hidden md:flex space-x-8 font-mono text-sm font-medium uppercase tracking-widest h-full items-center text-deep-emerald">
             <li><a href="newert.html" class="nav-link">Home</a></li>
             
             <li class="relative group h-full flex items-center cursor-pointer">
@@ -155,9 +163,9 @@
                 </button>
                 <div class="accordion-content">
                     <ul class="pl-4 pt-4 border-l border-white/20 space-y-3 mt-2">
-                        <li><a href="newertmsn.html" class="block font-mono text-sm font-bold text-classic-gold hover:text-white hover:pl-2 transition-all">Mission & Vision</a></li>
-                        <li><a href="newerthst.html" class="block font-mono text-sm font-bold text-white/70 hover:text-white hover:pl-2 transition-all">History</a></li>
-                        <li><a href="newertmtm.html" class="block font-mono text-sm font-bold text-white/70 hover:text-white hover:pl-2 transition-all">Meet the Team</a></li>
+                        <li><a href="newertmsn.html" class="block font-mono text-sm font-medium text-classic-gold hover:text-white hover:pl-2 transition-all">Mission & Vision</a></li>
+                        <li><a href="newerthst.html" class="block font-mono text-sm font-medium text-white/70 hover:text-white hover:pl-2 transition-all">History</a></li>
+                        <li><a href="newertmtm.html" class="block font-mono text-sm font-medium text-white/70 hover:text-white hover:pl-2 transition-all">Meet the Team</a></li>
                     </ul>
                 </div>
             </li>
@@ -177,8 +185,8 @@
                 </button>
                 <div class="accordion-content">
                     <ul class="pl-4 pt-4 border-l border-white/20 space-y-3 mt-2">
-                        <li><a href="newertclb.html" class="block font-mono text-sm font-bold text-white/70 hover:text-white hover:pl-2 transition-all">After-school Clubs</a></li>
-                        <li><a href="newertprt.html" class="block font-mono text-sm font-bold text-white/70 hover:text-white hover:pl-2 transition-all">Parent Engagements</a></li>
+                        <li><a href="newertclb.html" class="block font-mono text-sm font-medium text-white/70 hover:text-white hover:pl-2 transition-all">After-school Clubs</a></li>
+                        <li><a href="newertprt.html" class="block font-mono text-sm font-medium text-white/70 hover:text-white hover:pl-2 transition-all">Parent Engagements</a></li>
                     </ul>
                 </div>
             </li>
@@ -205,7 +213,7 @@
             <div class="container mx-auto px-6 relative z-10">
                 <div class="max-w-5xl">
                     <p class="font-mono text-sm mb-8 tracking-widest uppercase text-prestige-blue">[ THE VISION ]</p>
-                    <h2 id="vision-text" class="font-serif italic font-normal text-manifesto leading-[1.1] tracking-tight uppercase text-gray-300">
+                    <h2 id="vision-text" class="font-serif not-italic md:italic font-normal text-manifesto leading-[1.1] tracking-tight uppercase text-gray-300">
                         An end time generation, grounded in Godly values, empowered by academic mastery, and committed to living a life of dominion.
                     </h2>
                 </div>
@@ -362,7 +370,7 @@
         const mobileMenu = document.getElementById('mobile-menu-overlay');
         const navLogo = document.getElementById('nav-logo');
         const navText = document.getElementById('nav-text');
-        const mainNav = document.getElementById('main-nav'); // Reference to nav bar
+        const mainNav = document.getElementById('main-nav');
         
         let isMenuOpen = false;
         menuBtn.addEventListener('click', () => {
