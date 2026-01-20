@@ -7,7 +7,7 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -20,6 +20,7 @@
                         'deep-emerald': '#1A3C34',
                         'jet-black': '#000000',
                         'off-white': '#F4F7F6',
+                        'darker-emerald': '#0D2620',
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
@@ -35,7 +36,7 @@
     </script>
 
     <style>
-        body { background-color: #FFFFFF; color: #1A3C34; cursor: none; overflow-x: hidden; height: 100vh; }
+        body { background-color: #FFFFFF; color: #1A3C34; cursor: none; overflow-x: hidden; }
         
         #custom-cursor {
             position: fixed; top: 0; left: 0; width: 20px; height: 20px;
@@ -63,7 +64,8 @@
         .dropdown-left { left: -1rem; }
         .dropdown-right { right: 0; }
 
-        .dropdown-item { display: block; padding: 1rem 1.5rem; border-bottom: 1px solid #000000; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 0.875rem; transition: background 0s; cursor: none;}
+        /* Fixed: Font weight medium */
+        .dropdown-item { display: block; padding: 1rem 1.5rem; border-bottom: 1px solid #000000; font-family: 'Inter', sans-serif; font-weight: 500; font-size: 0.875rem; transition: background 0s; cursor: none;}
         .dropdown-item:last-child { border-bottom: none; }
         .dropdown-item:hover { background-color: #003366; color: #D4AF37; }
 
@@ -97,7 +99,7 @@
             <div class="font-serif italic font-black text-2xl tracking-tight text-jet-black transition-colors duration-300" id="nav-text">THE NICS</div>
         </div>
         
-        <ul class="hidden md:flex space-x-8 font-mono text-sm font-bold uppercase tracking-widest h-full items-center text-deep-emerald">
+        <ul class="hidden md:flex space-x-8 font-mono text-sm font-medium uppercase tracking-widest h-full items-center text-deep-emerald">
             <li><a href="newert.html" class="nav-link text-classic-gold border-b-2 border-classic-gold">Home</a></li>
             <li class="relative group h-full flex items-center cursor-pointer">
                 <span class="nav-link">About</span>
@@ -124,11 +126,11 @@
         </button>
     </nav>
 
-    <div id="mobile-menu-overlay" class="fixed inset-0 bg-deep-emerald z-40 flex flex-col justify-center items-start px-8 md:hidden">
+    <div id="mobile-menu-overlay" class="fixed inset-0 bg-deep-emerald z-40 flex flex-col justify-start items-start px-8 md:hidden overflow-y-auto pt-32 pb-12">
         
         <div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: radial-gradient(#D4AF37 1px, transparent 1px); background-size: 30px 30px;"></div>
 
-        <ul class="flex flex-col space-y-6 w-full text-left">
+        <ul class="flex flex-col space-y-6 w-full text-left relative z-50">
             
             <li class="mobile-group opacity-0 translate-y-4">
                 <a href="newert.html" class="font-mono text-xl font-bold uppercase tracking-widest text-classic-gold hover:text-white transition-colors">Home</a>
@@ -141,9 +143,9 @@
                 </button>
                 <div class="accordion-content">
                     <ul class="pl-4 pt-4 border-l border-white/20 space-y-3 mt-2">
-                        <li><a href="newertmsn.html" class="block font-mono text-sm font-bold text-white/70 hover:text-white hover:pl-2 transition-all">Mission & Vision</a></li>
-                        <li><a href="newerthst.html" class="block font-mono text-sm font-bold text-white/70 hover:text-white hover:pl-2 transition-all">History</a></li>
-                        <li><a href="newertmtm.html" class="block font-mono text-sm font-bold text-white/70 hover:text-white hover:pl-2 transition-all">Meet the Team</a></li>
+                        <li><a href="newertmsn.html" class="block font-mono text-sm font-medium text-white/70 hover:text-white hover:pl-2 transition-all">Mission & Vision</a></li>
+                        <li><a href="newerthst.html" class="block font-mono text-sm font-medium text-white/70 hover:text-white hover:pl-2 transition-all">History</a></li>
+                        <li><a href="newertmtm.html" class="block font-mono text-sm font-medium text-white/70 hover:text-white hover:pl-2 transition-all">Meet the Team</a></li>
                     </ul>
                 </div>
             </li>
@@ -163,79 +165,83 @@
                 </button>
                 <div class="accordion-content">
                     <ul class="pl-4 pt-4 border-l border-white/20 space-y-3 mt-2">
-                        <li><a href="newertclb.html" class="block font-mono text-sm font-bold text-white/70 hover:text-white hover:pl-2 transition-all">After-school Clubs</a></li>
-                        <li><a href="newertprt.html" class="block font-mono text-sm font-bold text-white/70 hover:text-white hover:pl-2 transition-all">Parent Engagements</a></li>
+                        <li><a href="newertclb.html" class="block font-mono text-sm font-medium text-white/70 hover:text-white hover:pl-2 transition-all">After-school Clubs</a></li>
+                        <li><a href="newertprt.html" class="block font-mono text-sm font-medium text-white/70 hover:text-white hover:pl-2 transition-all">Parent Engagements</a></li>
                     </ul>
                 </div>
             </li>
 
-            <li class="mobile-group opacity-0 translate-y-4 pt-4">
+            <li class="mobile-group opacity-0 translate-y-4">
                 <a href="newertstr.html" class="font-mono text-xl font-bold uppercase tracking-widest text-white hover:text-classic-gold transition-colors">
                     TNICS Store
                 </a>
             </li>
         </ul>
 
-        <div class="absolute bottom-8 left-8 text-left mobile-footer opacity-0">
+        <div class="mt-auto pt-10 text-left mobile-footer opacity-0 relative z-50">
             <p class="font-mono text-[10px] text-white/40 uppercase tracking-widest">Est. 2023 • Kampala</p>
         </div>
     </div>
 
     <main class="h-auto w-full flex flex-col pt-16">
 
-        <section class="relative h-screen flex-grow w-full flex flex-col justify-center overflow-hidden border-b border-jet-black bg-white">
-            <div class="hero-bg-container absolute inset-0 w-full h-[120%] -top-[10%] z-0 pointer-events-none">
-                 <div class="absolute inset-0 bg-gradient-to-tr from-deep-emerald via-[#002b1f] to-prestige-blue mix-blend-multiply opacity-70 z-10"></div>
-                 <div class="hero-bg-image absolute inset-0 bg-[url('https://images.unsplash.com/photo-1562774053-701939374585?q=80&w=1920&auto=format&fit=crop')] bg-cover bg-center z-0 grayscale"></div>
-            </div>
-
-            <div class="absolute top-8 left-6 md:top-12 md:left-12 z-30 max-w-4xl">
-                <div class="overflow-hidden">
-                    <h2 class="hero-header translate-y-full opacity-0 font-serif text-white text-4xl md:text-6xl font-normal uppercase leading-none tracking-tight border-l-8 border-classic-gold pl-6">
-                         The Nazirite<br><em class="font-serif">International</em><br>Christian School
-                    </h2>
+        <div class="flex flex-col h-[calc(100vh-4rem)] w-full relative">
+            
+            <section class="flex-grow relative w-full flex flex-col justify-center overflow-hidden border-b border-jet-black bg-white">
+                <div class="hero-bg-container absolute inset-0 w-full h-[120%] -top-[10%] z-0 pointer-events-none">
+                     <div class="absolute inset-0 bg-gradient-to-tr from-deep-emerald via-[#002b1f] to-prestige-blue mix-blend-multiply opacity-70 z-10"></div>
+                     <div class="hero-bg-image absolute inset-0 bg-[url('https://images.unsplash.com/photo-1562774053-701939374585?q=80&w=1920&auto=format&fit=crop')] bg-cover bg-center z-0 grayscale"></div>
                 </div>
-                <div class="overflow-hidden mt-4 pl-6">
-                    <p class="hero-motto translate-y-full opacity-0 font-mono text-classic-gold text-lg md:text-xl font-bold tracking-widest uppercase">
-                        "Called and Set Apart"
+
+                <div class="absolute top-8 left-6 md:top-12 md:left-12 z-30 max-w-4xl">
+                    <div class="overflow-hidden">
+                        <h2 class="hero-header translate-y-full opacity-0 font-serif text-white text-4xl md:text-6xl font-normal uppercase leading-none tracking-tight border-l-8 border-classic-gold pl-6">
+                             The Nazirite<br><em class="font-serif">International</em><br>Christian School
+                        </h2>
+                    </div>
+                    <div class="overflow-hidden mt-4 pl-6">
+                        <p class="hero-motto translate-y-full opacity-0 font-mono text-classic-gold text-lg md:text-xl font-bold tracking-widest uppercase">
+                            "Called and Set Apart"
+                        </p>
+                    </div>
+                </div>
+
+                <div class="absolute bottom-24 left-6 md:bottom-8 md:left-12 z-30 tech-badge opacity-0 hidden md:flex items-center justify-center select-none scale-75 origin-bottom-left md:scale-100">
+                    <div class="relative w-40 h-40 bg-white rounded-full border border-jet-black flex items-center justify-center shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+                        <div class="absolute w-full h-full spin-slow">
+                            <svg viewBox="0 0 100 100" class="w-full h-full">
+                                <path id="circlePath" d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" fill="transparent" />
+                                <text class="text-[10px] font-mono font-bold uppercase fill-deep-emerald tracking-widest">
+                                    <textPath href="#circlePath">
+                                        • THE NICS • SINCE 2023 • THE NICS • SINCE 2023 •
+                                    </textPath>
+                                </text>
+                            </svg>
+                        </div>
+                        <div class="w-20 h-20 rounded-full border border-jet-black flex items-center justify-center relative bg-white z-10">
+                            <svg viewBox="0 0 24 24" class="w-12 h-12 text-classic-gold fill-current spin-reverse-slow">
+                                <path d="M12 0L14 10L24 12L14 14L12 24L10 14L0 12L10 10L12 0Z" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="absolute bottom-8 right-8 max-w-[80%] md:max-w-xl p-6 border border-jet-black bg-white z-30 manifesto-box opacity-0 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+                    <p class="font-mono text-sm md:text-lg leading-relaxed uppercase text-deep-emerald font-bold">
+                        Welcome to The Nazirite International Christian School. We are an International Christian School using a variety of American Christian curricula from Early Years to Junior High School and International A Levels for Senior High School.
                     </p>
                 </div>
-            </div>
+            </section>
 
-            <div class="absolute bottom-24 left-6 md:bottom-8 md:left-12 z-30 tech-badge opacity-0 hidden md:flex items-center justify-center select-none scale-75 origin-bottom-left md:scale-100">
-                <div class="relative w-40 h-40 bg-white rounded-full border border-jet-black flex items-center justify-center shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
-                    <div class="absolute w-full h-full spin-slow">
-                        <svg viewBox="0 0 100 100" class="w-full h-full">
-                            <path id="circlePath" d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" fill="transparent" />
-                            <text class="text-[10px] font-mono font-bold uppercase fill-deep-emerald tracking-widest">
-                                <textPath href="#circlePath">
-                                    • THE NICS • SINCE 2023 • THE NICS • SINCE 2023 •
-                                </textPath>
-                            </text>
-                        </svg>
-                    </div>
-                    <div class="w-20 h-20 rounded-full border border-jet-black flex items-center justify-center relative bg-white z-10">
-                        <svg viewBox="0 0 24 24" class="w-12 h-12 text-classic-gold fill-current spin-reverse-slow">
-                            <path d="M12 0L14 10L24 12L14 14L12 24L10 14L0 12L10 10L12 0Z" />
-                        </svg>
-                    </div>
+            <div class="w-full bg-deep-emerald text-classic-gold py-3 overflow-hidden border-t border-jet-black flex-none">
+                <div class="marquee-content whitespace-nowrap font-mono text-lg font-bold uppercase tracking-widest flex">
+                    <span class="mx-4">Consecration • Obedience • Courage • Meekness • Discipline • Selflessness • Wisdom •</span>
+                    <span class="mx-4">Consecration • Obedience • Courage • Meekness • Discipline • Selflessness • Wisdom •</span>
+                    <span class="mx-4">Consecration • Obedience • Courage • Meekness • Discipline • Selflessness • Wisdom •</span>
+                    <span class="mx-4">Consecration • Obedience • Courage • Meekness • Discipline • Selflessness • Wisdom •</span>
                 </div>
             </div>
-
-            <div class="absolute bottom-8 right-8 max-w-[80%] md:max-w-xl p-6 border border-jet-black bg-white z-30 manifesto-box opacity-0 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
-                <p class="font-mono text-sm md:text-lg leading-relaxed uppercase text-deep-emerald font-bold">
-                    Welcome to The Nazirite International Christian School. We are an International Christian School using a variety of American Christian curricula from Early Years to Junior High School and International A Levels for Senior High School.
-                </p>
-            </div>
-        </section>
-
-        <div class="w-full bg-deep-emerald text-classic-gold py-3 overflow-hidden border-t border-jet-black flex items-center flex-none">
-            <div class="marquee-content whitespace-nowrap font-mono text-lg font-bold uppercase tracking-widest flex">
-                <span class="mx-4">Excellence • Faith • Integrity • Innovation • Discipleship •</span>
-                <span class="mx-4">Excellence • Faith • Integrity • Innovation • Discipleship •</span>
-                <span class="mx-4">Excellence • Faith • Integrity • Innovation • Discipleship •</span>
-                <span class="mx-4">Excellence • Faith • Integrity • Innovation • Discipleship •</span>
-            </div>
+        
         </div>
 
         <footer class="w-full border-t border-jet-black bg-white text-deep-emerald">
@@ -268,6 +274,7 @@
         const mobileMenu = document.getElementById('mobile-menu-overlay');
         const navLogo = document.getElementById('nav-logo');
         const navText = document.getElementById('nav-text');
+        const mainNav = document.getElementById('main-nav');
         
         let isMenuOpen = false;
         // Toggle Overlay
@@ -279,6 +286,10 @@
                 menuBtn.classList.replace('text-deep-emerald', 'text-white');
                 menuBtn.classList.replace('border-deep-emerald', 'border-white');
                 
+                // Change navbar background to green so white close button is visible
+                mainNav.classList.remove('bg-white', 'ticker-border');
+                mainNav.classList.add('bg-deep-emerald');
+
                 // Change header elements to white
                 navLogo.style.filter = "invert(1)";
                 navText.style.color = "white";
@@ -300,6 +311,10 @@
                 menuBtn.classList.replace('text-white', 'text-deep-emerald');
                 menuBtn.classList.replace('border-white', 'border-deep-emerald');
                 
+                // Revert navbar background
+                mainNav.classList.add('bg-white', 'ticker-border');
+                mainNav.classList.remove('bg-deep-emerald');
+
                 // Revert header elements
                 navLogo.style.filter = "invert(0)";
                 navText.style.color = "#000000";
@@ -324,7 +339,6 @@
                     content.style.maxHeight = null;
                     icon.textContent = "[ + ]";
                 } else {
-                    // Close others (optional, keeps it cleaner)
                     document.querySelectorAll('.accordion-content').forEach(el => el.style.maxHeight = null);
                     document.querySelectorAll('.accordion-icon').forEach(el => el.textContent = "[ + ]");
                     
