@@ -102,7 +102,7 @@
 
     <nav class="fixed top-0 left-0 w-full h-16 bg-deep-emerald ticker-border flex items-center justify-between px-6 z-50 cursor-none text-white border-b border-classic-gold/30 transition-colors duration-300" id="main-nav">
         <div class="flex items-center relative z-50">
-            <img src="images/logo.png" alt="NICS Logo" class="h-8 w-auto mr-3 object-contain invert transition-all duration-300" id="nav-logo">
+            <img src="images/logo.png" alt="NICS Logo" class="h-8 w-auto mr-3 object-contain transition-all duration-300" id="nav-logo">
             <div class="font-serif italic font-black text-2xl tracking-tight text-white transition-colors duration-300" id="nav-text">THE NICS</div>
         </div>
         
@@ -267,8 +267,8 @@
                 mainNav.classList.remove('bg-white', 'ticker-border');
                 mainNav.classList.add('bg-deep-emerald');
 
-                // Change header elements to white
-                navLogo.style.filter = "invert(1)";
+                // Ensure logo is NOT inverted (displayed normally)
+                navLogo.style.filter = "invert(0)";
                 navText.style.color = "white";
                 
                 // Animate Group Links Stagger
@@ -285,16 +285,16 @@
             } else {
                 mobileMenu.classList.remove('open');
                 menuBtn.textContent = "MENU";
-                menuBtn.classList.replace('text-white', 'text-deep-emerald');
+                menuBtn.classList.replace('text-deep-emerald', 'text-white');
                 menuBtn.classList.replace('border-white', 'border-deep-emerald');
                 
                 // Revert nav background
-                mainNav.classList.add('bg-white', 'ticker-border');
-                mainNav.classList.remove('bg-deep-emerald');
+                mainNav.classList.remove('bg-white', 'ticker-border');
+                mainNav.classList.add('bg-deep-emerald');
 
-                // Revert header elements
+                // Ensure logo is NOT inverted (displayed normally)
                 navLogo.style.filter = "invert(0)";
-                navText.style.color = "#000000";
+                navText.style.color = "white";
 
                 // Reset Links
                 gsap.to(".mobile-group", { y: 10, opacity: 0, duration: 0.2 });

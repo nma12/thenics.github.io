@@ -207,12 +207,12 @@
             <li class="mobile-group opacity-0 translate-y-4 w-full">
                 <button class="accordion-btn w-full flex items-center justify-between font-mono text-xl font-bold uppercase tracking-widest text-white hover:text-classic-gold transition-colors text-left group">
                     <span>Activities</span>
-                    <span class="accordion-icon text-sm text-classic-gold group-hover:text-white">[ + ]</span>
+                    <span class="accordion-icon text-sm text-classic-gold group-hover:text-white">[ - ]</span>
                 </button>
                 <div class="accordion-content">
                     <ul class="pl-4 pt-4 border-l border-white/20 space-y-3 mt-2">
-                        <li><a href="newertclb.html" class="block font-mono text-sm font-medium text-white/70 hover:text-white hover:pl-2 transition-all">After-School Clubs</a></li>
-                        <li><a href="newertprt.html" class="block font-mono text-sm font-medium text-classic-gold hover:text-white hover:pl-2 transition-all">Parent Engagements</a></li>
+                        <li><a href="newertclb.html" class="block font-mono text-sm font-medium text-classic-gold hover:text-white hover:pl-2 transition-all">After-School Clubs</a></li>
+                        <li><a href="newertprt.html" class="block font-mono text-sm font-medium text-white/70 hover:text-white hover:pl-2 transition-all">Parent Engagements</a></li>
                     </ul>
                 </div>
             </li>
@@ -405,7 +405,7 @@
                 mainNav.classList.add('bg-deep-emerald');
 
                 // Change header elements to white
-                navLogo.style.filter = "invert(1)";
+                
                 navText.style.color = "white";
                 
                 // Re-open Active Accordion (Activities is active)
@@ -439,7 +439,7 @@
                 mainNav.classList.remove('bg-deep-emerald');
 
                 // Revert header elements
-                navLogo.style.filter = "invert(0)";
+                
                 navText.style.color = "#000000";
 
                 // Reset Links

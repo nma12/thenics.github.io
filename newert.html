@@ -189,8 +189,8 @@
             
             <section class="flex-grow relative w-full flex flex-col justify-center overflow-hidden border-b border-jet-black bg-white">
                 <div class="hero-bg-container absolute inset-0 w-full h-[120%] -top-[10%] z-0 pointer-events-none">
-                     <div class="absolute inset-0 bg-gradient-to-tr from-deep-emerald via-[#002b1f] to-prestige-blue mix-blend-multiply opacity-70 z-10"></div>
-                     <div class="hero-bg-image absolute inset-0] bg-cover bg-center z-0 grayscale"></div>
+                      <div class="absolute inset-0 bg-gradient-to-tr from-deep-emerald via-[#002b1f] to-prestige-blue mix-blend-multiply opacity-70 z-10"></div>
+                      <div class="hero-bg-image absolute inset-0] bg-cover bg-center z-0 grayscale"></div>
                 </div>
 
                 <div class="absolute top-8 left-6 md:top-12 md:left-12 z-30 max-w-4xl">
@@ -235,6 +235,10 @@
 
             <div class="w-full bg-deep-emerald text-classic-gold py-3 overflow-hidden border-t border-jet-black flex-none">
                 <div class="marquee-content whitespace-nowrap font-mono text-lg font-bold uppercase tracking-widest flex">
+                    <span class="mx-4">Consecration • Obedience • Courage • Meekness • Discipline • Selflessness • Wisdom •</span>
+                    <span class="mx-4">Consecration • Obedience • Courage • Meekness • Discipline • Selflessness • Wisdom •</span>
+                    <span class="mx-4">Consecration • Obedience • Courage • Meekness • Discipline • Selflessness • Wisdom •</span>
+                    <span class="mx-4">Consecration • Obedience • Courage • Meekness • Discipline • Selflessness • Wisdom •</span>
                     <span class="mx-4">Consecration • Obedience • Courage • Meekness • Discipline • Selflessness • Wisdom •</span>
                     <span class="mx-4">Consecration • Obedience • Courage • Meekness • Discipline • Selflessness • Wisdom •</span>
                     <span class="mx-4">Consecration • Obedience • Courage • Meekness • Discipline • Selflessness • Wisdom •</span>
@@ -288,7 +292,6 @@
                 mainNav.classList.remove('bg-white', 'ticker-border');
                 mainNav.classList.add('bg-deep-emerald');
 
-                navLogo.style.filter = "invert(1)";
                 navText.style.color = "white";
                 
                 gsap.to(".mobile-group", {
@@ -310,7 +313,6 @@
                 mainNav.classList.add('bg-white', 'ticker-border');
                 mainNav.classList.remove('bg-deep-emerald');
 
-                navLogo.style.filter = "invert(0)";
                 navText.style.color = "#000000";
 
                 gsap.to(".mobile-group", { y: 10, opacity: 0, duration: 0.2 });
@@ -345,7 +347,9 @@
         .to(".manifesto-box", { opacity: 1, duration: 1, ease: "power2.out" }, "-=0.5")
         .to(".tech-badge", { opacity: 1, duration: 1, ease: "power2.out" }, "-=0.8");
         gsap.to(".hero-bg-container", { yPercent: 5, ease: "none", scrollTrigger: { trigger: ".hero-bg-container", start: "top top", end: "bottom top", scrub: true } });
-        gsap.to(".marquee-content", { xPercent: -50, repeat: -1, duration: 40, ease: "linear" });
+        
+        // Updated Duration to 8s for even faster mobile speed
+        gsap.to(".marquee-content", { xPercent: -50, repeat: -1, duration: window.innerWidth < 768 ? 8 : 40, ease: "linear" });
     </script>
 </body>
 </html>
